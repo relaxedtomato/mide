@@ -1,5 +1,8 @@
 //make api calls
-var request = require('request');
+//TODO: Investigate issues with rx: {"success":false,"reason":"token expired"}%
+
+var bluebird = require('bluebird');
+var request = bluebird.promisifyAll(require('request'));
 var codewars = {};
 
 var urls = {
@@ -21,7 +24,7 @@ var urls = {
 };
 
 var test = {
-    api: "A9QKk6SmRpDcriU-HMQr",
+    apiKey: "A9QKk6SmRpDcriU-HMQr",
     user:"cwcfsa@gmail.com",
     strategy:'kyu_8_workout',
     challenge: 'multiply', //http://www.codewars.com/kata/multiply TODO: does it refer to this: 50654ddff44f800200000004
@@ -33,18 +36,15 @@ var test = {
 
 //GET User Data
 codewars.getUserData = function(username){
-    username = username || test.user;
-    request
-        .get(urls.userData(username))
-        .on('data', function(data){
-            console.log(data.toString()); //TODO: Return the data
-        });
+    var username = username || test.user;
+    return request.getAsync(urls.userData(username));
 };
 
 //POST Train Next Code Challenge
-codewars.postNextChallenge = function(strategy, language){
+codewars.postNextChallenge = function(apiKey, strategy, language){
     var language = language || test.language;
     var strategy = strategy || test.strategy;
+    var apiKey = apiKey || test.apiKey;
 
     var options = {
         url: urls.nextChallenge(language),
@@ -52,84 +52,70 @@ codewars.postNextChallenge = function(strategy, language){
             strategy:strategy
         },
         headers: {
-            Authorization: test.api
+            Authorization: apiKey
         }
     };
 
-    request//TODO: Return a promise instead
-        .post(options)
-        .on('data',function(data){
-            console.log(data.toString());
-        });
-}
+    return request.postAsync(options);
+};
 
 //POST Train (Specific) Code Challenge
-codewars.postSpecificChallenge = function(language,challenge){
+codewars.postSpecificChallenge = function(apiKey,challenge,language){
     var language = language || test.language;
     var challenge = challenge || test.challenge;
+    var apiKey = apiKey || test.apiKey;
 
     var options = {
         url: urls.specificChallenge(language,challenge),
         headers: {
-            Authorization: test.api //TODO: need specific API
+            Authorization: apiKey
         }
     };
 
-    request
-        .post(options)
-        .on('data',function(data){
-            console.log(data.toString());
-        });
+    return request.postAsync(options);
 };
 
-//TODO: Investigate issues with rx: {"success":false,"reason":"token expired"}%
-
 //POST Attempt Solution
-codewars.attemptSolution = function(projectId,solutionId, solution){
-    projectId = projectId || test.projectId;
-    solutionId = solutionId || test.solutionId;
-    solution = solution || test.solution;
+codewars.attemptSolution = function(apiKey,projectId,solutionId, solution){
+    var projectId = projectId || test.projectId;
+    var solutionId = solutionId || test.solutionId;
+    var solution = solution || test.solution;
+    var apiKey = apiKey || test.apiKey;
 
     var options = {
     url: urls.attemptSolution(projectId, solutionId),
     form:solution,
     headers: {
-        Authorization: test.api
+        Authorization: apiKey
         }
     };
 
-    request
-        .post(options)
-        .on('data',function(data){
-            console.log(data.toString());
-        });
-}
+    return request.postAsync(options);
+};
 
 //POST Finalize Solution
-codewars.finalizeSolution = function(projectId,solutionId){
-    projectId = projectId || test.projectId;
-    solutionId = solutionId || test.solutionId;
+codewars.finalizeSolution = function(apiKey,projectId,solutionId){
+    var projectId = projectId || test.projectId;
+    var solutionId = solutionId || test.solutionId;
+    var apiKey = apiKey || test.apiKey;
 
     var options = {
         url: urls.finalizeSolution(projectId, solutionId),
         headers: {
-            Authorization: test.api //TODO: this should be input data, if it is not available, use tests data
+            Authorization: apiKey
         }
     };
 
-    request
-        .post(options)
-        .on('data',function(data){
-            console.log(data.toString());
-        });
+    return request.postAsync(options);
+};
 
-}
-
-codewars.finalizeSolution();
+//Testing Promises (informal)
+//var promise = codewars.postNextChallenge();
+//promise.then(function(data){
+//    console.log(data.toString());
+//});
 
 module.exports = codewars;
 
-//1. test current functionality
-//2. Promisify and test
 //3. Ship
 //4. Create Tests for codewars.api.js
