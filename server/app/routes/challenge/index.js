@@ -13,8 +13,8 @@ router.post('/', function (req, res, next) {
 	res.send(message);
 });
 
-router.get('/', function (req, res, next) {
-	var message = "This is a code challenge";
+router.put('/', function (req, res, next) {
+	var message = "put route for challenge";
 	res.send(message);
 });
 
