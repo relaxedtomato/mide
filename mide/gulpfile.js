@@ -7,11 +7,20 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 
+var uglify = require('gulp-uglify');
+var jshint = require('gulp-jshint');
+var plumber = require('gulp-plumber');
+var runSeq = require('run-sequence');
+var babel = require('gulp-babel');
+var sourcemaps = require('gulp-sourcemaps');
+var ngAnnotate = require('gulp-ng-annotate');
+
 var paths = {
-  sass: ['./scss/**/*.scss']
+  sass: ['./scss/**/*.scss'],
+  images : ['./development/img/*']
 };
 
-gulp.task('default', ['sass']);
+// gulp.task('default', ['sass']);
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
@@ -27,9 +36,9 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
-gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
-});
+// gulp.task('watch', function() {
+//   gulp.watch(paths.sass, ['sass']);
+// });
 
 gulp.task('install', ['git-check'], function() {
   return bower.commands.install()
@@ -50,3 +59,82 @@ gulp.task('git-check', function(done) {
   }
   done();
 });
+
+// ------------------------------------------------------
+// Javascript
+// ------------------------------------------------------
+
+gulp.task('lintJS', function () {
+    return gulp.src(['./development/features/**/*.js'])
+        .pipe(jshint())
+        .pipe(jshint.reporter('jshint-stylish'));
+});
+
+gulp.task('buildJS', function () {
+    return gulp.src(['./development/features/app.js', './development/features/**/*.js'])
+        .pipe(plumber())
+        .pipe(sourcemaps.init())
+        .pipe(concat('app.js'))
+        // .pipe(babel())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./www/features'));
+});
+
+gulp.task('buildJSProduction', function () {
+    return gulp.src(['./development/features/app.js', './development/features/**/*.js'])
+        .pipe(concat('app.js'))
+        .pipe(babel())
+        .pipe(ngAnnotate())
+        .pipe(uglify())
+        .pipe(gulp.dest('./www/features'));
+});
+
+// ------------------------------------------------------
+// HTML
+// ------------------------------------------------------
+gulp.task('moveHTML', function () {
+    return gulp.src(['./development/features/**/*.html'])
+        .pipe(gulp.dest('./www/features'));
+});
+
+gulp.task('moveIndexHTML', function(){
+  return gulp.src(['./development/index.html'])
+    .pipe(gulp.dest('./www/'))
+})
+
+gulp.task('buildHTML', ['moveHTML', 'moveIndexHTML']);
+
+// ---------------------------------------------------------
+// Images
+// ---------------------------------------------------------
+
+gulp.task('moveImages', function () {
+    return gulp.src(['./development/img/*'])
+        .pipe(gulp.dest('./www/img'));
+});
+
+// ------------------------------------------------------
+// Compose Tasks
+// ------------------------------------------------------
+
+gulp.task('build', function () {
+    if (process.env.NODE_ENV === 'production') {
+        runSeq(['buildJSProduction', 'sass', 'buildHTML', 'moveImages']);
+    } else {
+        runSeq(['buildJS', 'sass', 'buildHTML', 'moveImages']);
+    }
+});
+
+gulp.task('default', function(){
+  gulp.start('build');
+
+  gulp.watch('development/features/**', function(){
+    runSeq('lintJS', 'buildJS', 'buildHTML');
+  });
+
+  gulp.watch(paths.images, ['moveImages']);
+
+  gulp.watch(paths.sass, ['sass']);
+
+});
+
