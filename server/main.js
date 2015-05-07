@@ -8,37 +8,36 @@ var startDb = require('./db');
 // Create a node server instance! cOoL!
 var server = require('http').createServer();
 
-var app = require('./app');
-server.on('request', app);
+// var app = require('./app');
+// server.on('request', app);
 
-var PORT = process.env.PORT || 9000;
+// var PORT = process.env.PORT || 9000;
 
-server.listen(PORT, function () {
-    console.log(chalk.blue('Server started on port', chalk.magenta(PORT)));
-});
-
-
-
-// var createApplication = function () {
-//     var app = require('./app');
-//     server.on('request', app); // Attach the Express application.
-//     // require('./io')(server);   // Attach socket.io.
-// };
-
-// var startServer = function () {
-
-//     var PORT = process.env.PORT || 9000;
-
-//     server.listen(PORT, function () {
-//         console.log(chalk.blue('Server started on port', chalk.magenta(PORT)));
-//     });
-
-// };
-
-
-
-// startDb.then(createApplication).then(startServer).catch(function (err) {
-//     console.error('Initialization error:', chalk.red(err.message));
-//     console.error('Process terminating . . .');
-//     process.kill(1);
+// server.listen(PORT, function () {
+//     console.log(chalk.blue('Server started on port', chalk.magenta(PORT)));
 // });
+
+
+
+var createApplication = function () {
+    var app = require('./app');
+    server.on('request', app); // Attach the Express application.
+    // require('./io')(server);   // Attach socket.io.
+};
+
+var startServer = function () {
+
+    var PORT = process.env.PORT || 9000;
+
+    server.listen(PORT, function () {
+        console.log(chalk.blue('Server started on port', chalk.magenta(PORT)));
+    });
+
+};
+
+
+startDb.then(createApplication).then(startServer).catch(function (err) {
+    console.error('Initialization error:', chalk.red(err.message));
+    console.error('Process terminating . . .');
+    process.kill(1);
+});
