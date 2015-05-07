@@ -2,49 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a602205e-fe5d-46c0-b545-bdb5831ceb25" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/img/ionic.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/lib/ionic/scss/ionicons/_ionicons-animation.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/lib/ionic/scss/_loaders.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/lib/ionic/scss/_split-pane.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/account/account.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/account/account.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/account/account.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/app.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/app.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/challenge/challenge.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/challenge/challenge.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/challenge/challenge.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/chats/chat-detail.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/chats/chat-detail.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/chats/chats.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/env/development.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/app/views/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/app/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/app/routes/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/app/routes/challenge/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/app/routes/user/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/db/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/env/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/css/ionic.app.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/css/ionic.app.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/login/login.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/env/production.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/signup/signup.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/signup/signup.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/signup/signup.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/start.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/chats/tab-chats.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/chats/tab-chats.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/common/tabs/tabs.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/common/tabs/tabs.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/common/tabs/tabs.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/db/models/user.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/welcome/welcome.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/welcome/welcome.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/welcome/welcome.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/package.json" afterPath="$PROJECT_DIR$/server/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mide.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -90,7 +48,7 @@
           <file leaf-file-name="approach.txt" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/server/approach.txt">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.13103448">
+                <state vertical-scroll-proportion="0.2137931">
                   <caret line="15" column="20" selection-start-line="30" selection-start-column="0" selection-end-line="33" selection-end-column="28" />
                   <folding />
                 </state>
@@ -100,7 +58,7 @@
         </leaf>
       </split-first>
       <split-second>
-        <splitter split-orientation="vertical" split-proportion="0.5059761">
+        <splitter split-orientation="vertical" split-proportion="0.76626825">
           <split-first>
             <leaf>
               <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
@@ -116,8 +74,8 @@
               <file leaf-file-name="codewars.api.js" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/server/codewars.api.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.82758623">
-                      <caret line="116" column="26" selection-start-line="116" selection-start-column="26" selection-end-line="116" selection-end-column="26" />
+                    <state vertical-scroll-proportion="3.1273062">
+                      <caret line="114" column="35" selection-start-line="114" selection-start-column="35" selection-end-line="114" selection-end-column="35" />
                       <folding />
                     </state>
                   </provider>
@@ -141,8 +99,10 @@
                 <entry file="file://$PROJECT_DIR$/server/codewars.api.js">
                   <provider selected="true" editor-type-id="text-editor">
                     <state vertical-scroll-proportion="0.0">
-                      <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-                      <folding />
+                      <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+                      <folding>
+                        <marker date="1431031633000" expanded="true" signature="1541:1698" placeholder="//..." />
+                      </folding>
                     </state>
                   </provider>
                 </entry>
@@ -150,8 +110,8 @@
               <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/server/package.json">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.6687697">
-                      <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+                    <state vertical-scroll-proportion="0.24390244">
+                      <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
                       <folding />
                     </state>
                   </provider>
@@ -173,8 +133,8 @@
         <option value="$PROJECT_DIR$/server/approach.txt" />
         <option value="$PROJECT_DIR$/server/server.js" />
         <option value="$PROJECT_DIR$/server/api.js" />
-        <option value="$PROJECT_DIR$/server/codewars.api.js" />
         <option value="$PROJECT_DIR$/server/package.json" />
+        <option value="$PROJECT_DIR$/server/codewars.api.js" />
       </list>
     </option>
   </component>
@@ -186,9 +146,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="232" />
     <option name="y" value="23" />
-    <option name="width" value="1688" />
+    <option name="width" value="1920" />
     <option name="height" value="1053" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -324,14 +283,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="232" y="23" width="1688" height="1053" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1920" height="1053" extended-state="6" />
+    <editor active="false" />
     <layout>
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21806854" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21806854" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11997601" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.10531859" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -350,7 +309,16 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/server/codewars.api.js</url>
+          <line>43</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="3" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -386,14 +354,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/approach.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13103448">
-          <caret line="15" column="20" selection-start-line="30" selection-start-column="0" selection-end-line="33" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -402,18 +362,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/codewars.api.js">
+    <entry file="file://$PROJECT_DIR$/server/approach.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.2137931">
+          <caret line="15" column="20" selection-start-line="30" selection-start-column="0" selection-end-line="33" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6687697">
-          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.24390244">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/codewars.api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.1273062">
+          <caret line="114" column="35" selection-start-line="114" selection-start-column="35" selection-end-line="114" selection-end-column="35" />
           <folding />
         </state>
       </provider>
