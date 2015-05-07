@@ -118,5 +118,4 @@ codewars.finalizeSolution = function(apiKey,projectId,solutionId){
 
 module.exports = codewars;
 
-//3. Ship
-//4. Create Tests for codewars.api.js
+//4. TODO: Create Tests for codewars.api.js
