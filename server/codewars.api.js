@@ -1,5 +1,6 @@
 //make api calls
 //TODO: Investigate issues with rx: {"success":false,"reason":"token expired"}%
+//When token expired response is received, you need to reset the user account manually
 
 var bluebird = require('bluebird');
 var request = bluebird.promisifyAll(require('request'));
