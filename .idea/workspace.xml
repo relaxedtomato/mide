@@ -2,8 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a602205e-fe5d-46c0-b545-bdb5831ceb25" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/ram.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/approach.txt" afterPath="$PROJECT_DIR$/server/approach.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/img/ionic.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/lib/ionic/scss/ionicons/_ionicons-animation.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/lib/ionic/scss/_loaders.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/lib/ionic/scss/_split-pane.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/account/account.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/account/account.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/account/account.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/challenge/challenge.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/challenge/challenge.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/challenge/challenge.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/chats/chat-detail.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/chats/chat-detail.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/chats/chats.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/env/development.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/app/views/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/app/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/app/routes/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/app/routes/challenge/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/app/routes/user/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/db/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/env/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/css/ionic.app.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/css/ionic.app.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/login/login.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/main.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/env/production.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/signup/signup.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/signup/signup.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/signup/signup.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/start.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/chats/tab-chats.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/chats/tab-chats.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/common/tabs/tabs.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/common/tabs/tabs.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/common/tabs/tabs.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/db/models/user.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/welcome/welcome.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/www/features/welcome/welcome.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mide/development/features/welcome/welcome.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/package.json" afterPath="$PROJECT_DIR$/server/package.json" />
     </list>
     <ignored path="mide.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -96,11 +137,21 @@
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="codewars.api.js" pinned="false" current-in-tab="true">
+              <file leaf-file-name="codewars.api.js" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/server/codewars.api.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.2639296">
+                    <state vertical-scroll-proportion="0.0">
                       <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+                      <folding />
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/server/package.json">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state vertical-scroll-proportion="0.6687697">
+                      <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
                       <folding />
                     </state>
                   </provider>
@@ -123,6 +174,7 @@
         <option value="$PROJECT_DIR$/server/server.js" />
         <option value="$PROJECT_DIR$/server/api.js" />
         <option value="$PROJECT_DIR$/server/codewars.api.js" />
+        <option value="$PROJECT_DIR$/server/package.json" />
       </list>
     </option>
   </component>
@@ -273,9 +325,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="232" y="23" width="1688" height="1053" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21806854" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21806854" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -352,8 +404,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/codewars.api.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2639296">
+        <state vertical-scroll-proportion="0.0">
           <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6687697">
+          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
           <folding />
         </state>
       </provider>
