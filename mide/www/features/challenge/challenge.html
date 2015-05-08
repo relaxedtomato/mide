@@ -1,0 +1,14 @@
+<ion-view view-title="Challenge">
+  <ion-content>
+    <pre>{{challenge}}</pre>
+    <button class='button button-outline button-assertive'>
+    	{{buttons.dismiss | uppercase}}
+    </button>
+    <button class='button button-outline button-calm' ng-click='testChallenge()'>
+    	{{buttons.test | uppercase}}
+    </button>
+    <button class='button button-balanced' ng-click='submitChallenge()'>
+    	{{buttons.submit | uppercase}}
+    </button>
+  </ion-content>
+</ion-view>
