@@ -17,8 +17,6 @@ var server = require('http').createServer();
 //     console.log(chalk.blue('Server started on port', chalk.magenta(PORT)));
 // });
 
-
-
 var createApplication = function () {
     var app = require('./app');
     server.on('request', app); // Attach the Express application.
@@ -34,7 +32,6 @@ var startServer = function () {
     });
 
 };
-
 
 startDb.then(createApplication).then(startServer).catch(function (err) {
     console.error('Initialization error:', chalk.red(err.message));
