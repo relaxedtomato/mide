@@ -21,6 +21,11 @@ var app = angular.module('mide', ['ionic'])
   });
 })
 
+//This is needed to set to access the proxy url that will then in the ionic.project file redirect it to the correct URL
+.constant('ApiEndpoint', {
+  url : '/api'
+})
+
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
