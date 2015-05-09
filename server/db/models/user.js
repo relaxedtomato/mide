@@ -15,6 +15,7 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    apiKey: {type: String, required: true},
     password: {
         type: String,
     //used in routes later to display or not display certain properties

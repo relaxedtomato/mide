@@ -18,6 +18,9 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Pass our express application pipeline into the configuration
+// function located at server/app/configure/index.js
+require('./configure')(app);
 
 // Routes that will be accessed via AJAX should be prepended with
 // /api so they are isolated from our GET /* wildcard.
