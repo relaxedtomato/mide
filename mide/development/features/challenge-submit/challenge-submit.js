@@ -11,6 +11,17 @@ app.config(function($stateProvider){
 });
 
 app.controller('ChallengeSubmitCtrl', function($scope){
+
+	$scope.aceLoaded = function(_editor){
+		console.log(_editor);
+	};
+
+	$scope.aceChanged = function(e){
+		console.log(e);
+	};
+
+	$scope.txt = '';
+
 	$scope.aceConfig = {
 		useWrapMode : true,
 		showGutter : true,
@@ -20,15 +31,6 @@ app.controller('ChallengeSubmitCtrl', function($scope){
 		onChange : $scope.aceChanged
 	};
 	//text needs to be worked on
-	$scope.text = '';
-
-	$scope.aceLoaded = function(_editor){
-		console.log(_editor);
-	};
-
-	$scope.aceChanged = function(e){
-		console.log(e);
-	};
 
 	console.log('this is loaded');
 });

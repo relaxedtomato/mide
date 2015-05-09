@@ -35,6 +35,6 @@ var app = angular.module('mide', ['ionic', 'ui.ace'])
 
   // if none of the above states are matched, use this as the fallback
   //$urlRouterProvider.otherwise('/tab/chats');
-  //$urlRouterProvider.otherwise('/signup'); // TODO: Richard testing this route
-  $urlRouterProvider.otherwise('/tab/challenge');
+  $urlRouterProvider.otherwise('/signup'); // TODO: Richard testing this route
+  //$urlRouterProvider.otherwise('/tab/challenge'); //TODO: Tony testing this route
 });

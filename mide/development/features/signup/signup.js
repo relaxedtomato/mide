@@ -6,12 +6,14 @@ app.config(function($stateProvider){
     });
 });
 
-app.controller('SignUpCtrl',function($scope, SignUpFactory){
-    $scope.data = {};
+app.controller('SignUpCtrl',function($scope, $state, SignUpFactory){
+    $scope.login = {};
+    $scope.error = null;
 
     $scope.signup = function(){
-        SignUpFactory.postSignup($scope.data).then(function(response){
+        SignUpFactory.postSignup($scope.login).then(function(response){
             console.log(JSON.stringify(response));
+            $state.go('tab.challenge-submit');
         }).catch(function(err){
             console.error(JSON.stringify(err));
         });
@@ -22,7 +24,7 @@ app.controller('SignUpCtrl',function($scope, SignUpFactory){
 app.factory('SignUpFactory',function($http, ApiEndpoint){
     return{
         postSignup: function(userdata){
-            console.log(JSON.stringify(userdata));
+            console.log('postSignup',JSON.stringify(userdata));
             return $http.post(ApiEndpoint.url+"/user/signup", userdata)
             //TODO: Send correct url, send status 200 for now
         }
