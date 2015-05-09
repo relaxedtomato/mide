@@ -4,8 +4,9 @@ module.exports = router;
 
 //sign up
 router.post('/signup', function(req, res, next) {
-	var newUser = req.body;
-
+	//var newUser = req.body;
+	console.log('hitting the right post');
+	console.log(req.body);
 	// if (newUser.password !== newUser.passwordConfirm) {
 	// 	var error = new Error('Passwords do not match');
 	// 	error.status = 401;

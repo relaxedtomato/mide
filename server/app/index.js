@@ -1,6 +1,8 @@
 'use strict';
 var path = require('path');
 var express = require('express');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var app = express();
 module.exports = app;
 
@@ -10,6 +12,12 @@ var indexPath = path.join(rootPath, './app/views/index.html');
 // Pass our express application pipeline into the configuration
 // function located at server/app/configure/index.js
 // require('./configure')(app);
+app.use(cookieParser());
+
+// Parse our POST and PUT bodies.
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // Routes that will be accessed via AJAX should be prepended with
 // /api so they are isolated from our GET /* wildcard.

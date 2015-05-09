@@ -21,7 +21,7 @@ var app = angular.module('mide', ['ionic'])
   });
 })
 
-//This is needed to set to access the proxy url that will then in the ionic.project file redirect it to the correct URL
+//TODO:This is needed to set to access the proxy url that will then in the ionic.project file redirect it to the correct URL
 .constant('ApiEndpoint', {
   url : '/api'
 })
@@ -34,6 +34,6 @@ var app = angular.module('mide', ['ionic'])
   // Each state's controller can be found in controllers.js
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/chats');
-
+  //$urlRouterProvider.otherwise('/tab/chats');
+  $urlRouterProvider.otherwise('/signup');
 });
