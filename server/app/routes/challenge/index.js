@@ -27,7 +27,7 @@ router.post('/submit', function (req, res, next) {
 	//TODO: Keep track of successfully completed problems
 	codewars.finalizeSolution().then(function(finalized){
 		//console.log('here');
-		res.json(finalized[0].body);
+		res.json(finalized .body);
 	});
 });
 
