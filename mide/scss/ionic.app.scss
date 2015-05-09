@@ -22,5 +22,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "www/lib/ionic/scss/ionic";
 
 .ace_editor {
-	height : 375px;
+	height : 540px;
+	font-family: 'monospace';
 }

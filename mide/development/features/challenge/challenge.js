@@ -18,32 +18,11 @@ app.config(function($stateProvider){
 });
 
 app.controller('ChallengeCtrl', function($scope, ChallengeFactory, challenge, $state){
-	$scope.buttons = {
-		submit : 'Submit',
-		test : 'Test',
-		dismiss : 'Dismiss'
-	};
-
 	$scope.challenge = challenge;
 
-	$scope.submitChallenge = function(){
+	$scope.onSwipeRight = function(){
 		$state.go('tab.challenge-submit');
-		ChallengeFactory.submitChallenge().then(function(response){
-
-			return response.data;
-		}).catch(function(err){
-			console.error(JSON.stringify(err));
-		});
 	};
-
-	$scope.testChallenge = function(){
-		ChallengeFactory.testChallenge().then(function(response){
-			return response.data;
-		}).catch(function(err){
-			console.error(JSON.stringify(err));
-		});
-	};
-
 });
 
 app.factory('ChallengeFactory', function($http, ApiEndpoint){

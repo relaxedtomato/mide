@@ -34,6 +34,6 @@ var app = angular.module('mide', ['ionic', 'ui.ace'])
   // Each state's controller can be found in controllers.js
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/challenge');
+  $urlRouterProvider.otherwise('/tab/challenge/submit');
 
 });
