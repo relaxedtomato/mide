@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('mide', ['ionic'])
+var app = angular.module('mide', ['ionic', 'ui.ace'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -34,6 +34,6 @@ var app = angular.module('mide', ['ionic'])
   // Each state's controller can be found in controllers.js
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/chats');
+  $urlRouterProvider.otherwise('/tab/challenge');
 
 });
