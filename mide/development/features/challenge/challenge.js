@@ -25,6 +25,9 @@ app.controller('ChallengeCtrl', function($scope, ChallengeFactory, challenge, $s
 	};
 
 	$scope.challenge = challenge;
+	$scope.challengeDesc = JSON.parse(challenge[0].body).description;
+	$scope.challengeBody = JSON.parse(challenge[0].body).session.setup;
+
 
 	$scope.submitChallenge = function(){
 		$state.go('tab.challenge-submit');
