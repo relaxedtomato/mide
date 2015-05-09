@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 var router = require('express').Router();
 var codewars = require('../../api/codewars');
 module.exports = router;

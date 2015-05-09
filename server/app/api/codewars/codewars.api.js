@@ -37,15 +37,15 @@ var test = {
 
 //GET User Data
 codewars.getUserData = function(username){
-    var username = username || test.user;
+    username = username || test.user;
     return request.getAsync(urls.userData(username));
 };
 
 //POST Train Next Code Challenge
 codewars.postNextChallenge = function(apiKey, strategy, language){
-    var language = language || test.language;
-    var strategy = strategy || test.strategy;
-    var apiKey = apiKey || test.apiKey;
+    language = language || test.language;
+    strategy = strategy || test.strategy;
+    apiKey = apiKey || test.apiKey;
 
     var options = {
         url: urls.nextChallenge(language),
@@ -61,10 +61,10 @@ codewars.postNextChallenge = function(apiKey, strategy, language){
 };
 
 //POST Train (Specific) Code Challenge
-codewars.postSpecificChallenge = function(apiKey,challenge,language){
-    var language = language || test.language;
-    var challenge = challenge || test.challenge;
-    var apiKey = apiKey || test.apiKey;
+codewars.postSpecificChallenge = function(apiKey, challenge, language){
+    language = language || test.language;
+    challenge = challenge || test.challenge;
+    apiKey = apiKey || test.apiKey;
 
     var options = {
         url: urls.specificChallenge(language,challenge),
@@ -77,11 +77,11 @@ codewars.postSpecificChallenge = function(apiKey,challenge,language){
 };
 
 //POST Attempt Solution
-codewars.attemptSolution = function(apiKey,projectId,solutionId, solution){
-    var projectId = projectId || test.projectId;
-    var solutionId = solutionId || test.solutionId;
-    var solution = solution || test.solution;
-    var apiKey = apiKey || test.apiKey;
+codewars.attemptSolution = function(apiKey, projectId, solutionId, solution){
+    projectId = projectId || test.projectId;
+    solutionId = solutionId || test.solutionId;
+    solution = solution || test.solution;
+    apiKey = apiKey || test.apiKey;
 
     var options = {
     url: urls.attemptSolution(projectId, solutionId),
@@ -95,10 +95,10 @@ codewars.attemptSolution = function(apiKey,projectId,solutionId, solution){
 };
 
 //POST Finalize Solution
-codewars.finalizeSolution = function(apiKey,projectId,solutionId){
-    var projectId = projectId || test.projectId;
-    var solutionId = solutionId || test.solutionId;
-    var apiKey = apiKey || test.apiKey;
+codewars.finalizeSolution = function(apiKey, projectId, solutionId){
+    projectId = projectId || test.projectId;
+    solutionId = solutionId || test.solutionId;
+    apiKey = apiKey || test.apiKey;
 
     var options = {
         url: urls.finalizeSolution(projectId, solutionId),

@@ -99,8 +99,8 @@ gulp.task('moveHTML', function () {
 
 gulp.task('moveIndexHTML', function(){
   return gulp.src(['./development/index.html'])
-    .pipe(gulp.dest('./www/'))
-})
+    .pipe(gulp.dest('./www/'));
+});
 
 gulp.task('buildHTML', ['moveHTML', 'moveIndexHTML']);
 

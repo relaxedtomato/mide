@@ -2,7 +2,7 @@ app.config(function($stateProvider){
 	$stateProvider.state('tab.challenge', {
 		url: '/challenge',
 		views: {
-			'challenge' : {
+			'tab-challenge' : {
 				templateUrl: 'features/challenge/challenge.html',
 				controller: 'ChallengeCtrl'
 			}
@@ -17,7 +17,7 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ChallengeCtrl', function($scope, ChallengeFactory, challenge){
+app.controller('ChallengeCtrl', function($scope, ChallengeFactory, challenge, $state){
 	$scope.buttons = {
 		submit : 'Submit',
 		test : 'Test',
@@ -27,8 +27,9 @@ app.controller('ChallengeCtrl', function($scope, ChallengeFactory, challenge){
 	$scope.challenge = challenge;
 
 	$scope.submitChallenge = function(){
+		$state.go('tab.challenge-submit');
 		ChallengeFactory.submitChallenge().then(function(response){
-			console.log('this is the response data', response);
+
 			return response.data;
 		}).catch(function(err){
 			console.error(JSON.stringify(err));
@@ -37,7 +38,6 @@ app.controller('ChallengeCtrl', function($scope, ChallengeFactory, challenge){
 
 	$scope.testChallenge = function(){
 		ChallengeFactory.testChallenge().then(function(response){
-			console.log('this is the response data', response);
 			return response.data;
 		}).catch(function(err){
 			console.error(JSON.stringify(err));

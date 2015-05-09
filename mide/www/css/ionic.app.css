@@ -7674,3 +7674,6 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.ace_editor {
+  height: 375px; }
