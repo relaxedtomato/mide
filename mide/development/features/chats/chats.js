@@ -31,7 +31,6 @@ app.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 });
 
-
 app.factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 
