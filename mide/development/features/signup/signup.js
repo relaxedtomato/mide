@@ -1,5 +1,4 @@
 app.config(function($stateProvider){
-<<<<<<< HEAD
     $stateProvider.state('signup',{
         url:"/signup",
         templateUrl: "features/signup/signup.html",
@@ -34,16 +33,3 @@ app.factory('SignUpFactory',function($http, ApiEndpoint){
 
 //NEXT: Sending data to the back-end and setting up routes
 //Mongoose
-=======
-	$stateProvider.state('signup', {
-		url : '/signup',
-		templateUrl : 'features/signup/signup.html',
-		controller : 'SignupCtrl'
-	});
-});
-
-app.controller('SignupCtrl', function($scope){
-	
-});
-
->>>>>>> 5734002e9ed6efa06c541324738f41aa214fe0d1
