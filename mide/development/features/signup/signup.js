@@ -10,9 +10,8 @@ app.controller('SignUpCtrl',function($scope, SignUpFactory){
     $scope.data = {};
 
     $scope.signup = function(){
-        console.log(JSON.stringify($scope.data));
         SignUpFactory.postSignup($scope.data).then(function(response){
-            console.log(response);
+            console.log(JSON.stringify(response));
         }).catch(function(err){
             console.error(JSON.stringify(err));
         });
@@ -23,7 +22,7 @@ app.controller('SignUpCtrl',function($scope, SignUpFactory){
 app.factory('SignUpFactory',function($http, ApiEndpoint){
     return{
         postSignup: function(userdata){
-            console.log(userdata);
+            console.log(JSON.stringify(userdata));
             return $http.post(ApiEndpoint.url+"/user/signup", userdata)
             //TODO: Send correct url, send status 200 for now
         }
