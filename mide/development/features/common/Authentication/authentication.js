@@ -105,8 +105,14 @@
             });
         };
 
+        this.signedUp = function(response){
+            console.log('signedUp, Session call', JSON.stringify(response));
+            return onSuccessfulLogin(response);
+        };
+
         function onSuccessfulLogin(response) {
             var data = response.data;
+            //"data":{"user":{"userName":"1","email":"1","id":"554e7c4966983940d35126d4"}},
             Session.create(data.id, data.user);
             $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
             return data.user;
