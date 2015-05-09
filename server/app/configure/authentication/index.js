@@ -47,14 +47,15 @@ module.exports = function (app) {
     // We provide a simple GET /session in order to get session information directly.
     // This is used by the browser application (Angular) to determine if a user is
     // logged in already.
+    //TODO: get session route working
     app.get('/session', function (req, res) {
-        //     User.findById(req.user._id)
-        //     .select('+password')
-        //     .select('+salt')
-        //     .exec()
-        //     .then(function (user) {
+             User.findById(req.user.id)
+             .select('+password')
+             .select('+salt')
+             .exec()
+             .then(function (user) {
 
-        //     });
+             });
         if (req.user) {
             res.send({ user: _.omit(req.user.toJSON(), ['salt', 'password']) });
         } else {
