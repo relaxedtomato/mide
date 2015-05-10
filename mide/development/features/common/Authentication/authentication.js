@@ -72,7 +72,6 @@
         };
 
         this.getLoggedInUser = function () {
-
             // If an authenticated session exists, we
             // return the user attached to that session
             // with a promise. This ensures that we can
@@ -84,7 +83,7 @@
             // Make request GET /session.
             // If it returns a user, call onSuccessfulLogin with the response.
             // If it returns a 401 response, we catch it and instead resolve to null.
-            return $http.get(ApiEndpoint.session).then(onSuccessfulLogin).catch(function () {`
+            return $http.get(ApiEndpoint.session).then(onSuccessfulLogin).catch(function () {
                 return null;
             });
 
@@ -111,6 +110,7 @@
         };
 
         function onSuccessfulLogin(response) {
+            console.log('onSuccessfulLogin', response);
             var data = response.data;
             //"data":{"user":{"userName":"1","email":"1","id":"554e7c4966983940d35126d4"}},
             Session.create(data.id, data.user);
