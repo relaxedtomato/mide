@@ -27,7 +27,7 @@ router.post('/signup', function(req, res, next) {
 		//TODO: Error Message?
 	}
 
-	//TODO: Need to confirm API token is value before saving
+	//TODO: API Session is being saved, create working get /session route
 
 	// delete newUser.passwordConfirm;
 	// User.create(newUser, function(err, returnedUser) {

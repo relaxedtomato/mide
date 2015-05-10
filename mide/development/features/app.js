@@ -11,6 +11,7 @@ var app = angular.module('mide', ['ionic', 'ui.ace'])
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
+    // $locationProvider.html5Mode(true);
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -23,7 +24,8 @@ var app = angular.module('mide', ['ionic', 'ui.ace'])
 
 //TODO:This is needed to set to access the proxy url that will then in the ionic.project file redirect it to the correct URL
 .constant('ApiEndpoint', {
-  url : '/api'
+  url : '/api',
+  session: '/session'
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -35,6 +37,7 @@ var app = angular.module('mide', ['ionic', 'ui.ace'])
 
   // if none of the above states are matched, use this as the fallback
   //$urlRouterProvider.otherwise('/tab/chats');
-  $urlRouterProvider.otherwise('/signup'); // TODO: Richard testing this route
+  //$urlRouterProvider.otherwise('/signup'); // TODO: Richard testing this route
   //$urlRouterProvider.otherwise('/tab/challenge'); //TODO: Tony testing this route
+    $urlRouterProvider.otherwise('welcome');
 });
