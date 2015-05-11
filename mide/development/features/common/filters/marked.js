@@ -1,4 +1,4 @@
-app.filter('marked', function(){
+app.filter('marked', function($sce){
 	// marked.setOptions({
 	// 	renderer: new marked.Renderer(),
 	// 	gfm: true,
@@ -10,6 +10,6 @@ app.filter('marked', function(){
 	// 	smartypants: false
 	// });
 	return function(text){
-		return marked(text);
+		return $sce.trustAsHtml(marked(text));
 	};
 });

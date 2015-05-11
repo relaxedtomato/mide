@@ -1,17 +1,7 @@
 <ion-view view-title="Challenge">
   <ion-content>
-    <table>
-        <tr>
-            <td>Description: </td>
-            <td>{{challengeDesc}}</td>
-        </tr>
-        <tr>
-            <td>Challenge: </td>
-            <td>{{challengeBody}}</td>
-        </tr>
-    </table>
     <pre>{{challenge | json}}</pre>
     <h1>{{challenge.name}}</h1>
-    {{challenge.description | marked}}
+    <div ng-bind-html='challenge.description | marked'></div>
   </ion-content>
 </ion-view>

@@ -11,11 +11,6 @@ var ENABLED_AUTH_STRATEGIES = [
     'local'
 ];
 
-//TODO:,
-//'twitter',
-//    'facebook',
-//    'google'
-
 module.exports = function (app) {
 
     // First, our session middleware will set/read sessions from the request.
@@ -35,28 +30,25 @@ module.exports = function (app) {
 
     // When we give a cookie to the browser, it is just the userId (encrypted with our secret).
     passport.serializeUser(function (user, done) {
+        console.log('passport serialize', user);
         done(null, user.id);
     });
 
     // When we receive a cookie from the browser, we use that id to set our req.user
     // to a user found in the database.
     passport.deserializeUser(function (id, done) {
+        console.log('passport deserialize', id);
         UserModel.findById(id, done);
     });
 
     // We provide a simple GET /session in order to get session information directly.
     // This is used by the browser application (Angular) to determine if a user is
     // logged in already.
-    //TODO: get session route working
     app.get('/session', function (req, res) {
-             User.findById(req.user.id)
-             .select('+password')
-             .select('+salt')
-             .exec()
-             .then(function (user) {
+        console.log('/session is being hit, cookie is',req.cookies, req.user);
 
-             });
         if (req.user) {
+            console.log('found user', req.user);
             res.send({ user: _.omit(req.user.toJSON(), ['salt', 'password']) });
         } else {
             res.status(401).send('No authenticated user.');

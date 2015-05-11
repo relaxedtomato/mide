@@ -6,11 +6,19 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('WelcomeCtrl', function($scope, $state){
+app.controller('WelcomeCtrl', function($scope, $state, AuthService){
+	//TODO: Splash page while you load resources (possible idea)
 	$scope.login = function(){
 		$state.go('login');
 	};
 	$scope.signup = function(){
 		$state.go('signup');
 	};
+
+	//if (AuthService.isAuthenticated()) {
+	//	$state.go('challenge.view');
+	//} else {
+	//	$state.go('signup');
+	//}
+	//});
 });

@@ -9,21 +9,20 @@ var schemaOptions = {
     }
 };
 
+//TODO: Add required for userSchema after testing
 var userSchema = new mongoose.Schema({
     userName : {type : String},
     email: {
-        type: String,
-        required: true
+        type: String
     },
-    apiKey: {type: String, required: true},
+    apiKey: {type: String},
     password: {
         type: String,
-    //used in routes later to display or not display certain properties
-        select : false
+        //select : false //used in routes later to display or not display certain properties
     },
     salt: {
         type: String,
-        select: false
+        //select: false
     }
 }, schemaOptions);
 
@@ -66,6 +65,7 @@ userSchema.statics.generateSalt = generateSalt;
 userSchema.statics.encryptPassword = encryptPassword;
 
 userSchema.method('correctPassword', function (candidatePassword) {
+    console.log('candidatePassword',candidatePassword);
     return encryptPassword(candidatePassword, this.salt) === this.password;
 });
 

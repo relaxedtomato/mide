@@ -10,12 +10,12 @@ module.exports = function (app) {
     };
 
     require('./app-variables')(app);
-    //require('./static-middleware')(app);
-    //require('./parsing-middleware')(app);
+    require('./static-middleware')(app);
+    require('./parsing-middleware')(app);
 
     // Logging middleware, set as application
     // variable inside of server/app/configure/app-variables.js
-    //app.use(app.getValue('log'));
+    app.use(app.getValue('log'));
 
-    require('./authentication')(app);
+    //require('./authentication')(app); //TODO: You could add authentication here before routing
 };
