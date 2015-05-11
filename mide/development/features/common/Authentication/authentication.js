@@ -63,7 +63,7 @@ app.factory('AuthTokenFactory',function($window){
 });
 
 app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpoint,$rootScope){
-    var LOCAL_TOKEN_KEY = 'auth-token';
+    //var LOCAL_TOKEN_KEY = 'auth-token';
     var username = '';
     var isAuthenticated = false;
     var authToken;
@@ -77,18 +77,32 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
         }
     }
 
+    function storeUserCredentials(token) {
+        AuthTokenFactory.setToken(token);
+        useCredentials(token);
+    }
+
     function useCredentials(token) {
-        console.log('useCredentails token',token);
-        //username = token.split('.')[0]; //TODO:
+        console.log('useCredentials token',token);
+        username = token.user; //TODO: check this
         isAuthenticated = true;
-        //authToken = token; //TODO:
+        authToken = token.token; //TODO: check this
 
         // Set the token as header for your requests!
         //$http.defaults.headers.common['X-Auth-Token'] = token; //TODO
     }
 
+    function destroyUserCredentials() {
+        authToken = undefined;
+        username = '';
+        isAuthenticated = false;
+        //$http.defaults.headers.common['X-Auth-Token'] = undefined;
+        //window.localStorage.removeItem(LOCAL_TOKEN_KEY);
+        AuthTokenFactory.setToken(); //empty clears the token
+    }
+
     var logout = function(){
-        AuthTokenFactory.setToken(); //destroyUserCredentials
+        destroyUserCredentials();
     };
 
     //var login = function()
@@ -98,6 +112,7 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
             $http.post(ApiEndpoint.url+"/user/login", userdata)
                 .then(function(response){
                     AuthTokenFactory.setToken(response.data.token); //storeUserCredentials
+                    isAuthenticated = true;
                     resolve(response); //TODO: sent to authenticated
                 });
         });
@@ -113,45 +128,59 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
     };
     
     //TODO: Need to fix getLoggedInUser
-    var getLoggedInUser = function () {
-        console.log('getLoggedInUser called')
-        // If an authenticated session exists, we
-        // return the user attached to that session
-        // with a promise. This ensures that we can
-        // always interface with this method asynchronously.
-
-        //TODO: In what case will the below code run? It will work, but not clear of the use
-        if (isAuthenticated) {
-            return $q.when(AuthTokenFactory.getToken());
-        }
-
-        // Make request GET /session.
-        // If it returns a user, call onSuccessfulLogin with the response.
-        // If it returns a 401 response, we catch it and instead resolve to null.
-
-        if(AuthTokenFactory.getToken()){
-            return $http.get(ApiEndpoint.url+'/user/token')
-                .then(function(response){
-                    console.log('ApiEndpoint.url /user/token response',response);
-                    var data = response.data.user
-                    //TODO:$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                    return data; //user is being returned
-                }).catch(function () {
-                    console.log('getLoggedInUser returned null');
-                    return null;
-                });
-        } else {
-            return $q.reject({data: 'no auth token exists'});
-        }
-
-    };
+    //var getLoggedInUser = function () {
+    //    console.log('getLoggedInUser called')
+    //    // If an authenticated session exists, we
+    //    // return the user attached to that session
+    //    // with a promise. This ensures that we can
+    //    // always interface with this method asynchronously.
+    //
+    //    //TODO: In what case will the below code run? It will work, but not clear of the use
+    //    if (isAuthenticated) {
+    //        return $q.when(AuthTokenFactory.getToken());
+    //    }
+    //
+    //    // Make request GET /session.
+    //    // If it returns a user, call onSuccessfulLogin with the response.
+    //    // If it returns a 401 response, we catch it and instead resolve to null.
+    //
+    //    //if(AuthTokenFactory.getToken()){
+    //    //    return $http.get(ApiEndpoint.url+'/user/token')
+    //    //        .then(function(response){
+    //    //            console.log('ApiEndpoint.url /user/token response',response);
+    //    //            var data = response.data.user
+    //    //            //TODO:$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+    //    //            return data; //user is being returned
+    //    //        }).catch(function () {
+    //    //            console.log('getLoggedInUser returned null');
+    //    //            return null;
+    //    //        });
+    //    //} else {
+    //    //    return $q.reject({data: 'no auth token exists'});
+    //    //}
+    //    return $http.get(ApiEndpoint.url + '/user/token')
+    //        .then(onSuccessfulLogin)
+    //        .catch(function(){return null});
+    //};
+    //
+    //function onSuccessfulLogin(response) {
+    //    var data = response.data;
+    //    console.log(response.data);
+    //    //Session.create(data.id, data.user);
+    //    AuthTokenFactory.setToken(response.data.token)
+    //    //$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+    //    return data.user;
+    //}
 
     return {
         login: login,
         logout: logout,
-        isAuthenticated: function() {return isAuthenticated;},
+        isAuthenticated: function() {
+            console.log('AuthService.isAuthenticated()');
+            return isAuthenticated;
+        },
         username: function(){return username;},
-        getLoggedInUser: getLoggedInUser,
+        //getLoggedInUser: getLoggedInUser,
         isAuthorized: isAuthorized
     }
 

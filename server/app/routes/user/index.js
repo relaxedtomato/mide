@@ -19,8 +19,7 @@ var user = {
 var jwtSecret = 'blahblahblah';
 
 function authenticate(req,res,next){
-    console.log('authenticate',req.user);
-    var body = req.body || req.user;
+    var body = req.body
     if (!body.username || !body.password) {
         res.status(400).end('Must provide username and/or password');
     }
