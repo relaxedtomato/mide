@@ -73,4 +73,32 @@ var app = angular.module('mide', ['ionic', 'ui.ace'])
         //TODO: Not sure how to proceed here
         $state.go('login'); //if above fails, goto login
     });
+   $urlRouterProvider.otherwise('/welcome'); // TODO: Richard testing this route
+  //$urlRouterProvider.otherwise('/challenge/view'); //TODO: Tony testing this route
+});
+
+app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state){
+  $scope.states = [
+    {
+      name : 'Account',
+      ref : 'account'
+    },
+    {
+      name : 'Challenge',
+      ref : 'challenge.view'
+    },
+    {
+      name : 'Chats',
+      ref: 'chats'
+    }
+  ];
+
+  $scope.clickItem = function(stateRef){
+    $ionicSideMenuDelegate.toggleLeft();
+    $state.go(stateRef.toString());
+  };
+
+  $scope.toggleMenu = function(){
+    $ionicSideMenuDelegate.toggleLeft();
+  };
 });

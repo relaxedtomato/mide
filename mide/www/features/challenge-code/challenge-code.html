@@ -9,10 +9,10 @@
             onChange : aceChanged
         }" ng-model="text"></div>
 
-        <button class='button button-balanced' ng-click='testChallenge()'>
+        <button class='button button-balanced' ng-click='testChallenge(text)'>
             {{buttons.test | uppercase}}
         </button>
-        <button class='button button-balanced' ng-click='submitChallenge()'>
+        <button class='button button-balanced' ng-click='submitChallenge(text)'>
             {{buttons.submit | uppercase}}
         </button>
         <button class='button button-assertive'>
