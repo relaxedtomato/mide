@@ -29,24 +29,25 @@ router.post('/', function (req, res, next) {
 router.post('/submit/:id', function (req, res, next) {
 	//TODO: Keep track of successfully completed problems
 	console.log(req.params.id, req.body);
-	// codewars.finalizeSolution().then(function(finalized){
-	// 	//console.log('here');
-	// 	res.json(finalized .body);
-	// });
+	codewars.submitSubmission(req.params.id, req.body.projectId, req.body.solutionId, req.body.code).then(function(finalized){
+		//console.log('here');
+		// res.json(finalized .body);
+		console.log(finalized);
+	});
 });
 
 //Attempt Solution
 router.post('/attempt/:id', function (req, res, next) {
 	console.log(req.params.id, req.body);
 	//TODO: provide attemptSolution params, default is a test
-	// codewars.attemptSolution().then(function(attempt){
-	// 	var attempt = JSON.parse(attempt[0].body);
-	// 	if(attempt.success){
-	// 		res.json({success:attempt.success,dmid:attempt.dmid});
-	// 	} else {
-	// 		console.log('error handling for incorrect solution'); //TODO:
-	// 	}
-	// });
+	codewars.testSubmission(req.params.id, req.body.projectId, req.body.solutionId, req.body.code).then(function(attempt){
+		console.log(attempt);
+		// if(attempt.success){
+		// 	res.json({success:attempt.success,dmid:attempt.dmid});
+		// } else {
+		// 	console.log('error handling for incorrect solution'); //TODO:
+		// }
+	});
 });
 
 

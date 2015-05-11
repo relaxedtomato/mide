@@ -21,7 +21,10 @@ var urls = {
     },
     finalizeSolution: function(projectId, solutionId){
         return 'https://www.codewars.com/api/v1/code-challenges/projects/'+projectId+'/solutions/'+solutionId+'/finalize';
-    }//TODO: Defferred Resolution API Call left out
+    },
+    deferredResponse : function(deferredId){
+        return 'https://www.codewars.com/api/v1/deferred/' + deferredId;
+    }
 };
 
 var test = {
@@ -93,38 +96,28 @@ codewars.postSpecificChallenge = function(apiKey,challenge,language){
 //	"success":true,
 //	"dmid":"4rsdaDf8d"
 //}
-codewars.attemptSolution = function(apiKey,projectId,solutionId, solution){
-    projectId = projectId || test.projectId;
-    solutionId = solutionId || test.solutionId;
-    solution = solution || test.solution;
-    apiKey = apiKey || test.apiKey;
-
+function attemptSolution (apiKey,projectId,solutionId, solution){
     var options = {
     url: urls.attemptSolution(projectId, solutionId),
-    form:solution,
+    form: 'code=' + solution,
     headers: {
         Authorization: apiKey
         }
     };
 
     return request.postAsync(options).spread(function(res, body){
-        console.log(res);
-        console.log(body);
         return JSON.parse(body);
     }).catch(function(err){
         throw new Error(err);
     });
-};
+}
+
 
 //POST Finalize Solution
 //{
 //	"success":true,
 //}
-codewars.finalizeSolution = function(apiKey,projectId,solutionId){
-    projectId = projectId || test.projectId;
-    solutionId = solutionId || test.solutionId;
-    apiKey = apiKey || test.apiKey;
-
+function finalizeSolution (apiKey,projectId,solutionId){
     var options = {
         url: urls.finalizeSolution(projectId, solutionId),
         headers: {
@@ -133,21 +126,68 @@ codewars.finalizeSolution = function(apiKey,projectId,solutionId){
     };
 
     return request.postAsync(options).spread(function(res, body){
-        console.log(res);
-        console.log(body);
         return JSON.parse(body);
+    }).catch(function(err){
+        throw new Error(err);
+    });
+}
+
+//GET Deferred Response
+//{
+//    "success":true,
+//    "dmid":"4rsdaDf8d",
+//    "valid": false,
+//    "reason":"-e: Value is not what was expected (Test::Error)\n",
+//    "output":[
+//       "<div class='console-failed'>Value is not what was expected</div>"
+//    ],
+//    "wall_time":45
+// }
+
+function getDeferredResponse(apiKey, deferredId){
+    var options = {
+        url: urls.deferredResponse(deferredId),
+        headers: {
+            Authorization: apiKey
+        }
+    };
+
+    return request.getAsync(options).spread(function(res, body){
+        return JSON.parse(body);
+    }).catch(function(err){
+        throw new Error(err);
+    });
+}
+
+//To test a submission
+codewars.testSubmission = function(apiKey, projectId, solutionId, solution){
+    // projectId = projectId || test.projectId;
+    // solutionId = solutionId || test.solutionId;
+    // solution = solution || test.solution;
+    // apiKey = apiKey || test.apiKey;
+
+    return attemptSolution(apiKey, projectId, solutionId, solution).then(function(data){
+        return getDeferredResponse(apiKey, data.dmid);
+    }).catch(function(err){
+        throw new Error(err);
+    });
+}; 
+
+//To submit a submission
+codewars.submitSubmission = function(apiKey,projectId,solutionId, solution){
+    projectId = projectId || test.projectId;
+    solutionId = solutionId || test.solutionId;
+    solution = solution || test.solution;
+    apiKey = apiKey || test.apiKey;
+
+    return attemptSolution(apiKey, projectId, solutionId, solution).then(function(data){
+        return finalizeSolution(apiKey, projectId, solutionId);
     }).catch(function(err){
         throw new Error(err);
     });
 };
 
 //TODO: Grab Code Challenge ID based on slug
-
-//Testing Promises (informal)
-//var promise = codewars.postNextChallenge();
-//promise.then(function(data){
-//    console.log(data.toString());
-//});
 
 module.exports = codewars;
 

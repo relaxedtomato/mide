@@ -10,9 +10,10 @@ app.config(function($stateProvider){
 		resolve : {
 			challenge : function(ChallengeFactory, $state){
 				var id = 'A9QKk6SmRpDcriU-HMQr';
-				return ChallengeFactory.getChallenge(id).catch(function(err){
-					$state.go('account');
-				});
+				return ChallengeFactory.getChallenge(id)
+									.catch(function(err){
+										$state.go('account');
+									});
 			}
 		}
 	});
@@ -25,7 +26,5 @@ app.controller('ChallengeViewCtrl', function($scope, ChallengeFactory, challenge
 	};
 
 	//Challenge View
-	$scope.challenge = challenge;
-	// $scope.challengeDesc = JSON.parse(challenge[0].body).description;
-	// $scope.challengeBody = JSON.parse(challenge[0].body).session.setup;
+	$scope.challenge = ChallengeFactory.getProblem();
 });

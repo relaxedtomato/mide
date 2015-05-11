@@ -16,6 +16,9 @@ app.controller('ChallengeCodeCtrl', function($scope,$state, ChallengeFactory){
 	//text needs to be worked on
 	$scope.text = ChallengeFactory.getSubmission();
 
+	$scope.projectId = ChallengeFactory.getProblem().session.projectId;
+	$scope.solutionId = ChallengeFactory.getProblem().session.solutionId;
+
 	$scope.aceLoaded = function(_editor){
 		_editor.setReadOnly(false);
 	};
@@ -30,23 +33,28 @@ app.controller('ChallengeCodeCtrl', function($scope,$state, ChallengeFactory){
 		dismiss : 'Dismiss'
 	};
 
-	$scope.submitChallenge = function(text){
+	$scope.submitSubmission = function(projectId, solutionId, code){
 		var id = 'A9QKk6SmRpDcriU-HMQr';
-		console.log(text);
-		ChallengeFactory.submitChallenge(id, text).then(function(response){
+		ChallengeFactory.submitSubmission(id, projectId, solutionId, code).then(function(response){
 			return response.data;
 		}).catch(function(err){
 			console.error(JSON.stringify(err));
 		});
 	};
 
-	$scope.testChallenge = function(text){
+	$scope.testSubmission = function(projectId, solutionId, code){
 		var id = 'A9QKk6SmRpDcriU-HMQr';
-		console.log(text);
-		ChallengeFactory.testChallenge(id, text).then(function(response){
+		ChallengeFactory.testSubmission(id, projectId, solutionId, code).then(function(response){
 			return response.data;
 		}).catch(function(err){
 			console.error(JSON.stringify(err));
+		});
+	};
+
+	$scope.dismissChallenge = function(){
+		var id = 'A9QKk6SmRpDcriU-HMQr';
+		ChallengeFactory.getChallenge(id).then(function(data){
+			$state.go('challenge.view');
 		});
 	};
 
