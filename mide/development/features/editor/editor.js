@@ -2,29 +2,31 @@ app.config(function($stateProvider){
 	$stateProvider.state('editor', {
 		url: '/editor',
 		views: {
-			'tab-editor' : {
+			'editor' : {
 				templateUrl: 'features/editor/editor.html',
 				controller: 'EditorCtrl'
 			}
-		},
-		resolve : {
-			challenge : function(ChallengeFactory, $state){
-				return ChallengeFactory.getChallenge().catch(function(err){
-					$state.go('tab.account');
-				});
-			}
 		}
+		// resolve : {
+		// 	challenge : function(ChallengeFactory, $state){
+		// 		return ChallengeFactory.getChallenge().catch(function(err){
+		// 			console.log(JSON.parse(err));
+		// 			// $state.go('challenge');
+		// 		});
+		// 	}
+		// }
 	});
 });
 
-app.controller('EditorCtrl', function($scope, EditorFactory, ChallengeFactory, challenge, $state){
+app.controller('EditorCtrl', function($scope, EditorFactory, ChallengeFactory, $state){
 
-	$scope.challenge = challenge;
-	$scope.challengeDesc = JSON.parse(challenge[0].body).description;
-	$scope.challengeBody = JSON.parse(challenge[0].body).session.setup;
+	// $scope.challenge = challenge;
+	// $scope.challengeDesc = JSON.parse(challenge[0].body).description;
+	// $scope.challengeBody = JSON.parse(challenge[0].body).session.setup;
 
 
-	$scope.text = $scope.challengeBody;
+	// $scope.text = $scope.challengeBody;
+	$scope.text = "testing";
 
 	var editor;
     $scope.aceLoaded = function(_editor){

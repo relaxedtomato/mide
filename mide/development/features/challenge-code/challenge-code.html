@@ -3,11 +3,11 @@
 		<div ui-ace="{
             useWrapMode : true,
             showGutter : true,
-            theme: 'tomorrow',
+            theme: 'ambiance',
             mode: 'javascript',
             onLoad: aceLoaded,
             onChange : aceChanged
-        }" ng-model="text"></div>
+        }" ng-model="text" ng-click="focusEditor()"></div>
 
         <button class='button button-balanced' ng-click='testChallenge(text)'>
             {{buttons.test | uppercase}}

@@ -16,12 +16,24 @@ app.controller('ChallengeCodeCtrl', function($scope,$state, ChallengeFactory){
 	//text needs to be worked on
 	$scope.text = ChallengeFactory.getSubmission();
 
+	var editor;
+
 	$scope.aceLoaded = function(_editor){
-		_editor.setReadOnly(false);
+		editor = _editor;
+		editor.getSession().setUseWorker(false);
+
+		editor.focus();
+
+		editor.setReadOnly(false);
+
 	};
 
 	$scope.aceChanged = function(e){
 		// console.log(e);
+	};
+
+	$scope.focusEditor = function() {
+			editor.focus();
 	};
 
 	$scope.buttons = {

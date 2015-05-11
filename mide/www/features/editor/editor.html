@@ -1,15 +1,5 @@
 <ion-view view-title="Editor">
   <ion-content>
-    <table>
-        <tr>
-            <td>Description: </td>
-            <td>{{challengeDesc}}</td>
-        </tr>
-<!--         <tr>
-            <td>Challenge: </td>
-            <td>{{challengeBody}}</td>
-        </tr> -->
-    </table>
 
     <div div ui-ace="{
             useWrapMode : true,
@@ -20,17 +10,6 @@
             onChange : aceChanged
         }" ng-model="text"></div>
 
-
-    <button class='button button-outline button-assertive'>
-        {{buttons.dismiss | uppercase}}
-    </button>
-    <button class='button button-outline button-calm' ng-click='testChallenge()'>
-        {{buttons.test | uppercase}}
-    </button>
-    <button class='button button-balanced' ng-click='submitChallenge()'>
-        {{buttons.submit | uppercase}}
-    </button>
-    <h3>hey{{challenge[0].body}}</h3>
-    <pre>{{challenge | json}}</pre>
+    <h2>test</h2>
   </ion-content>
 </ion-view>
