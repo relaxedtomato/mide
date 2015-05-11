@@ -12,7 +12,5 @@ app.config(function($stateProvider){
 
 app.controller('ChallengeCompileCtrl', function($scope, ChallengeFactory){
 
-	$scope.results = (function(){
-		return eval(ChallengeFactory.getSubmission());
-	})();
+	$scope.results = (new Function("'use strict';" + ChallengeFactory.getSubmission()))();
 });
