@@ -1,22 +1,14 @@
 app.config(function($stateProvider){
 
-  $stateProvider.state('tab.chats', {
+  $stateProvider.state('chats', {
       url: '/chats',
-      views: {
-        'tab-chats': {
-          templateUrl: 'features/chats/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      }
+      templateUrl: 'features/chats/tab-chats.html',
+      controller: 'ChatsCtrl'
     })
-    .state('tab.chat-detail', {
+    .state('chat-detail', {
       url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'features/chats/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
+      templateUrl: 'features/chats/chat-detail.html',
+      controller: 'ChatDetailCtrl'
     });
 });
 

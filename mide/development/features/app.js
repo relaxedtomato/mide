@@ -35,6 +35,32 @@ var app = angular.module('mide', ['ionic', 'ui.ace'])
 
   // if none of the above states are matched, use this as the fallback
   //$urlRouterProvider.otherwise('/tab/chats');
-  $urlRouterProvider.otherwise('/signup'); // TODO: Richard testing this route
-  //$urlRouterProvider.otherwise('/tab/challenge'); //TODO: Tony testing this route
+  // $urlRouterProvider.otherwise('/signup'); // TODO: Richard testing this route
+  $urlRouterProvider.otherwise('/challenge/view'); //TODO: Tony testing this route
+});
+
+app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state){
+  $scope.states = [
+    {
+      name : 'Account',
+      ref : 'account'
+    },
+    {
+      name : 'Challenge',
+      ref : 'challenge.view'
+    },
+    {
+      name : 'Chats',
+      ref: 'chats'
+    }
+  ];
+
+  $scope.clickItem = function(stateRef){
+    $ionicSideMenuDelegate.toggleLeft();
+    $state.go(stateRef.toString());
+  };
+
+  $scope.toggleMenu = function(){
+    $ionicSideMenuDelegate.toggleLeft();
+  };
 });
