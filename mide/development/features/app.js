@@ -21,7 +21,7 @@ var app = angular.module('mide', ['ionic', 'ui.ace'])
   });
 })
 
-//This is needed to set to access the proxy url that will then in the ionic.project file redirect it to the correct URL
+//TODO:This is needed to set to access the proxy url that will then in the ionic.project file redirect it to the correct URL
 .constant('ApiEndpoint', {
   url : '/api'
 })
@@ -34,6 +34,33 @@ var app = angular.module('mide', ['ionic', 'ui.ace'])
   // Each state's controller can be found in controllers.js
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/challenge/submit');
+  //$urlRouterProvider.otherwise('/tab/chats');
+  // $urlRouterProvider.otherwise('/signup'); // TODO: Richard testing this route
+  $urlRouterProvider.otherwise('/challenge/view'); //TODO: Tony testing this route
+});
 
+app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state){
+  $scope.states = [
+    {
+      name : 'Account',
+      ref : 'account'
+    },
+    {
+      name : 'Challenge',
+      ref : 'challenge.view'
+    },
+    {
+      name : 'Chats',
+      ref: 'chats'
+    }
+  ];
+
+  $scope.clickItem = function(stateRef){
+    $ionicSideMenuDelegate.toggleLeft();
+    $state.go(stateRef.toString());
+  };
+
+  $scope.toggleMenu = function(){
+    $ionicSideMenuDelegate.toggleLeft();
+  };
 });

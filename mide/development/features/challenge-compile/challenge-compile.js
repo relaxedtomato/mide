@@ -1,8 +1,8 @@
 app.config(function($stateProvider){
-	$stateProvider.state('tab.challenge-compile', {
-		url : '/tab/challenge-compile',
+	$stateProvider.state('challenge.compile', {
+		url : '/challenge/compile',
 		views : {
-			'tab-challenge' : {
+			'tab-compile' : {
 				templateUrl : 'features/challenge-compile/challenge-compile.html',
 				controller: 'ChallengeCompileCtrl'
 			}
@@ -10,9 +10,9 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ChallengeCompileCtrl', function($scope, $state){
-	console.log('i am here');
-	$scope.onSwipeLeft = function(){
-		$state.go('tab.challenge-submit');
-	};
+app.controller('ChallengeCompileCtrl', function($scope, ChallengeFactory){
+
+	$scope.results = (function(){
+		return eval(ChallengeFactory.getSubmission());
+	})();
 });

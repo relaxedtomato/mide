@@ -10,7 +10,7 @@ var urls = {
     userData: function(user) {
         return 'https://www.codewars.com/api/v1/users/'+user;
     },
-    nextChallenge: function(language, apiKey){
+    nextChallenge: function(language){
         return 'https://www.codewars.com/api/v1/code-challenges/'+language+'/train';
     },
     specificChallenge: function(language, challenge){
@@ -27,7 +27,7 @@ var urls = {
 var test = {
     apiKey: "A9QKk6SmRpDcriU-HMQr",
     user:"cwcfsa@gmail.com",
-    strategy:'kyu_8_workout',
+    strategy:'default',
     challenge: 'multiply', //http://www.codewars.com/kata/multiply TODO: does it refer to this: 50654ddff44f800200000004
     projectId: '554b883a6c5b771ab000008a', //TODO:are these auto-generated for each one?
     solutionId: '554bb0f8555a87bb04000045', //TODO:are these auto-generated for each one?
@@ -37,15 +37,19 @@ var test = {
 
 //GET User Data
 codewars.getUserData = function(username){
-    var username = username || test.user;
-    return request.getAsync(urls.userData(username));
+    username = username || test.user;
+    return request.getAsync(urls.userData(username)).spread(function(res, body){
+        return JSON.parse(body);
+    }).catch(function(err){
+        throw new Error(err);
+    });
 };
 
 //POST Train Next Code Challenge
 codewars.postNextChallenge = function(apiKey, strategy, language){
-    var language = language || test.language;
-    var strategy = strategy || test.strategy;
-    var apiKey = apiKey || test.apiKey;
+    language = language || test.language;
+    strategy = strategy || test.strategy;
+    apiKey = apiKey || test.apiKey;
 
     var options = {
         url: urls.nextChallenge(language),
@@ -57,14 +61,18 @@ codewars.postNextChallenge = function(apiKey, strategy, language){
         }
     };
 
-    return request.postAsync(options);
+    return request.postAsync(options).spread(function(res, body){
+        return JSON.parse(body);
+    }).catch(function(err){
+        throw new Error(err);
+    });
 };
 
 //POST Train (Specific) Code Challenge
 codewars.postSpecificChallenge = function(apiKey,challenge,language){
-    var language = language || test.language;
-    var challenge = challenge || test.challenge;
-    var apiKey = apiKey || test.apiKey;
+    language = language || test.language;
+    challenge = challenge || test.challenge;
+    apiKey = apiKey || test.apiKey;
 
     var options = {
         url: urls.specificChallenge(language,challenge),
@@ -73,7 +81,11 @@ codewars.postSpecificChallenge = function(apiKey,challenge,language){
         }
     };
 
-    return request.postAsync(options);
+    return request.postAsync(options).spread(function(res, body){
+        return JSON.parse(body);
+    }).catch(function(err){
+        throw new Error(err);
+    });
 };
 
 //POST Attempt Solution
@@ -82,10 +94,10 @@ codewars.postSpecificChallenge = function(apiKey,challenge,language){
 //	"dmid":"4rsdaDf8d"
 //}
 codewars.attemptSolution = function(apiKey,projectId,solutionId, solution){
-    var projectId = projectId || test.projectId;
-    var solutionId = solutionId || test.solutionId;
-    var solution = solution || test.solution;
-    var apiKey = apiKey || test.apiKey;
+    projectId = projectId || test.projectId;
+    solutionId = solutionId || test.solutionId;
+    solution = solution || test.solution;
+    apiKey = apiKey || test.apiKey;
 
     var options = {
     url: urls.attemptSolution(projectId, solutionId),
@@ -95,7 +107,13 @@ codewars.attemptSolution = function(apiKey,projectId,solutionId, solution){
         }
     };
 
-    return request.postAsync(options);
+    return request.postAsync(options).spread(function(res, body){
+        console.log(res);
+        console.log(body);
+        return JSON.parse(body);
+    }).catch(function(err){
+        throw new Error(err);
+    });
 };
 
 //POST Finalize Solution
@@ -103,9 +121,9 @@ codewars.attemptSolution = function(apiKey,projectId,solutionId, solution){
 //	"success":true,
 //}
 codewars.finalizeSolution = function(apiKey,projectId,solutionId){
-    var projectId = projectId || test.projectId;
-    var solutionId = solutionId || test.solutionId;
-    var apiKey = apiKey || test.apiKey;
+    projectId = projectId || test.projectId;
+    solutionId = solutionId || test.solutionId;
+    apiKey = apiKey || test.apiKey;
 
     var options = {
         url: urls.finalizeSolution(projectId, solutionId),
@@ -114,7 +132,13 @@ codewars.finalizeSolution = function(apiKey,projectId,solutionId){
         }
     };
 
-    return request.postAsync(options);
+    return request.postAsync(options).spread(function(res, body){
+        console.log(res);
+        console.log(body);
+        return JSON.parse(body);
+    }).catch(function(err){
+        throw new Error(err);
+    });
 };
 
 //TODO: Grab Code Challenge ID based on slug

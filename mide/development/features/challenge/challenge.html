@@ -1,5 +1,23 @@
-<ion-view view-title="Challenge" on-swipe-right='onSwipeRight()'>
-  <ion-content>
-    <pre>{{challenge}}</pre>
-  </ion-content>
-</ion-view>
+<!--
+Create tabs with an icon and label, using the tabs-positive style.
+Each tab's child <ion-nav-view> directive will have its own
+navigation history that also transitions its views in and out.
+-->
+<ion-tabs class="tabs-icon-top tabs-top tabs-color-active-positive">
+
+  <!-- Dashboard Tab -->
+  <ion-tab title="View" icon-off="ion-eye-disabled" icon-on="ion-eye" href="#/challenge/view">
+    <ion-nav-view name="tab-view"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Challenge Tab -->
+  <ion-tab title="Code" icon-off="ion-ios-compose-outline" icon-on="ion-ios-compose" href="#/challenge/code">
+    <ion-nav-view name="tab-code"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Chats Tab -->
+  <ion-tab title="Compile" icon-off="ion-ios-paper-outline" icon-on="ion-ios-paper" href="#/challenge/compile">
+    <ion-nav-view name="tab-compile"></ion-nav-view>
+  </ion-tab>
+
+</ion-tabs>

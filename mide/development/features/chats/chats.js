@@ -1,22 +1,14 @@
 app.config(function($stateProvider){
 
-  $stateProvider.state('tab.chats', {
+  $stateProvider.state('chats', {
       url: '/chats',
-      views: {
-        'tab-chats': {
-          templateUrl: 'features/chats/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      }
+      templateUrl: 'features/chats/tab-chats.html',
+      controller: 'ChatsCtrl'
     })
-    .state('tab.chat-detail', {
+    .state('chat-detail', {
       url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'features/chats/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
+      templateUrl: 'features/chats/chat-detail.html',
+      controller: 'ChatDetailCtrl'
     });
 });
 
@@ -30,7 +22,6 @@ app.controller('ChatsCtrl', function($scope, Chats) {
 app.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);
 });
-
 
 app.factory('Chats', function() {
   // Might use a resource here that returns a JSON array

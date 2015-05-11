@@ -1,17 +1,26 @@
-<ion-view view-title="Signup">
-  <ion-content>
-    <div class="list">
-		<label class="item item-input">
-			<span class="input-label">Username</span>
-			<input type="text">
-		</label>
-		<label class="item item-input">
-			<span class="input-label">Password</span>
-			<input type="password">
-		</label>
-	</div>
-    <button class='button button-balanced' ng-click='account()'>
-    	LOGIN
-    </button>
-  </ion-content>
+<ion-view view-title="Sign Up">
+    <ion-content>
+        <div class="list list-inset">
+            <label class="item item-input">
+                <input type="text" placeholder="Username" ng-model="data.userName">
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="Email" ng-model="data.email">
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="Codewars API Key" ng-model="data.apiKey">
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="Password" ng-model="data.password">
+            </label>
+        </div>
+        <button class="button button-block button-calm" ng-click="signup()">Sign Up</button>
+        <button ui-sref="login" class="button button-block button-calm">Log In</button>
+    </ion-content>
 </ion-view>
+
+<!--//TODO: Is there in easy way to grab this, or provide  alink to the site to complete this.-->
+<!--TODO: remove underline from all a links, should this be replaced to use ui.router?-->
+<!--https://www.codewars.com/users/edit-->
+<!--<a href="#/tab/challenge"><button>Create Account (auto-login)</button></a><br/>-->
+<!--TODO: Bring in OAUTH Natively-->
