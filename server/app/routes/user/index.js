@@ -19,25 +19,33 @@ function authenticate(req,res,next){
     if (!body.username || !body.password) {
         res.status(400).end('Must provide username and/or password');
     }
-    if (body.username !== user.username || body.password !== user.password) {
-    //TODO: mongoose
+
+    UserModel.findOne({userName:body.username}).exec().then(userFound,userNotFound);
+
+    function userFound(user){
+        console.log('userFound',user,body.password,body.username);
+        console.log('correctPassword check',user.correctPassword(body.password));
+        if(user.correctPassword(body.password)){
+            req.user = user;
+            next();
+        } else {
+          res.status(401).end('Username or password incorrect');
+        }
+    }
+
+    function userNotFound(response){
         res.status(401).end('Username or password incorrect');
     }
-    next(); //TODO: pass along via mongoose
 }
 
 //TODO: figure out what to include
 router.post('/login', authenticate, function(req,res){ // api/login
-    //TODO: for login, encrypt the mongoose database instead and return with username
     var token = jwt.sign({
-        username: user.username //TODO: Mongoose _id
+        userId: req.user._id
     },SESSION_SECRET);
-    //res.send(user); //where is user defined?!
-    //TODO: Store token in Mongoose for future reference
     res.send({
         token:token,
-        username: user.username
-        //TODO: user is from Mongoose, not local variable, maybe remove user from sending it (password)
+        username: req.user.userName
     });
 });
 

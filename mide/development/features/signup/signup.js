@@ -14,8 +14,8 @@ app.controller('SignUpCtrl',function($http, $scope, $state, AuthService){
         AuthService
             .signup($scope.data)
             .then(function(authenticated){
-                console.log('signup, tab.challenge-submit');
-                $state.go('tab.challenge-submit');
+                console.log('signup, tab.challenge');
+                $state.go('tab.challenge');
             })
             .catch(function(err){
                 $scope.error = 'Signup Invalid';

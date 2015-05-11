@@ -6,7 +6,7 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('WelcomeCtrl', function($scope, $state, AuthTokenFactory){
+app.controller('WelcomeCtrl', function($scope, $state, AuthService){
 	//TODO: Splash page while you load resources (possible idea)
 	$scope.login = function(){
 		$state.go('login');
@@ -15,10 +15,8 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthTokenFactory){
 		$state.go('signup');
 	};
 
-	var token = AuthTokenFactory.getToken()
-	if (token) {
-		console.log('welcome page',token) //TODO: Trying to store user information in local storage as well
-		$state.go('tab.challenge-submit');
+	if (AuthService.isAuthenticated()) {
+		$state.go('tab.challenge');
 	} else {
 		$state.go('signup');
 	}

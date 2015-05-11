@@ -18,11 +18,11 @@ var userSchema = new mongoose.Schema({
     apiKey: {type: String},
     password: {
         type: String,
-        select : false //used in routes later to display or not display certain properties
+        //select : false //used in routes later to display or not display certain properties
     },
     salt: {
         type: String,
-        select: false
+        //select: false
     }
 }, schemaOptions);
 
@@ -65,6 +65,7 @@ userSchema.statics.generateSalt = generateSalt;
 userSchema.statics.encryptPassword = encryptPassword;
 
 userSchema.method('correctPassword', function (candidatePassword) {
+    console.log('candidatePassword',candidatePassword);
     return encryptPassword(candidatePassword, this.salt) === this.password;
 });
 

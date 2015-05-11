@@ -18,7 +18,7 @@ app.controller('LoginCtrl', function($scope, $ionicPopup, $state, AuthService){
 			.login($scope.data)
 			.then(function(authenticated){ //TODO:authenticated is what is returned
 				console.log('login, tab.challenge-submit');
-				$state.go('tab.challenge-submit');
+				$state.go('tab.challenge');
 				//TODO: We can set the user name here as well. Used in conjunction with a main ctrl
 			})
 			.catch(function(err){

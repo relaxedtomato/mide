@@ -16,6 +16,7 @@ app.factory('AuthInterceptor',function AuthInterceptor(AUTH_EVENTS,$rootScope,$q
 
     function addToken(config){
         var token = AuthTokenFactory.getToken();
+        console.log('addToken',token);
         if(token){
             config.headers = config.headers || {};
             config.headers.Authorization = 'Bearer ' + token;
@@ -70,23 +71,24 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
 
     function loadUserCredentials() {
         //var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
+
         var token = AuthTokenFactory.getToken();
+        console.log(token);
         if (token) {
             useCredentials(token);
         }
     }
 
-    function storeUserCredentials(token) {
-        AuthTokenFactory.setToken(token);
-        useCredentials(token);
+    function storeUserCredentials(data) {
+        AuthTokenFactory.setToken(data.token);
+        useCredentials(data);
     }
 
-    function useCredentials(token) {
-        console.log('useCredentials token',token);
-        username = token.user;
+    function useCredentials(data) {
+        console.log('useCredentials token',data);
+        username = data.username;
         isAuthenticated = true;
-        authToken = token.token;
-
+        authToken = data.token;
         // Set the token as header for your requests!
         //$http.defaults.headers.common['X-Auth-Token'] = token; //TODO
     }
@@ -111,7 +113,7 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
             $http.post(ApiEndpoint.url+"/user/login", userdata)
                 .then(function(response){
                     storeUserCredentials(response.data); //storeUserCredentials
-                    isAuthenticated = true;
+                    //isAuthenticated = true;
                     resolve(response); //TODO: sent to authenticated
                 });
         });
@@ -123,7 +125,7 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
             $http.post(ApiEndpoint.url+"/user/signup", userdata)
                 .then(function(response){
                     storeUserCredentials(response.data); //storeUserCredentials
-                    isAuthenticated = true;
+                    //isAuthenticated = true;
                     resolve(response); //TODO: sent to authenticated
                 });
         });
