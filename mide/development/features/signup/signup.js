@@ -6,42 +6,64 @@ app.config(function($stateProvider){
     });
 });
 
-app.controller('SignUpCtrl',function($http, $scope, $state, SignUpFactory, AuthService){
+app.controller('SignUpCtrl',function($rootScope, $http, $scope, $state, AuthService){
     $scope.data = {};
     $scope.error = null;
 
     $scope.signup = function(){
-        SignUpFactory
-            .postSignup($scope.data)
-            .then(AuthService.signedUp)
-            .then(function(response){
-                console.log('goto tab-challenge-submit',JSON.stringify(response));
-                //$http.get(ApiEndpoint.url+"/");
-                //INFO: Session is stored as a cookie on the browser
-                //TODO: Add route display session data
+        AuthService
+            .signup($scope.data)
+            .then(function(authenticated){
+                console.log('signup, tab.challenge');
+                //$rootScope.$broadcast('showMenu');
+                $scope.states.push({ //TODO: Need to add a parent controller to communicate
+                    name: 'Logout',
+                    ref: function(){
+                        AuthService.logout();
+                        $scope.states.pop(); //TODO: Find a better way to remove the Logout link, instead of pop
+                        $state.go('signup');
+                    }
+                });
+                $state.go('challenge.view');
             })
-            //store data in session
-            //$state.go('tab.challenge-submit'); //TODO: Add Route back, removed for testing
             .catch(function(err){
-            $scope.error = 'Login Invalid';
-            console.error(JSON.stringify(err));
-        });
+                $scope.error = 'Signup Invalid';
+                console.error(JSON.stringify(err))
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Signup failed!',
+                    template: 'Please check your credentials!'
+                });
+            });
+        //SignUpFactory //TODO: convert to use Auth Service instead
+        //    .postSignup($scope.data)
+        //    .then(AuthService.signedUp)
+        //    .then(function(response){
+        //        console.log('goto tab-challenge-submit',JSON.stringify(response));
+        //        //$http.get(ApiEndpoint.url+"/");
+        //        //INFO: Session is stored as a cookie on the browser
+        //    })
+        //    //store data in session
+        //    //$state.go('tab.challenge-submit'); //TODO: Add Route back, removed for testing
+        //    .catch(function(err){
+        //    $scope.error = 'Login Invalid';
+        //    console.error(JSON.stringify(err));
+        //});
     };
 
 });
 
-//TODO: NEXT How to check for session data stored, or if it is being sent back, somehow?
-
-app.factory('SignUpFactory',function($http, ApiEndpoint){
-    return{
-        postSignup: function(userdata){
-            console.log('postSignup',JSON.stringify(userdata));
-            return $http.post(ApiEndpoint.url+"/user/signup", userdata);
-        }
-    };
-});
+//app.factory('SignUpFactory',function($http, ApiEndpoint){
+//    return{
+//        postSignup: function(userdata){
+//            console.log('postSignup',JSON.stringify(userdata));
+//            return $http.post(ApiEndpoint.url+"/user/signup", userdata);
+//        }
+//    };
+//});
 
 //TODO: Form Validation
 
 //NEXT: Sending data to the back-end and setting up routes
 //Mongoose
+
+//TODO: Cleanup commented code

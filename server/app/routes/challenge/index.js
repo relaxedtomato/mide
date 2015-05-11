@@ -3,10 +3,15 @@ var router = require('express').Router();
 var codewars = require('../../api/codewars');
 module.exports = router;
 
+//TODO: Express JWT, will place decoded token on user object, so req.user is accessible
+
 //Get a code challenge
 router.get('/:id', function (req, res, next) {
 	//req.params.id is the Codewars API Key
 	//TODO: Store all challenges in mongo for future reference
+
+	//console.log('api/challenge',req.user);
+	//codewars.postSpecificChallenge().then(function(challenge){
 	codewars.postNextChallenge(req.params.id).then(function(challenge){
 		res.json(challenge);
 	}).catch(function(err){
