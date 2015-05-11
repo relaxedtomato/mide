@@ -18,7 +18,6 @@ app.controller('SignUpCtrl',function($http, $scope, $state, SignUpFactory, AuthS
                 console.log('goto tab-challenge-submit',JSON.stringify(response));
                 //$http.get(ApiEndpoint.url+"/");
                 //INFO: Session is stored as a cookie on the browser
-                //TODO: Add route display session data
             })
             //store data in session
             //$state.go('tab.challenge-submit'); //TODO: Add Route back, removed for testing
@@ -29,8 +28,6 @@ app.controller('SignUpCtrl',function($http, $scope, $state, SignUpFactory, AuthS
     };
 
 });
-
-//TODO: NEXT How to check for session data stored, or if it is being sent back, somehow?
 
 app.factory('SignUpFactory',function($http, ApiEndpoint){
     return{

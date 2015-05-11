@@ -52,7 +52,6 @@ app.factory('AuthTokenFactory',function($window){
         return store.getItem(key);
     }
 
-    //TODO: Create log-out function, were if token is not defined, remove token
     function setToken(token){
         if(token){
             store.setItem(key,token);
@@ -84,9 +83,9 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
 
     function useCredentials(token) {
         console.log('useCredentials token',token);
-        username = token.user; //TODO: check this
+        username = token.user;
         isAuthenticated = true;
-        authToken = token.token; //TODO: check this
+        authToken = token.token;
 
         // Set the token as header for your requests!
         //$http.defaults.headers.common['X-Auth-Token'] = token; //TODO
@@ -126,51 +125,6 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
         }
         return (isAuthenticated && authenticated.indexOf(USER_ROLES.public) !== -1);
     };
-    
-    //TODO: Need to fix getLoggedInUser
-    //var getLoggedInUser = function () {
-    //    console.log('getLoggedInUser called')
-    //    // If an authenticated session exists, we
-    //    // return the user attached to that session
-    //    // with a promise. This ensures that we can
-    //    // always interface with this method asynchronously.
-    //
-    //    //TODO: In what case will the below code run? It will work, but not clear of the use
-    //    if (isAuthenticated) {
-    //        return $q.when(AuthTokenFactory.getToken());
-    //    }
-    //
-    //    // Make request GET /session.
-    //    // If it returns a user, call onSuccessfulLogin with the response.
-    //    // If it returns a 401 response, we catch it and instead resolve to null.
-    //
-    //    //if(AuthTokenFactory.getToken()){
-    //    //    return $http.get(ApiEndpoint.url+'/user/token')
-    //    //        .then(function(response){
-    //    //            console.log('ApiEndpoint.url /user/token response',response);
-    //    //            var data = response.data.user
-    //    //            //TODO:$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-    //    //            return data; //user is being returned
-    //    //        }).catch(function () {
-    //    //            console.log('getLoggedInUser returned null');
-    //    //            return null;
-    //    //        });
-    //    //} else {
-    //    //    return $q.reject({data: 'no auth token exists'});
-    //    //}
-    //    return $http.get(ApiEndpoint.url + '/user/token')
-    //        .then(onSuccessfulLogin)
-    //        .catch(function(){return null});
-    //};
-    //
-    //function onSuccessfulLogin(response) {
-    //    var data = response.data;
-    //    console.log(response.data);
-    //    //Session.create(data.id, data.user);
-    //    AuthTokenFactory.setToken(response.data.token)
-    //    //$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-    //    return data.user;
-    //}
 
     return {
         login: login,
@@ -186,4 +140,5 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
 
 });
 
-//TODO: Did not complete main ctrl 'AppCtrl for handling events' as per http://devdactic.com/user-auth-angularjs-ionic/
+//TODO: Did not complete main ctrl 'AppCtrl for handling events'
+// as per http://devdactic.com/user-auth-angularjs-ionic/
