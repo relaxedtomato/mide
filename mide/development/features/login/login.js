@@ -6,11 +6,62 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('LoginCtrl', function($scope){
-	$scope.account = function(){
+app.controller('LoginCtrl', function($rootScope, $scope, $ionicPopup, $state, AuthService){
+	//$scope.account = function(){
+    //
+	//};
+	$scope.data = {};
+	$scope.error = null;
 
+	$scope.login = function(){
+		AuthService
+			.login($scope.data)
+			.then(function(authenticated){ //TODO:authenticated is what is returned
+				console.log('login, tab.challenge-submit');
+				//$scope.menu = true;
+				//$rootScope.$broadcast('showMenu');
+				$scope.states.push({ //TODO: Need to add a parent controller to communicate
+					name: 'Logout',
+					ref: function(){
+						AuthService.logout();
+						$scope.states.pop(); //TODO: Find a better way to remove the Logout link, instead of pop
+						$state.go('signup');
+					}
+				});
+				$state.go('challenge.view');
+				//TODO: We can set the user name here as well. Used in conjunction with a main ctrl
+			})
+			.catch(function(err){
+				$scope.error = 'Login Invalid';
+				console.error(JSON.stringify(err))
+				var alertPopup = $ionicPopup.alert({
+					title: 'Login failed!',
+					template: 'Please check your credentials!'
+				});
+			});
+		//LoginFactory
+		//	.postLogin($scope.data)
+		//	.then(function(response){
+		//		AuthTokenFactory.setToken(response.data.token);
+		//		//console.log('goto tab-challenge-submit',response.data.token, response.data.user);
+		//		$state.go('tab.challenge-submit');
+		//		return response; //TODO: remove if not required, you can just change states instead
+		//	})
+		//	.catch(function(err){
+		//		$scope.error = 'Login Invalid';
+		//		console.error(JSON.stringify(err));
+		//	});
 	};
 });
+
+//app.factory('LoginFactory',function($http,ApiEndpoint){
+//	return{
+//		postLogin: function(userdata){
+//			console.log('postLogin',JSON.stringify(userdata));
+//			return $http.post(ApiEndpoint.url+"/user/login", userdata);
+//		}
+//	};
+//});
 
 //app.controller('LoginCtrl', function ($scope, AuthService, $state) {
 //
@@ -30,3 +81,6 @@ app.controller('LoginCtrl', function($scope){
 //	};
 //
 //});
+
+//TODO: Cleanup commented code
+
