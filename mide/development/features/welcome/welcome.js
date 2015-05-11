@@ -6,22 +6,21 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('WelcomeCtrl', function($scope, $state, AuthService){
-	//$scope.login = function(){
-	//	$state.go('login');
-	//};
-	//$scope.signup = function(){
-	//	$state.go('signup');
-	//};
-	AuthService.getLoggedInUser().then(function (user) {
-		// If a user is retrieved, then renavigate to the destination
-		// (the second time, AuthService.isAuthenticated() will work)
-		// otherwise, if no user is logged in, go to "login" state.
-        console.log(user);
-		if (user) {
-			$state.go('/tab/challenge');
-		} else {
-			$state.go('signup');
-		}
-	});
+app.controller('WelcomeCtrl', function($scope, $state, AuthTokenFactory){
+	//TODO: Splash page while you load resources (possible idea)
+	$scope.login = function(){
+		$state.go('login');
+	};
+	$scope.signup = function(){
+		$state.go('signup');
+	};
+
+	var token = AuthTokenFactory.getToken()
+	if (token) {
+		console.log(token)
+		$state.go('tab.challenge-submit');
+	} else {
+		$state.go('login');
+	}
+	//});
 });

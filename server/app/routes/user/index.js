@@ -3,40 +3,92 @@ var router = require('express').Router();
 var UserModel = require('mongoose').model('User');
 var _ = require('lodash');
 module.exports = router;
+//TODO: Should be a ENV Variable
+var jwt = require('jsonwebtoken'); //encoded json object (token), token sends it back on each request
 
 //sign up
-router.post('/signup', function(req, res, next) {
-	//var newUser = req.body;
-	console.log('data',req.body);
-	// if (newUser.password !== newUser.passwordConfirm) {
-	// 	var error = new Error('Passwords do not match');
-	// 	error.status = 401;
-	// 	return next(error);
-	// }
-	UserModel.create(req.body).then(userCreated, userNotCreated);
 
-	//TODO: Currently you can create multiple non-unique users
-	function userCreated(userdata){
-		console.log('userCreated');
-		//res.sendStatus(200);
-		res.send({user: _.omit(userdata.toJSON(),['email','salt','password','admin','_id', 'apiKey','__v']) });
-	}
+//TODO: bring in mongoose after testing
+var user = {
+    username: 'test',
+    password: '1234'
+};
 
-	function userNotCreated(){
-		res.sendStatus(401);
-		//TODO: Error Message?
-	}
+//TODO: store in environment variable, not here, and change for future release
+//TODO: Check to make sure env variables at not git stored, if so change them and add to .gitignore
+var jwtSecret = 'blahblahblah';
 
-	//TODO: API Session is being saved, create working get /session route
+function authenticate(req,res,next){
+    console.log('authenticate',req.user);
+    var body = req.body || req.user;
+    if (!body.username || !body.password) {
+        res.status(400).end('Must provide username and/or password');
+    }
+    if (body.username !== user.username || body.password !== user.password) { //TODO: mongoose
+        res.status(401).end('Username or password incorrect');
+    }
+    next(); //TODO: pass along via mongoose
+}
 
-	// delete newUser.passwordConfirm;
-	// User.create(newUser, function(err, returnedUser) {
-	// 	if (err) return next(err);
-	// 	req.logIn(returnedUser, function (err) {
-	// 		if (err) return next(err);
-	// 		// We respond with a reponse object that has user with _id and email.
-	// 		res.status(200).send({ user: _.omit(returnedUser.toJSON(), ['password', 'salt']) });
-	// 	});
+//TODO: figure out what to include
+router.post('/login', authenticate, function(req,res){ // api/login
+    var token = jwt.sign({
+        username: user.username
+    },jwtSecret);
+    //res.send(user); //where is user defined?!
+    //TODO: Store token in Mongoose for future reference
+    res.send({
+        token:token,
+        user: user //TODO: user is from Mongoose, not local variable, maybe remove user from sending it (password)
+    });
+});
 
-	// });
+
+//TODO: Based on receiving a user via jwt
+router.get('/token', function(req,res){
+   console.log('api/user/token',req.user);
+    //res.send()
+    if(req.user){ //TODO: Can't req.user be faked? or is this decoded info?
+        res.send({
+            user:req.user //TODO: this is from Mongo Database
+        });
+    } else {
+        res.status(401).send('No Authenticated user.');
+    }
+});
+
+// We provide a simple GET /session in order to get session information directly.
+// This is used by the browser application (Angular) to determine if a user is
+//// logged in already.
+//app.get('/session', function (req, res) {
+//    //     User.findById(req.user._id)
+//    //     .select('+password')
+//    //     .select('+salt')
+//    //     .exec()
+//    //     .then(function (user) {
+//
+//    //     });
+//    console.log('/session is being hit, cookie is',req.cookies, req.user);
+//    if (req.user) {
+//        res.send({ user: _.omit(req.user.toJSON(), ['salt', 'password']) });
+//    } else {
+//        res.status(401).send('No authenticated user.');
+//    }
+//});
+
+router.post('/signup', function(req, res, next) { // api/signup
+
+    //console.log('/signup data',req.body);
+	//UserModel.create(req.body).then(userCreated, userNotCreated);
+    //
+	////TODO: Currently you can create multiple non-unique users
+	//function userCreated(userdata){
+	//	console.log('userCreated');
+	//	//res.sendStatus(200);
+	//	res.send({user: _.omit(userdata.toJSON(),['email','salt','password','admin','_id', 'apiKey','__v']) });
+	//}
+    //
+	//function userNotCreated(){
+	//	res.send(401).end('User was not created');
+	//}
 });

@@ -1,150 +1,160 @@
-(function () {
+//token is sent on every http request
+app.factory('AuthInterceptor',function AuthInterceptor(AUTH_EVENTS,$rootScope,$q,AuthTokenFactory){
 
-    'use strict';
+    var statusDict = {
+        401: AUTH_EVENTS.notAuthenticated,
+        403: AUTH_EVENTS.notAuthorized
+    };
 
-    // Hope you didn't forget Angular! Duh-doy.
-    if (!window.angular) throw new Error('I can\'t find Angular!');
+    return {
+        request: addToken,
+        responseError: function (response) {
+            $rootScope.$broadcast(statusDict[response.status], response);
+            return $q.reject(response);
+        }
+    };
 
-    //var app = angular.module('fsaPreBuilt', []);
+    function addToken(config){
+        var token = AuthTokenFactory.getToken();
+        if(token){
+            config.headers = config.headers || {};
+            config.headers.Authorization = 'Bearer ' + token;
+        }
+        return config;
+    }
+}); //skipped Auth Interceptors given TODO: You could apply the approach in
+//http://devdactic.com/user-auth-angularjs-ionic/
 
-    //app.factory('Socket', function ($location) {
-    //
-    //    if (!window.io) throw new Error('socket.io not found!');
-    //
-    //    var socket;
-    //
-    //    if ($location.$$port) {
-    //        socket = io('http://localhost:1337');
-    //    } else {
-    //        socket = io('/');
-    //    }
-    //
-    //    return socket;
-    //
-    //});
+app.config(function($httpProvider){
+    $httpProvider.interceptors.push('AuthInterceptor');
+});
 
-    // AUTH_EVENTS is used throughout our app to
-    // broadcast and listen from and to the $rootScope
-    // for important events about authentication flow.
-    app.constant('AUTH_EVENTS', {
-        loginSuccess: 'auth-login-success',
-        loginFailed: 'auth-login-failed',
-        logoutSuccess: 'auth-logout-success',
-        sessionTimeout: 'auth-session-timeout',
+app.constant('AUTH_EVENTS', {
         notAuthenticated: 'auth-not-authenticated',
         notAuthorized: 'auth-not-authorized'
-    });
+});
 
-    app.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
-        var statusDict = {
-            401: AUTH_EVENTS.notAuthenticated,
-            403: AUTH_EVENTS.notAuthorized,
-            419: AUTH_EVENTS.sessionTimeout,
-            440: AUTH_EVENTS.sessionTimeout
-        };
-        return {
-            responseError: function (response) {
-                $rootScope.$broadcast(statusDict[response.status], response);
-                return $q.reject(response);
-            }
-        };
-    });
+app.constant('USER_ROLES', {
+        //admin: 'admin_role',
+        public: 'public_role'
+});
 
-    app.config(function ($httpProvider) {
-        $httpProvider.interceptors.push([
-            '$injector',
-            function ($injector) {
-                return $injector.get('AuthInterceptor');
-            }
-        ]);
-    });
+app.factory('AuthTokenFactory',function($window){
+    var store = $window.localStorage;
+    var key = 'auth-token';
 
-    app.service('AuthService', function (ApiEndpoint, $http, Session, $rootScope, AUTH_EVENTS, $q) {
+    return {
+        getToken: getToken,
+        setToken: setToken
+    };
 
-        // Uses the session factory to see if an
-        // authenticated user is currently registered.
-        this.isAuthenticated = function () {
-            return !!Session.user;
-        };
+    function getToken(){
+        return store.getItem(key);
+    }
 
-        this.isAdmin = function() {
-            return Session.user.accountType === "admin" && this.isAuthenticated();
-        };
+    //TODO: Create log-out function, were if token is not defined, remove token
+    function setToken(token){
+        if(token){
+            store.setItem(key,token);
+        } else {
+            store.removeItem(key);
+        }
+    }
+});
 
-        this.getLoggedInUser = function () {
-            // If an authenticated session exists, we
-            // return the user attached to that session
-            // with a promise. This ensures that we can
-            // always interface with this method asynchronously.
-            if (this.isAuthenticated()) {
-                return $q.when(Session.user);
-            }
+app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpoint,$rootScope){
+    var LOCAL_TOKEN_KEY = 'auth-token';
+    var username = '';
+    var isAuthenticated = false;
+    var authToken;
 
-            // Make request GET /session.
-            // If it returns a user, call onSuccessfulLogin with the response.
-            // If it returns a 401 response, we catch it and instead resolve to null.
-            return $http.get(ApiEndpoint.session).then(onSuccessfulLogin).catch(function () {
-                return null;
-            });
 
-        };
+    function loadUserCredentials() {
+        //var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
+        var token = AuthTokenFactory.getToken();
+        if (token) {
+            useCredentials(token);
+        }
+    }
 
-        this.login = function (credentials) {
-            return $http.post('/login', credentials)
-                .then(onSuccessfulLogin)
-                .catch(function (response) {
-                    return $q.reject({ message: 'Invalid login credentials.' });
+    function useCredentials(token) {
+        console.log('useCredentails token',token);
+        //username = token.split('.')[0]; //TODO:
+        isAuthenticated = true;
+        //authToken = token; //TODO:
+
+        // Set the token as header for your requests!
+        //$http.defaults.headers.common['X-Auth-Token'] = token; //TODO
+    }
+
+    var logout = function(){
+        AuthTokenFactory.setToken(); //destroyUserCredentials
+    };
+
+    //var login = function()
+    var login = function(userdata){
+        console.log('postLogin',JSON.stringify(userdata));
+        return $q(function(resolve,reject){
+            $http.post(ApiEndpoint.url+"/user/login", userdata)
+                .then(function(response){
+                    AuthTokenFactory.setToken(response.data.token); //storeUserCredentials
+                    resolve(response); //TODO: sent to authenticated
                 });
-        };
+        });
+    };
 
-        this.logout = function () {
-            return $http.get('/logout').then(function () {
-                Session.destroy();
-                $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-            });
-        };
+    loadUserCredentials();
 
-        this.signedUp = function(response){
-            console.log('signedUp, Session call', JSON.stringify(response));
-            return onSuccessfulLogin(response);
-        };
+    var isAuthorized = function(authenticated) {
+        if (!angular.isArray(authenticated)) {
+            authenticated = [authenticated];
+        }
+        return (isAuthenticated && authenticated.indexOf(USER_ROLES.public) !== -1);
+    };
+    
+    //TODO: Need to fix getLoggedInUser
+    var getLoggedInUser = function () {
+        console.log('getLoggedInUser called')
+        // If an authenticated session exists, we
+        // return the user attached to that session
+        // with a promise. This ensures that we can
+        // always interface with this method asynchronously.
 
-        function onSuccessfulLogin(response) {
-            console.log('onSuccessfulLogin', response);
-            var data = response.data;
-            //"data":{"user":{"userName":"1","email":"1","id":"554e7c4966983940d35126d4"}},
-            Session.create(data.id, data.user);
-            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-            return data.user;
+        //TODO: In what case will the below code run? It will work, but not clear of the use
+        if (isAuthenticated) {
+            return $q.when(AuthTokenFactory.getToken());
         }
 
-    });
+        // Make request GET /session.
+        // If it returns a user, call onSuccessfulLogin with the response.
+        // If it returns a 401 response, we catch it and instead resolve to null.
 
-    app.service('Session', function ($rootScope, AUTH_EVENTS) {
+        if(AuthTokenFactory.getToken()){
+            return $http.get(ApiEndpoint.url+'/user/token')
+                .then(function(response){
+                    console.log('ApiEndpoint.url /user/token response',response);
+                    var data = response.data.user
+                    //TODO:$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                    return data; //user is being returned
+                }).catch(function () {
+                    console.log('getLoggedInUser returned null');
+                    return null;
+                });
+        } else {
+            return $q.reject({data: 'no auth token exists'});
+        }
 
-        var self = this;
+    };
 
-        $rootScope.$on(AUTH_EVENTS.notAuthenticated, function () {
-            self.destroy();
-        });
+    return {
+        login: login,
+        logout: logout,
+        isAuthenticated: function() {return isAuthenticated;},
+        username: function(){return username;},
+        getLoggedInUser: getLoggedInUser,
+        isAuthorized: isAuthorized
+    }
 
-        $rootScope.$on(AUTH_EVENTS.sessionTimeout, function () {
-            self.destroy();
-        });
+});
 
-        this.id = null;
-        this.user = null;
-
-        this.create = function (sessionId, user) {
-            this.id = sessionId;
-            this.user = user;
-        };
-
-        this.destroy = function () {
-            this.id = null;
-            this.user = null;
-        };
-
-    });
-
-})();
+//TODO: Did not complete main ctrl 'AppCtrl for handling events' as per http://devdactic.com/user-auth-angularjs-ionic/

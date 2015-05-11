@@ -11,7 +11,7 @@ app.controller('SignUpCtrl',function($http, $scope, $state, SignUpFactory, AuthS
     $scope.error = null;
 
     $scope.signup = function(){
-        SignUpFactory
+        SignUpFactory //TODO: convert to use Auth Service instead
             .postSignup($scope.data)
             .then(AuthService.signedUp)
             .then(function(response){

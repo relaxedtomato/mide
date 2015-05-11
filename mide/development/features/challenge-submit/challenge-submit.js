@@ -1,4 +1,4 @@
-app.config(function($stateProvider){
+app.config(function($stateProvider, USER_ROLES){
 	$stateProvider.state('tab.challenge-submit', {
 		url : '/challenge/submit',
 		views: {
@@ -6,6 +6,9 @@ app.config(function($stateProvider){
 				templateUrl : 'features/challenge-submit/challenge-submit.html',
 				controller : 'ChallengeSubmitCtrl'
 			}
+		},
+		data: {
+			authenticate: [USER_ROLES.public]
 		}
 	});
 });

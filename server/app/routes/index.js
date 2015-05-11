@@ -2,8 +2,8 @@
 var router = require('express').Router();
 module.exports = router;
 
-router.use('/challenge', require('./challenge'));
-router.use('/user', require('./user'));
+router.use('/challenge', require('./challenge')); //TODO: these are restricted
+router.use('/user', require('./user')); //these are not restricted, anyone can access
 
 // Make sure this is after all of
 // the registered routes!

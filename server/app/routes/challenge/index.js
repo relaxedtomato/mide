@@ -3,6 +3,8 @@ var router = require('express').Router();
 var codewars = require('../../api/codewars');
 module.exports = router;
 
+//TODO: Express JWT, will place decoded token on user object, so req.user is accessible
+
 //Get a code challenge
 router.get('/', function (req, res, next) {
 	//TODO: Change to postNextChallenge for Random (for first Build/Release)
