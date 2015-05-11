@@ -1,70 +1,43 @@
 app.config(function($stateProvider){
-	$stateProvider.state('tab.challenge', {
-		url: '/challenge',
-		views: {
-			'tab-challenge' : {
-				templateUrl: 'features/challenge/challenge.html',
-				controller: 'ChallengeCtrl'
-			}
-		},
-		resolve : {
-			challenge : function(ChallengeFactory, $state){
-				return ChallengeFactory.getChallenge().catch(function(err){
-					$state.go('tab.account');
-				});
-			}
-		}
+	$stateProvider.state('challenge', {
+		templateUrl : 'features/challenge/challenge.html',
+		abstract : true
 	});
 });
 
-app.controller('ChallengeCtrl', function($scope, ChallengeFactory, challenge, $state){
-	$scope.buttons = {
-		submit : 'Submit',
-		test : 'Test',
-		dismiss : 'Dismiss'
-	};
-
-	$scope.challenge = challenge;
-	$scope.challengeDesc = JSON.parse(challenge[0].body).description;
-	$scope.challengeBody = JSON.parse(challenge[0].body).session.setup;
-
-
-	$scope.submitChallenge = function(){
-		$state.go('tab.challenge-submit');
-		ChallengeFactory.submitChallenge().then(function(response){
-
-			return response.data;
-		}).catch(function(err){
-			console.error(JSON.stringify(err));
-		});
-	};
-
-	$scope.testChallenge = function(){
-		ChallengeFactory.testChallenge().then(function(response){
-			return response.data;
-		}).catch(function(err){
-			console.error(JSON.stringify(err));
-		});
-	};
-
-});
-
 app.factory('ChallengeFactory', function($http, ApiEndpoint){
+
+	var submission ='';
+
 	return {
-		getChallenge : function(){
-			return $http.get(ApiEndpoint.url + '/challenge').then(function(response){
+		getChallenge : function(id){
+			return $http.get(ApiEndpoint.url + '/challenge/' + id).then(function(response){
+				submission = '' || response.data.session.setup;
 				return response.data;
 			});
 		},
-		submitChallenge : function(){
-			return $http.post(ApiEndpoint.url + '/challenge/submit').then(function(response){
+		submitChallenge : function(id, text){
+			submission = text;
+			var code = {
+				code : text
+			};
+			console.log(code);
+			return $http.post(ApiEndpoint.url + '/challenge/submit/' + id, code).then(function(response){
 				return response.data;
 			});
 		},
-		testChallenge : function(){
-			return $http.post(ApiEndpoint.url + '/challenge/test/').then(function(response){
+		testChallenge : function(id, text){
+			submission = text;
+			var code = {
+				code : text
+			};
+			console.log(code);
+			return $http.post(ApiEndpoint.url + '/challenge/attempt/' + id, code).then(function(response){
 				return response.data;
 			});
+		},
+		getSubmission : function(){
+			return submission;
 		}
 	};
 });

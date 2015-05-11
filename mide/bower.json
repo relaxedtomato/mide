@@ -5,6 +5,7 @@
     "ionic": "driftyco/ionic-bower#1.0.0-rc.5"
   },
   "dependencies": {
-    "angular-ui-ace": "~0.2.3"
+    "angular-ui-ace": "~0.2.3",
+    "marked": "~0.3.3"
   }
 }

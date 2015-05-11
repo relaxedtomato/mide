@@ -1,13 +1,9 @@
 app.config(function($stateProvider){
 	// Each tab has its own nav history stack:
-	$stateProvider.state('tab.account', {
+	$stateProvider.state('account', {
 		url: '/account',
-	    views: {
-	    	'tab-account': {
-	    		templateUrl: 'features/account/account.html',
-				controller: 'AccountCtrl'
-			}
-	    }
+	    templateUrl: 'features/account/account.html',
+		controller: 'AccountCtrl'
 	});
 });
 

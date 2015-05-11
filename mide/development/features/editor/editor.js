@@ -1,5 +1,5 @@
 app.config(function($stateProvider){
-	$stateProvider.state('tab.editor', {
+	$stateProvider.state('editor', {
 		url: '/editor',
 		views: {
 			'tab-editor' : {
