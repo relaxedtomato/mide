@@ -9,6 +9,7 @@ module.exports = router;
 router.get('/', function (req, res, next) {
 	//TODO: Change to postNextChallenge for Random (for first Build/Release)
 	//TODO: Store all challenges in mongo for future reference
+	//console.log('api/challenge',req.user);
 	codewars.postSpecificChallenge().then(function(challenge){
 		res.json(challenge);
 	});
