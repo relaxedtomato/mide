@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 var Q = require('q');
 var path = require('path');
 var chalk = require('chalk');
@@ -12,6 +12,7 @@ var db = mongoose.connect(DATABASE_URI).connection;
 // so the rest of the application can simply call mongoose.model('User')
 // anywhere the User model needs to be used.
 require('./models/user');
+require('./models/challenge');
 
 var startDbPromise = new Q(function (resolve, reject) {
     db.on('open', resolve);
