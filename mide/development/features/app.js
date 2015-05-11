@@ -76,7 +76,6 @@ var app = angular.module('mide', ['ionic', 'ui.ace'])
     });
   // $urlRouterProvider.otherwise('/signup'); // TODO: Richard testing this route
   //$urlRouterProvider.otherwise('/challenge/view'); //TODO: Tony testing this route
->>>>>>> development
 });
 
 app.config(function($stateProvider){
@@ -112,7 +111,7 @@ app.controller('MainCtrl', function($rootScope,$scope, $ionicSideMenuDelegate, $
     };
     $scope.showMenu = function(){
         return true;
-    }
+    };
 });
 
 app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state){
