@@ -9,13 +9,13 @@
             onChange : aceChanged
         }" ng-model="text"></div>
 
-        <button class='button button-balanced' ng-click='testChallenge(text)'>
+        <button class='button button-balanced' ng-click='testSubmission(projectId, solutionId, text)'>
             {{buttons.test | uppercase}}
         </button>
-        <button class='button button-balanced' ng-click='submitChallenge(text)'>
+        <button class='button button-balanced' ng-click='submitSubmission(projectId, solutionId, text)'>
             {{buttons.submit | uppercase}}
         </button>
-        <button class='button button-assertive'>
+        <button class='button button-assertive' ng-click='dismissChallenge()'>
             {{buttons.dismiss | uppercase}}
         </button>
 	</ion-content>
