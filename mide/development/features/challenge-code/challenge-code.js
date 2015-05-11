@@ -12,19 +12,43 @@ app.config(function($stateProvider){
 
 app.controller('ChallengeCodeCtrl', function($scope,$state, ChallengeFactory){
 
+	
+
 	//Challenge Submit
 	//text needs to be worked on
 	$scope.text = ChallengeFactory.getSubmission();
+
+	var editor;
 
 	$scope.projectId = ChallengeFactory.getProblem().session.projectId;
 	$scope.solutionId = ChallengeFactory.getProblem().session.solutionId;
 
 	$scope.aceLoaded = function(_editor){
-		_editor.setReadOnly(false);
+		editor = _editor;
+		editor.getSession().setUseWorker(false);
+
+		editor.focus();
+
+		editor.setReadOnly(false);
 	};
 
 	$scope.aceChanged = function(e){
 		// console.log(e);
+	};
+
+	$scope.clickEditor = function() {
+		editor.focus(); //bring editor to focus
+
+		// cordova.plugins.Keyboard.show = function() {
+		//     exec(null, null, "Keyboard", "show", []);
+		// };
+
+		console.log("is Keyboard vis?", cordova.plugins.Keyboard.isVisible);
+
+		// cordova.plugins.Keyboard.show();
+		// native.keyboardshow();
+		// console.log("is Keyboard vis?", cordova.plugins.Keyboard);
+
 	};
 
 	$scope.buttons = {
