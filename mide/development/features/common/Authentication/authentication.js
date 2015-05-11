@@ -16,7 +16,7 @@ app.factory('AuthInterceptor',function AuthInterceptor(AUTH_EVENTS,$rootScope,$q
 
     function addToken(config){
         var token = AuthTokenFactory.getToken();
-        console.log('addToken',token);
+        //console.log('addToken',token);
         if(token){
             config.headers = config.headers || {};
             config.headers.Authorization = 'Bearer ' + token;
@@ -68,10 +68,8 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
     var isAuthenticated = false;
     var authToken;
 
-
     function loadUserCredentials() {
         //var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
-
         var token = AuthTokenFactory.getToken();
         console.log(token);
         if (token) {
@@ -104,6 +102,7 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
 
     var logout = function(){
         destroyUserCredentials();
+
     };
 
     //var login = function()

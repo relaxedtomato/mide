@@ -6,7 +6,7 @@ app.config(function($stateProvider){
     });
 });
 
-app.controller('SignUpCtrl',function($http, $scope, $state, AuthService){
+app.controller('SignUpCtrl',function($rootScope, $http, $scope, $state, AuthService){
     $scope.data = {};
     $scope.error = null;
 
@@ -15,7 +15,16 @@ app.controller('SignUpCtrl',function($http, $scope, $state, AuthService){
             .signup($scope.data)
             .then(function(authenticated){
                 console.log('signup, tab.challenge');
-                $state.go('tab.challenge');
+                //$rootScope.$broadcast('showMenu');
+                $scope.states.push({ //TODO: Need to add a parent controller to communicate
+                    name: 'Logout',
+                    ref: function(){
+                        AuthService.logout();
+                        $scope.states.pop(); //TODO: Find a better way to remove the Logout link, instead of pop
+                        $state.go('signup');
+                    }
+                });
+                $state.go('challenge.view');
             })
             .catch(function(err){
                 $scope.error = 'Signup Invalid';

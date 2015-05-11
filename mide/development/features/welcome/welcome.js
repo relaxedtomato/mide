@@ -15,10 +15,10 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService){
 		$state.go('signup');
 	};
 
-	if (AuthService.isAuthenticated()) {
-		$state.go('tab.challenge');
-	} else {
-		$state.go('signup');
-	}
+	//if (AuthService.isAuthenticated()) {
+	//	$state.go('challenge.view');
+	//} else {
+	//	$state.go('signup');
+	//}
 	//});
 });

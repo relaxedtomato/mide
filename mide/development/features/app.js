@@ -35,9 +35,9 @@ var app = angular.module('mide', ['ionic', 'ui.ace'])
   // Each state's controller can be found in controllers.js
   // if none of the above states are matched, use this as the fallback
   //$urlRouterProvider.otherwise('/tab/chats');
-  //$urlRouterProvider.otherwise('/signup'); // TODO: Richard testing this route
+  $urlRouterProvider.otherwise('/welcome'); // TODO: Richard testing this route
   //$urlRouterProvider.otherwise('/tab/challenge'); //TODO: Tony testing this route
-   $urlRouterProvider.otherwise('welcome');
+  // $urlRouterProvider.otherwise('welcome');
 })
 //
 
@@ -73,32 +73,68 @@ var app = angular.module('mide', ['ionic', 'ui.ace'])
         //TODO: Not sure how to proceed here
         $state.go('login'); //if above fails, goto login
     });
-   $urlRouterProvider.otherwise('/welcome'); // TODO: Richard testing this route
+  // $urlRouterProvider.otherwise('/signup'); // TODO: Richard testing this route
   //$urlRouterProvider.otherwise('/challenge/view'); //TODO: Tony testing this route
 });
 
-app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state){
-  $scope.states = [
-    {
-      name : 'Account',
-      ref : 'account'
-    },
-    {
-      name : 'Challenge',
-      ref : 'challenge.view'
-    },
-    {
-      name : 'Chats',
-      ref: 'chats'
+app.config(function($stateProvider){
+   $stateProvider.state('main', {
+       templateUrl: 'features/common/main/main.html',
+       controller: 'MenuCtrl'
+   });
+});
+
+app.controller('MainCtrl', function($rootScope,$scope, $ionicSideMenuDelegate, $ionicPopup, $state, AuthService,AUTH_EVENTS){
+    $scope.username = AuthService.username();
+    //console.log(AuthService.isAuthenticated());
+    //$scope.menu = false;
+
+    $scope.$on(AUTH_EVENTS.notAuthorized, function(event) {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Unauthorized!',
+            template: 'You are not allowed to access this resource.'
+        });
+    });
+
+    $scope.$on(AUTH_EVENTS.notAuthenticated, function(event) {
+        AuthService.logout();
+        $state.go('login');
+        var alertPopup = $ionicPopup.alert({
+            title: 'Session Lost!',
+            template: 'Sorry, You have to login again.'
+        });
+    });
+
+    $scope.setCurrentUsername = function(name) {
+        $scope.username = name;
+    };
+    $scope.showMenu = function(){
+        return true;
     }
-  ];
+});
 
-  $scope.clickItem = function(stateRef){
-    $ionicSideMenuDelegate.toggleLeft();
-    $state.go(stateRef.toString());
-  };
+app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state){
+    $scope.states = [
+        {
+          name : 'Account',
+          ref : function(){return 'account';}
+        },
+        {
+          name : 'Challenge',
+          ref : function(){return 'challenge.view';}
+        },
+        {
+          name : 'Chats',
+          ref: function(){return 'chats';}
+        }
+    ];
 
-  $scope.toggleMenu = function(){
-    $ionicSideMenuDelegate.toggleLeft();
-  };
+    $scope.clickItem = function(stateRef){
+        $ionicSideMenuDelegate.toggleLeft();
+        $state.go(stateRef()); //RB: Updated to have stateRef as a function instead.
+    };
+
+    $scope.toggleMenu = function(){
+        $ionicSideMenuDelegate.toggleLeft();
+    };
 });
