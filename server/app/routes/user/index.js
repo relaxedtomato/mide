@@ -2,11 +2,11 @@
 var router = require('express').Router();
 var UserModel = require('mongoose').model('User');
 var _ = require('lodash');
-module.exports = router;
-//TODO: Should be a ENV Variable
+var path = require('path');
+var SESSION_SECRET = require(path.join(__dirname, '../../../env')).SESSION_SECRET;
 var jwt = require('jsonwebtoken'); //encoded json object (token), token sends it back on each request
 
-//sign up
+module.exports = router;
 
 //TODO: bring in mongoose after testing
 var user = {
@@ -14,16 +14,13 @@ var user = {
     password: '1234'
 };
 
-//TODO: store in environment variable, not here, and change for future release
-//TODO: Check to make sure env variables at not git stored, if so change them and add to .gitignore
-var jwtSecret = 'blahblahblah';
-
 function authenticate(req,res,next){
-    var body = req.body
+    var body = req.body;
     if (!body.username || !body.password) {
         res.status(400).end('Must provide username and/or password');
     }
-    if (body.username !== user.username || body.password !== user.password) { //TODO: mongoose
+    if (body.username !== user.username || body.password !== user.password) {
+    //TODO: mongoose
         res.status(401).end('Username or password incorrect');
     }
     next(); //TODO: pass along via mongoose
@@ -31,14 +28,16 @@ function authenticate(req,res,next){
 
 //TODO: figure out what to include
 router.post('/login', authenticate, function(req,res){ // api/login
+    //TODO: for login, encrypt the mongoose database instead and return with username
     var token = jwt.sign({
-        username: user.username
-    },jwtSecret);
+        username: user.username //TODO: Mongoose _id
+    },SESSION_SECRET);
     //res.send(user); //where is user defined?!
     //TODO: Store token in Mongoose for future reference
     res.send({
         token:token,
-        user: user //TODO: user is from Mongoose, not local variable, maybe remove user from sending it (password)
+        username: user.username
+        //TODO: user is from Mongoose, not local variable, maybe remove user from sending it (password)
     });
 });
 
@@ -77,17 +76,25 @@ router.get('/token', function(req,res){
 
 router.post('/signup', function(req, res, next) { // api/signup
 
-    //console.log('/signup data',req.body);
-	//UserModel.create(req.body).then(userCreated, userNotCreated);
-    //
-	////TODO: Currently you can create multiple non-unique users
-	//function userCreated(userdata){
-	//	console.log('userCreated');
-	//	//res.sendStatus(200);
-	//	res.send({user: _.omit(userdata.toJSON(),['email','salt','password','admin','_id', 'apiKey','__v']) });
-	//}
-    //
-	//function userNotCreated(){
-	//	res.send(401).end('User was not created');
-	//}
+
+	UserModel.create(req.body).then(userCreated, userNotCreated);
+
+	//TODO: Currently you can create multiple non-unique users
+	function userCreated(userdata){
+		//console.log('userCreated',userdata);
+        var token = jwt.sign({
+            userId : userdata._id
+        },SESSION_SECRET);
+        res.send({
+            token:token,
+            username: userdata.userName
+        });
+	}
+
+	function userNotCreated(){
+		res.send(401).end('User was not created');
+	}
 });
+
+//res.sendStatus(200);
+//res.send({user: _.omit(userdata.toJSON(),['email','salt','password','admin','_id', 'apiKey','__v']) });

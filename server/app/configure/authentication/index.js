@@ -11,11 +11,6 @@ var ENABLED_AUTH_STRATEGIES = [
     'local'
 ];
 
-//TODO:,
-//'twitter',
-//    'facebook',
-//    'google'
-
 module.exports = function (app) {
 
     // First, our session middleware will set/read sessions from the request.

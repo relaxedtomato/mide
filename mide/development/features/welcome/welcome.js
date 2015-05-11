@@ -17,10 +17,10 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthTokenFactory){
 
 	var token = AuthTokenFactory.getToken()
 	if (token) {
-		console.log(token)
+		console.log('welcome page',token) //TODO: Trying to store user information in local storage as well
 		$state.go('tab.challenge-submit');
 	} else {
-		$state.go('login');
+		$state.go('signup');
 	}
 	//});
 });

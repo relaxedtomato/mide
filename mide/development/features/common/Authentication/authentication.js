@@ -106,16 +106,28 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
 
     //var login = function()
     var login = function(userdata){
-        console.log('postLogin',JSON.stringify(userdata));
+        console.log('login',JSON.stringify(userdata));
         return $q(function(resolve,reject){
             $http.post(ApiEndpoint.url+"/user/login", userdata)
                 .then(function(response){
-                    AuthTokenFactory.setToken(response.data.token); //storeUserCredentials
+                    storeUserCredentials(response.data); //storeUserCredentials
                     isAuthenticated = true;
                     resolve(response); //TODO: sent to authenticated
                 });
         });
     };
+
+    var signup = function(userdata){
+        console.log('signup',JSON.stringify(userdata));
+        return $q(function(resolve,reject){
+            $http.post(ApiEndpoint.url+"/user/signup", userdata)
+                .then(function(response){
+                    storeUserCredentials(response.data); //storeUserCredentials
+                    isAuthenticated = true;
+                    resolve(response); //TODO: sent to authenticated
+                });
+        });
+    }
 
     loadUserCredentials();
 
@@ -128,6 +140,7 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
 
     return {
         login: login,
+        signup: signup,
         logout: logout,
         isAuthenticated: function() {
             console.log('AuthService.isAuthenticated()');

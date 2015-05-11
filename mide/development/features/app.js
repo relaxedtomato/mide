@@ -37,7 +37,7 @@ var app = angular.module('mide', ['ionic', 'ui.ace'])
   //$urlRouterProvider.otherwise('/tab/chats');
   //$urlRouterProvider.otherwise('/signup'); // TODO: Richard testing this route
   //$urlRouterProvider.otherwise('/tab/challenge'); //TODO: Tony testing this route
-    $urlRouterProvider.otherwise('welcome');
+   $urlRouterProvider.otherwise('welcome');
 })
 //
 
