@@ -23,7 +23,8 @@ app.factory('AuthInterceptor',function AuthInterceptor(AUTH_EVENTS,$rootScope,$q
         }
         return config;
     }
-}); //skipped Auth Interceptors given TODO: You could apply the approach in
+});
+//skipped Auth Interceptors given TODO: You could apply the approach in
 //http://devdactic.com/user-auth-angularjs-ionic/
 
 app.config(function($httpProvider){
@@ -63,7 +64,6 @@ app.factory('AuthTokenFactory',function($window){
 });
 
 app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpoint,$rootScope){
-    //var LOCAL_TOKEN_KEY = 'auth-token';
     var username = '';
     var isAuthenticated = false;
     var authToken;
@@ -71,7 +71,7 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
     function loadUserCredentials() {
         //var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
         var token = AuthTokenFactory.getToken();
-        console.log(token);
+        //console.log(token);
         if (token) {
             useCredentials(token);
         }
@@ -83,20 +83,16 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
     }
 
     function useCredentials(data) {
-        console.log('useCredentials token',data);
+        //console.log('useCredentials token',data);
         username = data.username;
         isAuthenticated = true;
         authToken = data.token;
-        // Set the token as header for your requests!
-        //$http.defaults.headers.common['X-Auth-Token'] = token; //TODO
     }
 
     function destroyUserCredentials() {
         authToken = undefined;
         username = '';
         isAuthenticated = false;
-        //$http.defaults.headers.common['X-Auth-Token'] = undefined;
-        //window.localStorage.removeItem(LOCAL_TOKEN_KEY);
         AuthTokenFactory.setToken(); //empty clears the token
     }
 
@@ -144,7 +140,7 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
         signup: signup,
         logout: logout,
         isAuthenticated: function() {
-            console.log('AuthService.isAuthenticated()');
+            //console.log('AuthService.isAuthenticated()');
             return isAuthenticated;
         },
         username: function(){return username;},

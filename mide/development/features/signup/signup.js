@@ -9,17 +9,20 @@ app.config(function($stateProvider){
 app.controller('SignUpCtrl',function($rootScope, $http, $scope, $state, AuthService){
     $scope.data = {};
     $scope.error = null;
-
+    $scope.login = function(){
+        $state.go('login');
+    };
     $scope.signup = function(){
         AuthService
             .signup($scope.data)
             .then(function(authenticated){
-                console.log('signup, tab.challenge');
-                //$rootScope.$broadcast('showMenu');
+                //console.log('signup, tab.challenge');
+                $rootScope.$broadcast('Auth');
                 $scope.states.push({ //TODO: Need to add a parent controller to communicate
                     name: 'Logout',
                     ref: function(){
                         AuthService.logout();
+                        $scope.data = {};
                         $scope.states.pop(); //TODO: Find a better way to remove the Logout link, instead of pop
                         $state.go('signup');
                     }

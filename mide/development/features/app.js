@@ -88,7 +88,6 @@ app.config(function($stateProvider){
 app.controller('MainCtrl', function($rootScope,$scope, $ionicSideMenuDelegate, $ionicPopup, $state, AuthService,AUTH_EVENTS){
     $scope.username = AuthService.username();
     //console.log(AuthService.isAuthenticated());
-    //$scope.menu = false;
 
     $scope.$on(AUTH_EVENTS.notAuthorized, function(event) {
         var alertPopup = $ionicPopup.alert({
@@ -101,20 +100,16 @@ app.controller('MainCtrl', function($rootScope,$scope, $ionicSideMenuDelegate, $
         AuthService.logout();
         $state.go('login');
         var alertPopup = $ionicPopup.alert({
-            title: 'Session Lost!',
-            template: 'Sorry, You have to login again.'
+            title: 'Login Error',
+            template: 'Invalid email or password.'
         });
     });
 
-    $scope.setCurrentUsername = function(name) {
-        $scope.username = name;
-    };
-    $scope.showMenu = function(){
-        return true;
-    };
 });
 
-app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state){
+app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, AuthService, $rootScope){
+    //console.log('MenuCtrl');
+
     $scope.states = [
         {
           name : 'Account',
@@ -130,6 +125,16 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state){
         }
     ];
 
+    $scope.toggleMenuShow = function(){
+        return AuthService.isAuthenticated();
+    };
+
+    $rootScope.$on('Auth',function(){
+       $scope.toggleMenuShow();
+    });
+
+    //console.log(AuthService.isAuthenticated());
+    //if(AuthService.isAuthenticated()){
     $scope.clickItem = function(stateRef){
         $ionicSideMenuDelegate.toggleLeft();
         $state.go(stateRef()); //RB: Updated to have stateRef as a function instead.
@@ -138,4 +143,5 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state){
     $scope.toggleMenu = function(){
         $ionicSideMenuDelegate.toggleLeft();
     };
+    //}
 });

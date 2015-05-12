@@ -14,7 +14,7 @@ app.factory('ChallengeFactory', function($http, ApiEndpoint){
 		getChallenge : function(id){
 			return $http.get(ApiEndpoint.url + '/challenge/' + id).then(function(response){
 				problem = response.data;
-				submission = '' || problem.session.setup;
+				submission = problem.session.setup || '';
 				return response.data;
 			});
 		},

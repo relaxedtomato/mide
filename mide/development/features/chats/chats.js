@@ -1,9 +1,12 @@
-app.config(function($stateProvider){
+app.config(function($stateProvider, USER_ROLES){
 
   $stateProvider.state('chats', {
       url: '/chats',
       templateUrl: 'features/chats/tab-chats.html',
-      controller: 'ChatsCtrl'
+      controller: 'ChatsCtrl',
+      data: {
+        authenticate: [USER_ROLES.public]
+      }
     })
     .state('chat-detail', {
       url: '/chats/:chatId',
