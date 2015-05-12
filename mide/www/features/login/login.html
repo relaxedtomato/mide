@@ -2,14 +2,24 @@
     <ion-content>
 
         <div class="list list-inset">
-            <label class="item item-input">
-                <input type="text" placeholder="Username or Email" ng-model="data.username">
-            </label>
-            <label class="item item-input">
-                <input type="password" placeholder="Password" ng-model="data.password">
-            </label>
+            <div>
+                <label class="item item-input">
+                    <input type="text" placeholder="Username" ng-model="data.username" required>
+                    <div class="error" ng-show="data.username.$dirty && data.username.$invalid">
+                        <small class="error" ng-show="data.username.name.$error.required">
+                            Username or Email Required to Login
+                        </small>
+                    </div>
+                </label>
+            </div>
+            <div>
+                <label class="item item-input">
+                    <input type="password" placeholder="Password" ng-model="data.password" required>
+                </label>
+            </div>
         </div>
         <button class="button button-block button-calm" ng-click="login()">Log In</button>
+        <button class="button button-block button-calm" ng-click="signup()">Sign Up</button>
         <!--TODO:<button class="button button-block button-calm">Reset Password (no action)</button>-->
 
     </ion-content>

@@ -1,9 +1,12 @@
-app.config(function($stateProvider){
+app.config(function($stateProvider, USER_ROLES){
 	// Each tab has its own nav history stack:
 	$stateProvider.state('account', {
 		url: '/account',
 	    templateUrl: 'features/account/account.html',
-		controller: 'AccountCtrl'
+		controller: 'AccountCtrl',
+		data: {
+			authenticate: [USER_ROLES.public]
+		}
 	});
 });
 

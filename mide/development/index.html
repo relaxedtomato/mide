@@ -45,12 +45,12 @@
             <!-- <ion-nav-back-button>
             </ion-nav-back-button> -->
             <ion-nav-buttons side="left">
-              <button class="button button-icon button-clear ion-navicon" ng-click="toggleMenu()"></button>
+              <button ng-if="toggleMenuShow()" class="button button-icon button-clear ion-navicon" ng-click="toggleMenu()"></button>
             </ion-nav-buttons>
           </ion-nav-bar>
           <!--
             The views will be rendered in the <ion-nav-view> directive below
-            Templates are in the /templates folder (but you could also
+            Templates are in the /templates folder (butd you could also
             have templates inline in this html file if you'd like).
           -->
           <ion-nav-view></ion-nav-view>
@@ -61,6 +61,7 @@
             <ion-list>
               <ion-item ng-repeat='item in states'>
                 <div ng-click='clickItem(item.ref)'>{{item.name}}</div>
+                <!-- TODO: Remove {{item.name}} from showing-->
               </ion-item>
             </ion-list>
           </ion-content>
