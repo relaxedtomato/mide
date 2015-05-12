@@ -6,13 +6,16 @@ app.config(function($stateProvider){
 				templateUrl : 'features/challenge-code/challenge-code.html',
 				controller : 'ChallengeCodeCtrl'
 			}
+		},
+		onEnter : function(ChallengeFactory, $state){
+			if(ChallengeFactory.getProblem().length === 0){
+				$state.go('challenge.view');
+			}
 		}
 	});
 });
 
-app.controller('ChallengeCodeCtrl', function($scope,$state, ChallengeFactory){
-
-	
+app.controller('ChallengeCodeCtrl', function($scope,$state, $rootScope, ChallengeFactory){
 
 	//Challenge Submit
 	//text needs to be worked on
@@ -42,9 +45,7 @@ app.controller('ChallengeCodeCtrl', function($scope,$state, ChallengeFactory){
 		// cordova.plugins.Keyboard.show = function() {
 		//     exec(null, null, "Keyboard", "show", []);
 		// };
-
 		console.log("is Keyboard vis?", cordova.plugins.Keyboard.isVisible);
-
 		// cordova.plugins.Keyboard.show();
 		// native.keyboardshow();
 		// console.log("is Keyboard vis?", cordova.plugins.Keyboard);
@@ -56,6 +57,16 @@ app.controller('ChallengeCodeCtrl', function($scope,$state, ChallengeFactory){
 		test : 'Test',
 		dismiss : 'Dismiss'
 	};
+
+	$rootScope.$on('problemUpdated', function(e){
+		$scope.projectId = ChallengeFactory.getProblem().session.projectId;
+		$scope.solutionId = ChallengeFactory.getProblem().session.solutionId;
+		$scope.text = ChallengeFactory.getProblem().session.setup;
+	});
+
+	$rootScope.$on('submissionUpdated', function(e, submission){
+		$scope.text = ChallengeFactory.getSubmission();
+	});
 
 	$scope.submitSubmission = function(projectId, solutionId, code){
 		var id = 'A9QKk6SmRpDcriU-HMQr';
