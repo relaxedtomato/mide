@@ -34,7 +34,6 @@ app.controller('LoginCtrl', function($rootScope, $scope, $ionicPopup, $state, Au
 				//TODO: We can set the user name here as well. Used in conjunction with a main ctrl
 			})
 			.catch(function(err){
-				console.log('here');
 				$scope.error = 'Login Invalid';
 				console.error(JSON.stringify(err))
 				var alertPopup = $ionicPopup.alert({

@@ -166,8 +166,8 @@ codewars.testSubmission = function(apiKey, projectId, solutionId, solution){
     // solution = solution || test.solution;
     // apiKey = apiKey || test.apiKey;
 
-    return attemptSolution(apiKey, projectId, solutionId, solution).then(function(data){
-        return getDeferredResponse(apiKey, data.dmid);
+    return attemptSolution(apiKey, projectId, solutionId, solution).delay(500).then(function(data){
+            return getDeferredResponse(apiKey, data.dmid);
     }).catch(function(err){
         throw new Error(err);
     });
@@ -180,7 +180,7 @@ codewars.submitSubmission = function(apiKey,projectId,solutionId, solution){
     solution = solution || test.solution;
     apiKey = apiKey || test.apiKey;
 
-    return attemptSolution(apiKey, projectId, solutionId, solution).then(function(data){
+    return attemptSolution(apiKey, projectId, solutionId, solution).delay(500).then(function(data){
         return finalizeSolution(apiKey, projectId, solutionId);
     }).catch(function(err){
         throw new Error(err);

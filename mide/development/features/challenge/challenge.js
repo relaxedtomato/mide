@@ -5,40 +5,43 @@ app.config(function($stateProvider){
 	});
 });
 
-app.factory('ChallengeFactory', function($http, ApiEndpoint){
+app.factory('ChallengeFactory', function($http, ApiEndpoint, $rootScope){
 
 	var problem = '';
 	var submission ='';
+	var test = '';
 
 	return {
 		getChallenge : function(id){
 			return $http.get(ApiEndpoint.url + '/challenge/' + id).then(function(response){
 				problem = response.data;
 				submission = problem.session.setup || '';
+				$rootScope.$broadcast('problemUpdated');
 				return response.data;
 			});
 		},
 		submitSubmission : function(id, projectId, solutionId, code){
 			submission = code;
+			$rootScope.$broadcast('submissionUpdated');
 			var submit = {
 				code : code,
 				projectId : projectId,
 				solutionId : solutionId
 			};
-			console.log(code);
 			return $http.post(ApiEndpoint.url + '/challenge/submit/' + id, submit).then(function(response){
 				return response.data;
 			});
 		},
 		testSubmission : function(id, projectId, solutionId, code){
 			submission = code;
+			$rootScope.$broadcast('submissionUpdated');
 			var submit = {
 				code : code,
 				projectId : projectId,
 				solutionId : solutionId
 			};
-			console.log(code);
 			return $http.post(ApiEndpoint.url + '/challenge/attempt/' + id, submit).then(function(response){
+				test = response.data;
 				return response.data;
 			});
 		},

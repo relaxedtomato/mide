@@ -27,4 +27,8 @@ app.controller('ChallengeViewCtrl', function($scope, ChallengeFactory, challenge
 
 	//Challenge View
 	$scope.challenge = ChallengeFactory.getProblem();
+
+	$scope.$on('problemUpdated', function(e){
+		$scope.challenge = ChallengeFactory.getProblem();
+	});
 });
