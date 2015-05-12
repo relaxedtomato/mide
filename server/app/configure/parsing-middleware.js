@@ -16,5 +16,11 @@ module.exports = function (app) {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 
-    app.use(expressJwt({secret:SESSION_SECRET}).unless({path: ['/api/user/login','/api/user/signup']}));
+    //TODO: Fix for Production
+    if (process.env.NODE_ENV === 'production') {
+        app.use(expressJwt({secret:SESSION_SECRET}).unless({path: ['/api/user/login','/api/user/signup']}));
+    } else {
+        //do nothing
+    }
+
 };

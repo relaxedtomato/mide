@@ -4,6 +4,7 @@ var UserModel = require('mongoose').model('User');
 var _ = require('lodash');
 var path = require('path');
 var SESSION_SECRET = require(path.join(__dirname, '../../../env')).SESSION_SECRET;
+
 var jwt = require('jsonwebtoken'); //encoded json object (token), token sends it back on each request
 
 module.exports = router;

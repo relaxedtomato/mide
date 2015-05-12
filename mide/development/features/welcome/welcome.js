@@ -29,6 +29,7 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope){
 		});
 		$state.go('challenge.view');
 	} else {
-		$state.go('signup');
+		//TODO: $state.go('signup'); Remove Below line
+		$state.go('challenge.view');
 	}
 });
