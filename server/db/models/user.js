@@ -11,17 +11,19 @@ var schemaOptions = {
 
 //TODO: Add required for userSchema after testing
 var userSchema = new mongoose.Schema({
-    userName : {type : String},
+    userName : {type : String, required:true},
     email: {
-        type: String
+        type: String,
+        required:true
     },
-    apiKey: {type: String},
+    apiKey: {type: String, required:true},
     password: {
         type: String,
+        required:true
         //select : false //used in routes later to display or not display certain properties
     },
     salt: {
-        type: String,
+        type: String//,
         //select: false
     }
 }, schemaOptions);

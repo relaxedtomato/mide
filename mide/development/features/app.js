@@ -98,10 +98,10 @@ app.controller('MainCtrl', function($rootScope,$scope, $ionicSideMenuDelegate, $
 
     $scope.$on(AUTH_EVENTS.notAuthenticated, function(event) {
         AuthService.logout();
-        $state.go('login');
+        //$state.go('login');
         var alertPopup = $ionicPopup.alert({
-            title: 'Login Error',
-            template: 'Invalid email or password.'
+            title: 'Please Review',
+            template: ''
         });
     });
 

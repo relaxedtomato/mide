@@ -11,9 +11,9 @@ module.exports = router;
 function authenticate(req,res,next){
     var body = req.body;
     if (!body.username || !body.password) {
-        res.status(400).end('Must provide username and/or password');
+        res.sendStatus(400)//.end('Must provide username and/or password');
     }
-
+    //TODO: Check if data.username is username or email
     UserModel.findOne({userName:body.username}).exec().then(userFound,userNotFound);
 
     function userFound(user){
@@ -44,20 +44,6 @@ router.post('/login', authenticate, function(req,res){ // api/login
     });
 });
 
-
-//TODO: Based on receiving a user via jwt
-router.get('/token', function(req,res){
-   console.log('api/user/token',req.user);
-    //res.send()
-    if(req.user){ //TODO: Can't req.user be faked? or is this decoded info?
-        res.send({
-            user:req.user
-        });
-    } else {
-        res.status(401).send('No Authenticated user.');
-    }
-});
-
 router.post('/signup', function(req, res, next) { // api/signup
 
 	UserModel.create(req.body).then(userCreated, userNotCreated);
@@ -74,7 +60,7 @@ router.post('/signup', function(req, res, next) { // api/signup
         });
 	}
 	function userNotCreated(){
-		res.send(401).end('User was not created');
+		res.sendStatus(401);//.send('User was not created');
 	}
 });
 
