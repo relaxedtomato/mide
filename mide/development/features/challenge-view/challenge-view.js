@@ -31,4 +31,9 @@ app.controller('ChallengeViewCtrl', function($scope, ChallengeFactory, challenge
 	$scope.$on('problemUpdated', function(e){
 		$scope.challenge = ChallengeFactory.getProblem();
 	});
+
+	$scope.showTestCases = function(){
+		return $scope.challenge.session.exampleFixture && $scope.challenge.session.exampleFixture.length !== 0;
+	};
+
 });

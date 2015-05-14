@@ -18,39 +18,40 @@ app.config(function($stateProvider){
 app.controller('ChallengeCodeCtrl', function($scope,$state, $rootScope, ChallengeFactory){
 
 	//Challenge Submit
-	//text needs to be worked on
+
 	$scope.text = ChallengeFactory.getSubmission();
-
-	var editor;
-
 	$scope.projectId = ChallengeFactory.getProblem().session.projectId;
 	$scope.solutionId = ChallengeFactory.getProblem().session.solutionId;
 
-	$scope.aceLoaded = function(_editor){
-		editor = _editor;
-		editor.getSession().setUseWorker(false);
+	//initialize CodeMirror
+	var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('code'), {
+		lineNumbers : true,
+		mode: 'javascript',
+		autofocus : true,
+		theme : 'twilight',
+		lineWrapping: true
+	});
 
-		editor.focus();
+	myCodeMirror.replaceSelection($scope.text);
 
-		editor.setReadOnly(false);
+	$scope.updateText = function(){
+		$scope.text = myCodeMirror.getValue();
+		//check if digest is in progress
+		if(!$scope.$$phase) {
+		  $scope.$apply();
+		}
 	};
 
-	$scope.aceChanged = function(e){
-		// console.log(e);
+	$scope.insertFunc = function(param){
+		//given a param, will insert characters where cursor is
+		console.log("inserting: ", param);
+		myCodeMirror.replaceSelection(param);
 	};
 
-	$scope.clickEditor = function() {
-		editor.focus(); //bring editor to focus
+    myCodeMirror.on("change", function (myCodeMirror, changeObj){
+    	$scope.updateText();
+    });
 
-		// cordova.plugins.Keyboard.show = function() {
-		//     exec(null, null, "Keyboard", "show", []);
-		// };
-		console.log("is Keyboard vis?", cordova.plugins.Keyboard.isVisible);
-		// cordova.plugins.Keyboard.show();
-		// native.keyboardshow();
-		// console.log("is Keyboard vis?", cordova.plugins.Keyboard);
-
-	};
 
 	$scope.buttons = {
 		submit : 'Submit',

@@ -1,13 +1,10 @@
 <ion-view view-title="Challenge">
 	<ion-content>
-		<div ui-ace="{
-            useWrapMode : true,
-            showGutter : true,
-            theme: 'ambiance',
-            mode: 'javascript',
-            onLoad: aceLoaded,
-            onChange : aceChanged
-        }" ng-model="text" ng-click="clickEditor()"><input type="text"></div>
+		
+        <pre>{{text}}</pre>
+        <div>
+            <textarea id='code' ng-model='text'></textarea>
+        </div>
 
         <button class='button button-balanced' ng-click='testSubmission(projectId, solutionId, text)'>
             {{buttons.test | uppercase}}
@@ -18,5 +15,11 @@
         <button class='button button-assertive' ng-click='dismissChallenge()'>
             {{buttons.dismiss | uppercase}}
         </button>
+
+       <!--  <ion-footer-bar class="bar-stable">
+          <div class="buttons" ng-repeat="hotkey in footerHotkeys">
+            <button class="button" ng-click="insertFunc(hotkey.insertParam)">{{hotkey.display}}</button>
+          </div>
+        </ion-footer-bar> -->
 	</ion-content>
 </ion-view>

@@ -3,7 +3,9 @@
     <pre>{{challenge | json}}</pre>
     <h1>{{challenge.name}}</h1>
     <div ng-bind-html='challenge.description | marked'></div>
-    <h3>Test Cases</h3>
-    <div ng-bind-html='challenge.session.exampleFixture | marked'></div>
+    <div ng-show='showTestCases()'>
+	    <h3>Test Cases</h3>
+	    <div ng-bind-html='challenge.session.exampleFixture | marked'></div>
+	</div>
   </ion-content>
 </ion-view>
