@@ -16,16 +16,28 @@ app.config(function($stateProvider){
 });
 
 app.controller('ChallengeCompileCtrl', function($scope, ChallengeFactory){
-	var code = ChallengeFactory.getSubmission();
-	var api = {
-		console : console
-	};
-	var plugin = new jailed.DynamicPlugin(code, api);
-	$scope.results = ChallengeFactory.getSubmission();
+	$scope.question = ChallengeFactory.getSubmission();
+	var results = ChallengeFactory.compileSubmission($scope.question);
+	$scope.results = results;
+	$scope.output = ChallengeFactory.compileSubmission($scope.question).output;
+	$scope.error = ChallengeFactory.compileSubmission($scope.question).error;
+
+	//initialize CodeMirror
+	var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('code'), {
+		readOnly : 'nocursor',
+		mode: 'javascript',
+		autofocus : true,
+		theme : 'twilight',
+		lineWrapping: true
+	});
+
+	myCodeMirror.replaceSelection($scope.question);
 
 	$scope.$on('submissionUpdated', function(e){
-		$scope.results = ChallengeFactory.getSubmission();
-
+		$scope.question = ChallengeFactory.getSubmission();
+		results = ChallengeFactory.compileSubmission($scope.question);
+		$scope.results = results;
+		$scope.output = ChallengeFactory.compileSubmission($scope.question).output;
+		$scope.error = ChallengeFactory.compileSubmission($scope.question).error;
 	});
-	console.dir(jailed);
 });

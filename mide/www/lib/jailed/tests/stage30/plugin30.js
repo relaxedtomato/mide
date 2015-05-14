@@ -1,2 +1,0 @@
-
-application.whenConnected('something');

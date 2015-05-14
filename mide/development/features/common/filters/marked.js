@@ -10,6 +10,11 @@ app.filter('marked', function($sce){
 	// 	smartypants: false
 	// });
 	return function(text){
-		return $sce.trustAsHtml(marked(text));
+		if(text){
+			return $sce.trustAsHtml(marked(text));
+		}
+		else {
+			return undefined;
+		}
 	};
 });

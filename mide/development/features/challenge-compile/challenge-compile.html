@@ -1,6 +1,11 @@
 <ion-view view-title="Challenge">
 	<ion-content class="padding">
 		<p>Compiled results<p>
-		<pre>{{results}}</pre>
+		<pre>{{question}}</pre>
+		<p>This is the result</p>
+		<textarea id='code'></textarea>
+		<p ng-show='output' style='color:white;'>{{output}}</p>
+		<p ng-show='error' style='color:red;'>{{error}}</p>
+		<pre>{{results | json}}</pre>
 	</ion-content>
 </ion-view>
