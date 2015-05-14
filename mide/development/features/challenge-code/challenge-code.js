@@ -15,7 +15,11 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ChallengeCodeCtrl', function($scope,$state, $rootScope, ChallengeFactory){
+app.controller('ChallengeCodeCtrl', function($scope,$state, $rootScope, ChallengeFactory, ChallengeFooterFactory){
+
+	$scope.footerHotkeys = ChallengeFooterFactory.getHotkeys();
+
+	console.log("footerHotkeys, ", $scope.footerHotkeys);
 
 	//Challenge Submit
 
