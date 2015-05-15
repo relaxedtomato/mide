@@ -7,6 +7,12 @@ app.config(function($stateProvider){
 				controller : 'ChallengeCodeCtrl'
 			}
 		}
+		// ,
+		// onEnter : function(ChallengeFactory, $state){
+		// 	if(ChallengeFactory.getProblem().length === 0){
+		// 		$state.go('challenge.view');
+		// 	}
+		// }
 	});
 });
 
@@ -17,10 +23,7 @@ app.controller('ChallengeCodeCtrl', function($scope,$state, $rootScope, Challeng
 	console.log("footerHotkeys, ", $scope.footerHotkeys);
 
 	//Challenge Submit
-
 	$scope.text = ChallengeFactory.getSubmission() || 'text';
-	//$scope.projectId = ChallengeFactory.getProblem().session.projectId;
-	//$scope.solutionId = ChallengeFactory.getProblem().session.solutionId;
 
 	//initialize CodeMirror
 	var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('code'), {
@@ -53,44 +56,26 @@ app.controller('ChallengeCodeCtrl', function($scope,$state, $rootScope, Challeng
 
 
 	$scope.buttons = {
-		submit : 'Submit',
-		test : 'Test',
+		compile : 'Compile',
 		dismiss : 'Dismiss'
 	};
 
-	$rootScope.$on('problemUpdated', function(e){
-		$scope.projectId = ChallengeFactory.getProblem().session.projectId;
-		$scope.solutionId = ChallengeFactory.getProblem().session.solutionId;
-		$scope.text = ChallengeFactory.getProblem().session.setup;
-	});
+	// $rootScope.$on('problemUpdated', function(e){
+	// 	$scope.projectId = ChallengeFactory.getProblem().session.projectId;
+	// 	$scope.solutionId = ChallengeFactory.getProblem().session.solutionId;
+	// 	$scope.text = ChallengeFactory.getProblem().session.setup;
+	// });
 
-	$rootScope.$on('submissionUpdated', function(e, submission){
-		$scope.text = ChallengeFactory.getSubmission();
-	});
-
-	$scope.submitSubmission = function(projectId, solutionId, code){
-		var id = 'A9QKk6SmRpDcriU-HMQr';
-		ChallengeFactory.submitSubmission(id, projectId, solutionId, code).then(function(response){
-			return response.data;
-		}).catch(function(err){
-			console.error(JSON.stringify(err));
-		});
+	$scope.compileChallenge = function(text){
+		ChallengeFactory.setSubmission(text);
+		$state.go('challenge.compile');
 	};
 
-	$scope.testSubmission = function(projectId, solutionId, code){
-		var id = 'A9QKk6SmRpDcriU-HMQr';
-		ChallengeFactory.testSubmission(id, projectId, solutionId, code).then(function(response){
-			return response.data;
-		}).catch(function(err){
-			console.error(JSON.stringify(err));
-		});
-	};
-
-	$scope.dismissChallenge = function(){
-		var id = 'A9QKk6SmRpDcriU-HMQr';
-		ChallengeFactory.getChallenge(id).then(function(data){
-			$state.go('challenge.view');
-		});
-	};
+	// $scope.dismissChallenge = function(){
+	// 	var id = 'A9QKk6SmRpDcriU-HMQr';
+	// 	ChallengeFactory.getChallenge(id).then(function(data){
+	// 		$state.go('challenge.view');
+	// 	});
+	// };
 
 });

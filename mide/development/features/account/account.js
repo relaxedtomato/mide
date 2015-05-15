@@ -4,6 +4,10 @@ app.config(function($stateProvider, USER_ROLES){
 		url: '/account',
 	    templateUrl: 'features/account/account.html',
 		controller: 'AccountCtrl'
+		// ,
+		// data: {
+		// 	authenticate: [USER_ROLES.public]
+		// }
 	});
 });
 

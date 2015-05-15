@@ -19,7 +19,8 @@ var mocha = require('gulp-mocha');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
-  images : ['./development/img/*']
+  images : ['./development/img/*'],
+  exercism : ['./development/exercism/javascript/**/*']
 };
 
 // gulp.task('default', ['sass']);
@@ -92,6 +93,15 @@ gulp.task('buildJSProduction', function () {
 });
 
 // ------------------------------------------------------
+// Exercism
+// ------------------------------------------------------
+
+gulp.task('moveExercism', function () {
+    return gulp.src(['./development/exercism/**/*.spec.js'])
+        .pipe(gulp.dest('./www/exercism/'));
+});
+
+// ------------------------------------------------------
 // HTML
 // ------------------------------------------------------
 gulp.task('moveHTML', function () {
@@ -135,9 +145,9 @@ gulp.task('test', function(done) {
 
 gulp.task('build', function () {
     if (process.env.NODE_ENV === 'production') {
-        runSeq(['buildJSProduction', 'sass', 'buildHTML', 'moveImages']);
+        runSeq(['buildJSProduction', 'sass', 'buildHTML', 'moveImages', 'moveExercism']);
     } else {
-        runSeq(['buildJS', 'sass', 'buildHTML', 'moveImages']);
+        runSeq(['buildJS', 'sass', 'buildHTML', 'moveImages', 'moveExercism']);
     }
 });
 
@@ -148,7 +158,9 @@ gulp.task('default', function(){
     runSeq('lintJS', 'buildJS', 'buildHTML');
   });
 
-    gulp.watch("development/tests/*", function (){
+  gulp.watch(paths.exercism, ['moveExercism']);
+
+  gulp.watch("development/tests/*", function (){
        runSeq('test');
     });
 
