@@ -3,10 +3,7 @@ app.config(function($stateProvider, USER_ROLES){
 	$stateProvider.state('account', {
 		url: '/account',
 	    templateUrl: 'features/account/account.html',
-		controller: 'AccountCtrl',
-		data: {
-			authenticate: [USER_ROLES.public]
-		}
+		controller: 'AccountCtrl'
 	});
 });
 
