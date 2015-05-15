@@ -4,7 +4,7 @@
   "proxies": [
     {
       "path": "/api",
-      "proxyUrl": "http://localhost:9000/api"
+      "proxyUrl": "https://arcane-sea-9917.herokuapp.com/api"
     },
     {
       "path": "/session",

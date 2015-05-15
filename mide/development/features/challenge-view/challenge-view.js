@@ -26,7 +26,7 @@ app.controller('ChallengeViewCtrl', function($scope, ChallengeFactory, challenge
 	};
 
 	//Challenge View
-	$scope.challenge = ChallengeFactory.getProblem();
+	$scope.challenge = ChallengeFactory.getProblem() || 'token expired';
 
 	$scope.$on('problemUpdated', function(e){
 		$scope.challenge = ChallengeFactory.getProblem();
