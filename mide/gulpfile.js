@@ -17,7 +17,8 @@ var ngAnnotate = require('gulp-ng-annotate');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
-  images : ['./development/img/*']
+  images : ['./development/img/*'],
+  exercism : ['./development/exercism/javascript/**/*']
 };
 
 // gulp.task('default', ['sass']);
@@ -90,6 +91,15 @@ gulp.task('buildJSProduction', function () {
 });
 
 // ------------------------------------------------------
+// Exercism
+// ------------------------------------------------------
+
+gulp.task('moveExercism', function () {
+    return gulp.src(['./development/exercism/**/*.spec.js'])
+        .pipe(gulp.dest('./www/exercism/'));
+});
+
+// ------------------------------------------------------
 // HTML
 // ------------------------------------------------------
 gulp.task('moveHTML', function () {
@@ -119,9 +129,9 @@ gulp.task('moveImages', function () {
 
 gulp.task('build', function () {
     if (process.env.NODE_ENV === 'production') {
-        runSeq(['buildJSProduction', 'sass', 'buildHTML', 'moveImages']);
+        runSeq(['buildJSProduction', 'sass', 'buildHTML', 'moveImages', 'moveExercism']);
     } else {
-        runSeq(['buildJS', 'sass', 'buildHTML', 'moveImages']);
+        runSeq(['buildJS', 'sass', 'buildHTML', 'moveImages', 'moveExercism']);
     }
 });
 
@@ -131,6 +141,8 @@ gulp.task('default', function(){
   gulp.watch('development/features/**', function(){
     runSeq('lintJS', 'buildJS', 'buildHTML');
   });
+
+  gulp.watch(paths.exercism, ['moveExercism']);
 
   gulp.watch(paths.images, ['moveImages']);
 

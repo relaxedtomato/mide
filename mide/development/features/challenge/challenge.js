@@ -8,8 +8,7 @@ app.config(function($stateProvider){
 app.factory('ChallengeFactory', function($http, ApiEndpoint, $rootScope, $state){
 
 	var problem = '';
-	var submission ='';
-	var test = '';
+	var submission = '';
 
 	var runHidden = function(code) {
 	    var indexedDB = null;
@@ -81,25 +80,9 @@ app.factory('ChallengeFactory', function($http, ApiEndpoint, $rootScope, $state)
 				return response.data;
 			});
 		},
-		submitSubmission : function(id, projectId, solutionId, code){
+		setSubmission : function(code){
 			submission = code;
 			$rootScope.$broadcast('submissionUpdated');
-			var submit = {
-				code : code,
-				projectId : projectId,
-				solutionId : solutionId
-			};
-			$state.go('challenge-compile');
-		},
-		testSubmission : function(id, projectId, solutionId, code){
-			submission = code;
-			$rootScope.$broadcast('submissionUpdated');
-			var submit = {
-				code : code,
-				projectId : projectId,
-				solutionId : solutionId
-			};
-			$state.go('challenge.compile');
 		},
 		compileSubmission: function(code){
 			return run(code);

@@ -6,6 +6,8 @@
   },
   "dependencies": {
     "marked": "~0.3.3",
-    "codemirror": "~5.2.0"
+    "codemirror": "~5.2.0",
+    "jasmine": "~2.3.4",
+    "jquery": "~2.1.4"
   }
 }
