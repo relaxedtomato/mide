@@ -76,7 +76,7 @@ app.factory('ChallengeFactory', function($http, ApiEndpoint, $rootScope, $state)
 		getChallenge : function(id){
 			return $http.get(ApiEndpoint.url + '/challenge/' + id).then(function(response){
 				problem = response.data;
-				submission = problem.session.setup || '';
+				submission = problem.session.setup || 'no setup';
 				$rootScope.$broadcast('problemUpdated');
 				return response.data;
 			});
