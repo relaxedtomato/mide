@@ -59,6 +59,8 @@ app.controller('ChallengeCodeCtrl', function($scope, $state, $rootScope, Challen
 		//given a param, will insert characters where cursor is
 		console.log("inserting: ", param);
 		myCodeMirror.replaceSelection(param);
+		// window.cordova.plugins.Keyboard.show();
+		myCodeMirror.focus();
 	};
 
     myCodeMirror.on("change", function (myCodeMirror, changeObj){
