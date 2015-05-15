@@ -6,22 +6,21 @@ app.config(function($stateProvider){
 				templateUrl : 'features/challenge-code/challenge-code.html',
 				controller : 'ChallengeCodeCtrl'
 			}
-		},
-		onEnter : function(ChallengeFactory, $state){
-			if(ChallengeFactory.getProblem().length === 0){
-				$state.go('challenge.view');
-			}
 		}
 	});
 });
 
-app.controller('ChallengeCodeCtrl', function($scope,$state, $rootScope, ChallengeFactory){
+app.controller('ChallengeCodeCtrl', function($scope,$state, $rootScope, ChallengeFactory, ChallengeFooterFactory){
+
+	$scope.footerHotkeys = ChallengeFooterFactory.getHotkeys();
+
+	console.log("footerHotkeys, ", $scope.footerHotkeys);
 
 	//Challenge Submit
 
-	$scope.text = ChallengeFactory.getSubmission();
-	$scope.projectId = ChallengeFactory.getProblem().session.projectId;
-	$scope.solutionId = ChallengeFactory.getProblem().session.solutionId;
+	$scope.text = ChallengeFactory.getSubmission() || 'text';
+	//$scope.projectId = ChallengeFactory.getProblem().session.projectId;
+	//$scope.solutionId = ChallengeFactory.getProblem().session.solutionId;
 
 	//initialize CodeMirror
 	var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('code'), {
