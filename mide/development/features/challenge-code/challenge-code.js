@@ -16,13 +16,14 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ChallengeCodeCtrl', function($scope,$state, $rootScope, ChallengeFactory){
+app.controller('ChallengeCodeCtrl', function($scope,$state, $rootScope, ChallengeFactory, ChallengeFooterFactory){
+
+	$scope.footerHotkeys = ChallengeFooterFactory.getHotkeys();
+
+	console.log("footerHotkeys, ", $scope.footerHotkeys);
 
 	//Challenge Submit
-
-	$scope.text = ChallengeFactory.getSubmission();
-	// $scope.projectId = ChallengeFactory.getProblem().session.projectId;
-	// $scope.solutionId = ChallengeFactory.getProblem().session.solutionId;
+	$scope.text = ChallengeFactory.getSubmission() || 'text';
 
 	//initialize CodeMirror
 	var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('code'), {

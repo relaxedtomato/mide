@@ -14,6 +14,8 @@ var runSeq = require('run-sequence');
 var babel = require('gulp-babel');
 var sourcemaps = require('gulp-sourcemaps');
 var ngAnnotate = require('gulp-ng-annotate');
+var karma = require('karma').server;
+var mocha = require('gulp-mocha');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -124,6 +126,20 @@ gulp.task('moveImages', function () {
 });
 
 // ------------------------------------------------------
+// Testing
+// ------------------------------------------------------
+/**
+ * Test task, run test continuously
+ */
+gulp.task('test', function(done) {
+    karma.start({
+        configFile: __dirname + '/my.conf.js'//,
+        //singleRun: true //runs only once.
+    }, function() {
+        done();
+    });
+});
+// ------------------------------------------------------
 // Compose Tasks
 // ------------------------------------------------------
 
@@ -136,13 +152,17 @@ gulp.task('build', function () {
 });
 
 gulp.task('default', function(){
-  gulp.start('build');
+  gulp.start('build', 'test');
 
   gulp.watch('development/features/**', function(){
     runSeq('lintJS', 'buildJS', 'buildHTML');
   });
 
   gulp.watch(paths.exercism, ['moveExercism']);
+
+  gulp.watch("development/tests/*", function (){
+       runSeq('test');
+    });
 
   gulp.watch(paths.images, ['moveImages']);
 
