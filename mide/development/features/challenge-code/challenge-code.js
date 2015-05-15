@@ -16,11 +16,22 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ChallengeCodeCtrl', function($scope,$state, $rootScope, ChallengeFactory, ChallengeFooterFactory){
+app.controller('ChallengeCodeCtrl', function($scope, $state, $rootScope, ChallengeFactory, ChallengeFooterFactory){
+
+	setTimeout(function (){
+		$scope.keyboardVis = window.cordova.plugins.Keyboard.isVisible;
+			console.log("cordova isvis", window.cordova.plugins.Keyboard.isVisible);
+			console.log("$scope keyboardVis", $scope.keyboardVis);
+
+
+		if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+			console.log("got in here");
+		  window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+		  window.cordova.plugins.Keyboard.disableScroll(true);
+		}
+	}, 500);
 
 	$scope.footerHotkeys = ChallengeFooterFactory.getHotkeys();
-
-	console.log("footerHotkeys, ", $scope.footerHotkeys);
 
 	//Challenge Submit
 	$scope.text = ChallengeFactory.getSubmission() || 'text';
@@ -53,7 +64,24 @@ app.controller('ChallengeCodeCtrl', function($scope,$state, $rootScope, Challeng
     myCodeMirror.on("change", function (myCodeMirror, changeObj){
     	$scope.updateText();
     });
+    // myCodeMirror.on("cursorActivity", function (myCodeMirror, changeObj){
+    // 	window.cordova.plugins.Keyboard.show();
+    // 	$scope.keyboardVis = true;
+    // 	$scope.$apply();
+    // });
+    window.addEventListener("native.keyboardshow", function (){
+    	$scope.keyboardVis = true;
+    	$scope.$apply();
+    });
+    window.addEventListener("native.keyboardhide", function (){
+    	$scope.keyboardVis = false;
+    	$scope.$apply();
+    });
 
+    // myCodeMirror.off("focus", function (myCodeMirror, changeObj){
+    // 	$scope.keyboardVis = $window.cordova.plugins.Keyboard.isVisible;
+    // });
+	
 
 	$scope.buttons = {
 		compile : 'Compile',
