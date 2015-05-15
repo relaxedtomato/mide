@@ -35,9 +35,11 @@ var app = angular.module('mide', ['ionic'])
   // Each state's controller can be found in controllers.js
   // if none of the above states are matched, use this as the fallback
   // $urlRouterProvider.otherwise('/challenge/view'); //TODO: Albert testing this route
+
   $urlRouterProvider.otherwise('/welcome'); // TODO: Richard testing this route
   //$urlRouterProvider.otherwise('/tab/challenge'); //TODO: Tony testing this route
   // $urlRouterProvider.otherwise('welcome');
+
 })
 //
 
@@ -51,7 +53,7 @@ var app = angular.module('mide', ['ionic'])
         //console.log('cl - destinationStateRequiresAuth','state.data',state.data,'state.data.auth',state.data.authenticate);
         return state.data && state.data.authenticate;
     };
-
+   
     //TODO: Need to make authentication more robust below does not follow FSG (et. al.)
     //TODO: Currently it is not checking the backend route router.get('/token')
     $rootScope.$on('$stateChangeStart', function (event,toState, toParams) {
@@ -75,6 +77,7 @@ var app = angular.module('mide', ['ionic'])
     });
   // $urlRouterProvider.otherwise('/signup'); // TODO: Richard testing this route
   //$urlRouterProvider.otherwise('/challenge/view'); //TODO: Tony testing this route
+
 });
 
 app.config(function($stateProvider){
@@ -103,11 +106,9 @@ app.controller('MainCtrl', function($rootScope,$scope, $ionicSideMenuDelegate, $
             template: ''
         });
     });
-
 });
 
 app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, AuthService, $rootScope){
-    //console.log('MenuCtrl');
 
     $scope.states = [
         {
@@ -121,6 +122,10 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, Auth
         {
           name : 'Chats',
           ref: function(){return 'chats';}
+        },
+        {
+          name : 'Exercism',
+          ref: function(){return 'exercism.view';}
         }
     ];
 

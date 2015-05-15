@@ -7675,6 +7675,6 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
-.ace_editor {
-  height: 540px;
-  font-family: 'monospace'; }
+.resultsContainer .CodeMirror {
+  border: 1px solid #eee;
+  height: auto; }
