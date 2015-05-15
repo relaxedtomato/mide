@@ -6,11 +6,6 @@ app.config(function($stateProvider){
 				templateUrl : 'features/challenge-compile/challenge-compile.html',
 				controller: 'ChallengeCompileCtrl'
 			}
-		},
-		onEnter : function(ChallengeFactory, $state){
-			if(ChallengeFactory.getSubmission().length === 0){
-				$state.go('challenge.view');
-			}
 		}
 	});
 });
