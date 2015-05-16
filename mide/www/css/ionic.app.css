@@ -7674,3 +7674,26 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+#modalView {
+  width: 90%;
+  height: 50%;
+  background: gray; }
+
+#slide {
+  border: 1px solid #de9a44;
+  width: 80px;
+  height: auto;
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: 15px; }
+
+#button {
+  background: none repeat scroll 0 0 transparent;
+  border: 1px solid #CC0001;
+  cursor: pointer;
+  height: 15px;
+  right: 10px;
+  top: 100px;
+  width: 80px; }

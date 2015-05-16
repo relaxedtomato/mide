@@ -15,16 +15,37 @@
                 {{buttons.dismiss | uppercase}}
             </button>
         </div>
-		
 
-     
 	</ion-content>
-       <ion-footer-bar class="bar-assertive" keyboard-attach ng-show="keyboardVis">
-           <div class="buttons" ng-repeat="hotkey in footerHotkeys">
+   
+   <ion-footer-bar class="bar-stable" keyboard-attach ng-show="keyboardVis">
+           <div class="buttons" ng-repeat="item in footerMenu">
+            <button class="button" ng-click="showPopup(item.data)">{{item.display}}</button>
+          </div>
+           <div>
+            <!-- <button class="button" ng-click="showPopup()">Open Modal</button> -->
+          </div>
+  </ion-footer-bar>
+
+  <!-- <script id="challenge-code-modal.html" type="text/ng-template">
+    <ion-modal-view id="modalView">
+      <ion-header-bar>
+         <h1 class="title">Code Snippets</h1>
+      </ion-header-bar>
+      <ion-content>
+        <div>
+          <div class="buttons" ng-repeat="hotkey in footerHotkeys">
             <button class="button" ng-click="insertFunc(hotkey.insertParam)">{{hotkey.display}}</button>
           </div>
 
-        </ion-footer-bar>
+          <button ng-click="insertSnippet()">Insert Snippet</button>
+          <button ng-click="closeModal()">Close Modal</button>
+        </div>
+      </ion-content>
+    </ion-modal-view>
+  </script> -->
+
+
 </ion-view>
 
 
