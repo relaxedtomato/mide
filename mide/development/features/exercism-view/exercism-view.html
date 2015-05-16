@@ -1,4 +1,5 @@
-<ion-view view-title="Exercism">
+<ion-view view-title="{{name | nameformat}}">
 	<ion-content>
+		<div ng-bind-html='markdown | marked'></div>
 	</ion-content>
 </ion-view>
