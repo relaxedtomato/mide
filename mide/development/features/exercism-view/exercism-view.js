@@ -10,6 +10,7 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ExercismViewCtrl', function($scope){
-	
+app.controller('ExercismViewCtrl', function($scope, ExercismFactory){
+	$scope.markdown = ExercismFactory.getMarkdown();
+	$scope.name = ExercismFactory.getName();
 });

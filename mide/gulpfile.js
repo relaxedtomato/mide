@@ -97,7 +97,7 @@ gulp.task('buildJSProduction', function () {
 // ------------------------------------------------------
 
 gulp.task('moveExercism', function () {
-    return gulp.src(['./development/exercism/**/*.spec.js'])
+    return gulp.src(['./development/exercism/**/*.spec.js', './development/exercism/**/*.md'])
         .pipe(gulp.dest('./www/exercism/'));
 });
 
