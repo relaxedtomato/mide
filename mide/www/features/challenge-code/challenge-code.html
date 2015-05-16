@@ -1,23 +1,30 @@
 <ion-view view-title="Challenge">
 	<ion-content>
-		
-        <pre>{{text}}</pre>
+
+               <pre>{{text}}</pre>
+        <pre>KeyboardVis: {{keyboardVis}}</pre>
         <div>
             <textarea id='code' ng-model='text'></textarea>
         </div>
+        <div style="margin-bottom:20px;">
+            <button class='button button-balanced' ng-click='compileChallenge(text)'>
+                {{buttons.compile | uppercase}}
+            </button>
 
-        <button class='button button-balanced' ng-click='compileChallenge(text)'>
-            {{buttons.compile | uppercase}}
-        </button>
+            <button class='button button-assertive' ng-click='dismissChallenge()'>
+                {{buttons.dismiss | uppercase}}
+            </button>
+        </div>
+		
 
-        <button class='button button-assertive' ng-click='dismissChallenge()'>
-            {{buttons.dismiss | uppercase}}
-        </button>
-
-        <ion-footer-bar class="bar-stable">
-          <div class="buttons" ng-repeat="hotkey in footerHotkeys">
+     
+	</ion-content>
+       <ion-footer-bar class="bar-assertive" keyboard-attach ng-show="keyboardVis">
+           <div class="buttons" ng-repeat="hotkey in footerHotkeys">
             <button class="button" ng-click="insertFunc(hotkey.insertParam)">{{hotkey.display}}</button>
           </div>
+
         </ion-footer-bar>
-	</ion-content>
 </ion-view>
+
+

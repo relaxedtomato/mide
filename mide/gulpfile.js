@@ -14,8 +14,8 @@ var runSeq = require('run-sequence');
 var babel = require('gulp-babel');
 var sourcemaps = require('gulp-sourcemaps');
 var ngAnnotate = require('gulp-ng-annotate');
-var karma = require('karma').server;
-var mocha = require('gulp-mocha');
+// var karma = require('karma').server;
+// var mocha = require('gulp-mocha');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -152,7 +152,7 @@ gulp.task('build', function () {
 });
 
 gulp.task('default', function(){
-  gulp.start('build', 'test');
+  gulp.start('build');
 
   gulp.watch('development/features/**', function(){
     runSeq('lintJS', 'buildJS', 'buildHTML');
@@ -160,9 +160,9 @@ gulp.task('default', function(){
 
   gulp.watch(paths.exercism, ['moveExercism']);
 
-  gulp.watch("development/tests/*", function (){
-       runSeq('test');
-    });
+  // gulp.watch("development/tests/*", function (){
+  //      runSeq('test');
+  //   });
 
   gulp.watch(paths.images, ['moveImages']);
 
