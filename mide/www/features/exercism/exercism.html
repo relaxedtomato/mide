@@ -10,17 +10,19 @@ navigation history that also transitions its views in and out.
     <ion-nav-view name="tab-view"></ion-nav-view>
   </ion-tab>
 
+  <!-- Test Tab -->
+  <ion-tab title="Test" icon-off="ion-ios-paper-outline" icon-on="ion-ios-paper" href="#/exercism/test">
+    <ion-nav-view name="tab-test"></ion-nav-view>
+  </ion-tab>
+
   <!-- Code Tab -->
   <ion-tab title="Code" icon-off="ion-ios-compose-outline" icon-on="ion-ios-compose" href="#/exercism/code">
     <ion-nav-view name="tab-code"></ion-nav-view>
   </ion-tab>
 
   <!-- Compile Tab -->
-  <ion-tab title="Compile" icon-off="ion-ios-paper-outline" icon-on="ion-ios-paper" href="#/exercism/compile">
+  <ion-tab title="Compile" icon-off="ion-code-working" icon-on="ion-code-working" href="#/exercism/compile">
     <ion-nav-view name="tab-compile"></ion-nav-view>
   </ion-tab>
-
-  <script id='exercismTests'></script>
-  <script id='exercismCode'></script>
 
 </ion-tabs>
