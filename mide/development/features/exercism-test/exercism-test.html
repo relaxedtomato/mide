@@ -1,7 +1,8 @@
 <ion-view view-title="{{name | nameformat}}">
 	<ion-content>
+		<pre>{{test}}</pre>
 		<div class='editContainer'>
-            <textarea id='exercism-test' ng-model='test' cmedit></textarea>
+            <textarea id='exercism-test' ng-model='test' updatefunc='updatefunc' cmedit></textarea>
         </div>
 	</ion-content>
 </ion-view>
