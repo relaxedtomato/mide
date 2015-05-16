@@ -1,6 +1,6 @@
 <ion-view view-title="{{name | nameformat}}">
 	<ion-content>
-		<pre>{{text}}</pre>
+		<pre>{{code}}</pre>
 		<div class='editContainer'>
             <textarea id='exercism-code' ng-model='code' cmedit></textarea>
         </div>
@@ -8,4 +8,8 @@
             COMPILE
         </button>
 	</ion-content>
+
+	<ion-footer-bar codekeyboard>
+		<h1>test</h1>
+	</ion-footer-bar>
 </ion-view>
