@@ -2,12 +2,14 @@ app.directive('cmedit', function(){
 	return {
 		restrict : 'A',
 		scope: {
-			ngModel : '='
+			ngModel : '=',
+			updatefunc: '='
 		},
 		link : function(scope, element, attribute){
 			var updateText = function(){
-				scope.ngModel = myCodeMirror.getValue();
-				console.log(myCodeMirror.getValue());
+				var newValue = myCodeMirror.getValue();
+				scope.ngModel = newValue;
+				scope.updatefunc(newValue);
 				scope.$apply();
 			};
 			//initialize CodeMirror

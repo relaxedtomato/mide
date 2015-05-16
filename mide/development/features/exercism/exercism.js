@@ -4,21 +4,21 @@ app.config(function($stateProvider){
 		abstract : true,
 		resolve : {
 			markdown : function(AvailableExercises, ExercismFactory, $state){
-				var exercise;
+
 				if(ExercismFactory.getTestScript().length === 0) {
-					exercise = AvailableExercises.getRandomExercise();
+					var exercise = AvailableExercises.getRandomExercise();
 					ExercismFactory.setName(exercise.name);
 					return ExercismFactory.getExternalScript(exercise.link).then(function(data){
 						return ExercismFactory.getExternalMd(exercise.mdLink);
 					});
 				}
-				else return Exercism.getMarkdown();
+				return;
 			}
 		}
 	});
 });
 
-app.factory('ExercismFactory', function($http){
+app.factory('ExercismFactory', function($http, $rootScope){
 	var name = '';
 	var test = '';
 	var code = '';
@@ -42,9 +42,11 @@ app.factory('ExercismFactory', function($http){
 		},
 		setTestScript : function(test){
 			test = test;
+			$rootScope.$broadcast('testChange', {test : test});
 		},
 		setCodeScript : function (code){
 			code = code;
+			$rootScope.$broadcast('codeChange', {code : code});
 		},
 		getTestScript : function(){
 			return test;

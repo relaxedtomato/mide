@@ -14,7 +14,8 @@ app.controller('ExercismCodeCtrl', function($scope, ExercismFactory){
 	$scope.name = ExercismFactory.getName();
 	$scope.code = ExercismFactory.getCodeScript();
 
-	$scope.$watch('code', function(newValue, oldValue){
+	//passing this update function so that on text change in the directive the factory will be alerted
+	$scope.updatefunc = function(newValue){
 		ExercismFactory.setCodeScript(newValue);
-	});
+	};
 });
