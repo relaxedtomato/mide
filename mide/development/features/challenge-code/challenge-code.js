@@ -16,7 +16,8 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ChallengeCodeCtrl', function($scope, $state, $rootScope, ChallengeFactory, ChallengeFooterFactory, $ionicModal, $ionicPopup){
+
+app.controller('ChallengeCodeCtrl', function($scope, $state, $rootScope, ChallengeFactory, ChallengeFooterFactory, $ionicPopup){
 
 	setTimeout(function (){
 		$scope.keyboardVis = window.cordova.plugins.Keyboard.isVisible;
@@ -28,12 +29,10 @@ app.controller('ChallengeCodeCtrl', function($scope, $state, $rootScope, Challen
 		  window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 		  window.cordova.plugins.Keyboard.disableScroll(true);
 		}
-	}, 500);
+	}, 50);
 
-	// $scope.footerHotkeys = ChallengeFooterFactory.getHotkeys();
 	$scope.footerMenu = ChallengeFooterFactory.getFooterMenu();
 
-	// console.log('footerMenu',$scope.footerMenu);
 
 	//Challenge Submit
 	$scope.text = ChallengeFactory.getSubmission() || 'text';
@@ -68,11 +67,7 @@ app.controller('ChallengeCodeCtrl', function($scope, $state, $rootScope, Challen
     myCodeMirror.on("change", function (myCodeMirror, changeObj){
     	$scope.updateText();
     });
-    // myCodeMirror.on("cursorActivity", function (myCodeMirror, changeObj){
-    // 	window.cordova.plugins.Keyboard.show();
-    // 	$scope.keyboardVis = true;
-    // 	$scope.$apply();
-    // });
+
     window.addEventListener("native.keyboardshow", function (){
     	$scope.keyboardVis = true;
     	$scope.$apply();
@@ -82,91 +77,27 @@ app.controller('ChallengeCodeCtrl', function($scope, $state, $rootScope, Challen
     	$scope.$apply();
     });
 
-    // myCodeMirror.off("focus", function (myCodeMirror, changeObj){
-    // 	$scope.keyboardVis = $window.cordova.plugins.Keyboard.isVisible;
-    // });
-
 	$scope.buttons = {
 		compile : 'Compile',
 		dismiss : 'Dismiss'
 	};
 
-	// $rootScope.$on('problemUpdated', function(e){
-	// 	$scope.projectId = ChallengeFactory.getProblem().session.projectId;
-	// 	$scope.solutionId = ChallengeFactory.getProblem().session.solutionId;
-	// 	$scope.text = ChallengeFactory.getProblem().session.setup;
-	// });
-	// $scope.popUp = function(){
-	// 	// $scope.compileChallenge = function(text){
-	// 		// ChallengeFactory.setSubmission('hello world');
-	// 		// $state.go('challenge.compile');
-	// 	// };
-
-	// };
-	
-
-	// $scope.dismissChallenge = function(){
-	// 	var id = 'A9QKk6SmRpDcriU-HMQr';
-	// 	ChallengeFactory.getChallenge(id).then(function(data){
-	// 		$state.go('challenge.view');
-	// 	});
-	// };
 	$scope.keys = [];
+
 	$scope.showPopup = function(item) {
 		console.log('keys',item);
 		$scope.data = {};
-		$scope.keys = item;
-		
+		$scope.keys = item.data;
 
-		  // An elaborate, custom popup
-		var myPopup = $ionicPopup.show({
-		templateUrl: 'features/challenge-code/challenge-syntax.html',
-		title: 'Select Something',
-		subTitle: 'Please use normal things',
-		scope: $scope,
-		buttons: [
-			  { text: 'Cancel' },
-			  {
-			    text: '<b>Save</b>',
-			    type: 'button-positive',
-			    onTap: function(e) {
-			      if (!$scope.data.wifi) {
-			        //don't allow the user to close unless he enters wifi password
-			        e.preventDefault();
-			      } else {
-			        return $scope.data.wifi;
-			      }
-			    }
-			  }
-			]
-		});
+	  // An elaborate, custom popup
+	var myPopup = $ionicPopup.show({
+	templateUrl: 'features/challenge-code/challenge-syntax.html',
+	title: item.display,
+	scope: $scope,
+	buttons: [
+		  { text: '<b>Done</b>' }
+		]
+	});
 	};
-
-	//modal testing
-	// $ionicModal.fromTemplateUrl('challenge-code-modal.html', {
-	//   scope: $scope,
-	//   animation: 'slide-in-up'
-	// }).then(function(modal) {
-	// 	console.log("into the then");
-	//   $scope.modal = modal;
-	// });
-	// $scope.openModal = function() {
-	//   $scope.modal.show();
-	// };
-	// $scope.closeModal = function() {
-	//   $scope.modal.hide();
-	// };
-	// //Cleanup the modal when we're done with it!
-	// $scope.$on('$destroy', function() {
-	//   $scope.modal.remove();
-	// });
-	// // Execute action on hide modal
-	// $scope.$on('modal.hidden', function() {
-	//   // Execute action
-	// });
-	// // Execute action on remove modal
-	// $scope.$on('modal.removed', function() {
-	//   // Execute action
-	// });
 
 });
