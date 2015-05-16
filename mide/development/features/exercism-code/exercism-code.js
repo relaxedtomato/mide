@@ -10,16 +10,11 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ExercismCodeCtrl', function($scope){
+app.controller('ExercismCodeCtrl', function($scope, ExercismFactory){
+	$scope.name = ExercismFactory.getName();
+	$scope.code = ExercismFactory.getCodeScript();
 
-	//initialize CodeMirror
-	var cmExercismCodeMirror = CodeMirror.fromTextArea(document.getElementById('exercism-code'), {
-		lineNumbers : true,
-		mode: 'javascript',
-		autofocus : true,
-		theme : 'twilight',
-		lineWrapping: true
+	$scope.$watch('code', function(newValue, oldValue){
+		ExercismFactory.setCodeScript(newValue);
 	});
-	$scope.text = '';
-
 });

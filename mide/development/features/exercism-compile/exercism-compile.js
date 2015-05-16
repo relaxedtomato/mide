@@ -10,10 +10,8 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ExercismCompileCtrl', function($scope){
-	// document.getElementById('jasmine').appendChild(document.getElementsByClassName('jasmine_html-reporter'));
-
-	$('div.jasmine_html-reporter').load(function(){
-		console.log($(this));
-	});
+app.controller('ExercismCompileCtrl', function($scope, ExercismFactory){
+	$scope.name = ExercismFactory.getName();
+	$scope.test = ExercismFactory.getTestScript();
+	$scope.code = ExercismFactory.getCodeScript();
 });
