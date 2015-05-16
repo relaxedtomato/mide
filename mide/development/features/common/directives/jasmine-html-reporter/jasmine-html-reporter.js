@@ -1,13 +1,11 @@
 app.directive('jhr', function(JasmineReporter){
 	return {
 		restrict : 'E',
-		scope : {
-			test : '='
-		},
+		transclude: true,
 		templateUrl : 'features/common/directives/jasmine-html-reporter/jasmine-html-reporter.html',
 		link : function (scope, element, attribute){
 			JasmineReporter.createJasmineReporter(element[0]);
-			console.log(element);
+			console.log()//children[0].env.execute();
 		}
 	};
 });
@@ -313,11 +311,15 @@ app.factory('JasmineReporter', function(){
 		  var currentWindowOnload = window.onload;
 
 		  (function() {
-		    if (currentWindowOnload) {
-		      currentWindowOnload();
-		    }
-		    htmlReporter.initialize();
-		    env.execute();
+		    (function(){
+		    	if (currentWindowOnload) {
+			      currentWindowOnload();
+			    }
+			    htmlReporter.initialize();
+
+			    env.execute();
+			})();
+		    console.log(env.topSuite().children);
 		  })();
 
 		  /**
