@@ -38,7 +38,7 @@ var app = angular.module('mide', ['ionic'])
   // $urlRouterProvider.otherwise('/challenge/view'); //TODO: Albert testing this route
 
   $urlRouterProvider.otherwise('/welcome'); // TODO: Richard testing this route
-  //$urlRouterProvider.otherwise('/tab/challenge'); //TODO: Tony testing this route
+  //$urlRouterProvider.otherwise('challenge.view'); //TODO: Tony testing this route
   // $urlRouterProvider.otherwise('welcome');
 
 })
