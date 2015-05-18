@@ -17,10 +17,10 @@ module.exports = function (app) {
     app.use(bodyParser.urlencoded({ extended: true }));
 
     //TODO: Fix for Production
-    //if (process.env.NODE_ENV === 'production') {
-    //    app.use(expressJwt({secret:SESSION_SECRET}).unless({path: ['/api/user/login','/api/user/signup']}));
-    //} else {
-    //    //do nothing
-    //}
+    if (process.env.NODE_ENV === 'production') {
+        app.use(expressJwt({secret:SESSION_SECRET}).unless({path: ['/api/user/login','/api/user/signup']}));
+    } else {
+        //do nothing
+    }
 
 };
