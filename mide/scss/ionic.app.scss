@@ -38,6 +38,65 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 div.jasmine_html-reporter {
+	font-size: 12px;
+	font-family: Monaco, "Lucida Console", monospace;
+	line-height: 15px;
+	.bar {
+		font-size : 18px;
+	}
+
+	.summary {
+		li.passed{
+			font-size: 14px;
+			p {
+				color: #007069;
+				line-height: 16px;
+			}
+		}
+		li.failed {
+			font-size: 14px;
+			p {
+				color: #ca3a11;
+				line-height: 16px;
+			}
+		}
+		li.empty {
+			font-size: 14px;
+			p {
+				color: #ba9d37;
+				line-height: 16px;
+			}
+		}
+		li.pending {
+			font-size: 14px;
+
+			p {
+				color: #ba9d37;
+				line-height: 16px;
+			}
+		}
+		li.disabled {
+			font-size: 14px;
+			p {
+				color: #bababa;
+				line-height: 16px;
+			}
+		}
+	}
+	.failures {
+		.description {
+			font-size: 14px;
+			line-height:20px;
+		}
+	}
+	.suite {
+		.suite-detail {
+			p {
+				font-size: 16px;
+				line-height: 18px;
+			}
+		}
+	}
 	.alert {
 		height: 35px;
 	}

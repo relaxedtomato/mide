@@ -31,13 +31,23 @@ app.directive('jasmine', function(JasmineReporter){
 				});
 			}
 
+			scope.summaryShowing = true;
+
+			scope.showSummary = function(){
+				if(!scope.summaryShowing) scope.summaryShowing = !scope.summaryShowing;
+			};
+			scope.showFailures = function(){
+				if(scope.summaryShowing) scope.summaryShowing = !scope.summaryShowing;
+			};
+
+
 			scope.$watch('suites', function(){
-				console.log('there is a change in the suites');
 				if(scope.suites){
 					var suitesSpecs = scope.suites.map(function(el){
 						return el.specs;
 					});
 					scope.specsOverview = flattenRemoveDupes(suitesSpecs, "id");
+					console.log(scope.specsOverview);
 				}
 			});
 
