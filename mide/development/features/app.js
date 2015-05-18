@@ -26,8 +26,7 @@ var app = angular.module('mide', ['ionic'])
 
 //TODO:This is needed to set to access the proxy url that will then in the ionic.project file redirect it to the correct URL
 .constant('ApiEndpoint', {
-  url : '/api',
-  session: '/session'
+  url : '/api'
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -132,10 +131,14 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, Auth
     ];
 
     $scope.toggleMenuShow = function(){
+        //console.log('AuthService',AuthService.isAuthenticated())
+        //console.log('toggleMenuShow',AuthService.isAuthenticated());
         return AuthService.isAuthenticated();
+        //return true;
     };
 
     $rootScope.$on('Auth',function(){
+       //console.log('auth');
        $scope.toggleMenuShow();
     });
 
