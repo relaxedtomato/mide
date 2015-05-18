@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('mide', ['ionic'])
+var app = angular.module('mide', ['ionic', 'ionic.utils'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -26,8 +26,7 @@ var app = angular.module('mide', ['ionic'])
 
 //TODO:This is needed to set to access the proxy url that will then in the ionic.project file redirect it to the correct URL
 .constant('ApiEndpoint', {
-  url : '/api',
-  session: '/session'
+  url : 'https://protected-reaches-5946.herokuapp.com/api'
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -39,7 +38,7 @@ var app = angular.module('mide', ['ionic'])
   // $urlRouterProvider.otherwise('/challenge/view'); //TODO: Albert testing this route
 
   $urlRouterProvider.otherwise('/welcome'); // TODO: Richard testing this route
-  //$urlRouterProvider.otherwise('/tab/challenge'); //TODO: Tony testing this route
+  //$urlRouterProvider.otherwise('challenge.view'); //TODO: Tony testing this route
   // $urlRouterProvider.otherwise('welcome');
 
 })
@@ -132,10 +131,14 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, Auth
     ];
 
     $scope.toggleMenuShow = function(){
-        return AuthService.isAuthenticated();
+        //console.log('AuthService',AuthService.isAuthenticated())
+        //console.log('toggleMenuShow',AuthService.isAuthenticated());
+        //TODO: return AuthService.isAuthenticated();
+        return true;
     };
 
     $rootScope.$on('Auth',function(){
+       //console.log('auth');
        $scope.toggleMenuShow();
     });
 

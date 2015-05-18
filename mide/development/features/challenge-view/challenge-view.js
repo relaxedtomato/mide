@@ -20,9 +20,12 @@ app.controller('ChallengeViewCtrl', function($scope, ChallengeFactory, $state, $
 	//Challenge View
 	$scope.challenge = ChallengeFactory.getProblem() || "Test";
 
+	$scope.toggleMenuShow();
+
 	// $scope.$on('problemUpdated', function(e){
 	// 	$scope.challenge = ChallengeFactory.getProblem();
 	// });
 
 
+	
 });
