@@ -3,11 +3,11 @@ var path = require('path');
 var chalk = require('chalk');
 var util = require('util');
 
-var rootPath = path.join(__dirname, '../../');
+var rootPath = path.join(__dirname, '../');
 var indexPath = path.join(rootPath, './app/views/index.html');
 //var faviconPath = path.join(rootPath, './app/views/favicon.ico');
 
-var env = require(path.join(rootPath, './env'));
+var env = require(path.join(rootPath, '../env'));
 
 var logMiddleware = function (req, res, next) {
     util.log(('---NEW REQUEST---'));
