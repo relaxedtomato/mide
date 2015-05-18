@@ -27,4 +27,5 @@ app.controller('ChallengeViewCtrl', function($scope, ChallengeFactory, $state, $
 	// });
 
 
+	
 });
