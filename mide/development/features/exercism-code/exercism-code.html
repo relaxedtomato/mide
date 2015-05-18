@@ -2,9 +2,9 @@
 	<ion-content>
 		<pre>{{text}}</pre>
 		<div class='editContainer'>
-            <textarea id='exercism-code' ng-model='code' updatefunc='updatefunc' cmedit></textarea>
+            <textarea id='exercism-code' ng-model='code' cmedit></textarea>
         </div>
-        <button class='button button-balanced'>
+        <button class='button button-balanced' ng-click='compile(code)'>
             COMPILE
         </button>
 	</ion-content>
