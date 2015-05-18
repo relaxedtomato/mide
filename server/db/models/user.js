@@ -11,10 +11,11 @@ var schemaOptions = {
 
 //TODO: Add required for userSchema after testing
 var userSchema = new mongoose.Schema({
-    userName : {type : String, required:true},
+    userName : {type : String, required:true, unique:true},
     email: {
         type: String,
-        required:true
+        required:true,
+        unique:true
     },
     apiKey: {type: String, required:true},
     password: {

@@ -27,9 +27,10 @@ app.controller('SignUpCtrl',function($rootScope, $http, $scope, $state, AuthServ
                         $scope.data = {};
                         $scope.states.pop(); //TODO: Find a better way to remove the Logout link, instead of pop
                         $state.go('signup');
+                        $rootScope.$broadcast('Auth');
                     }
                 });
-                $state.go('challenge.view');
+                $state.go('exercism.view');
             })
             .catch(function(err){
                 $scope.error = 'Signup Invalid';
