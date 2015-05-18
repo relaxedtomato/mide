@@ -26,7 +26,7 @@ var app = angular.module('mide', ['ionic'])
 
 //TODO:This is needed to set to access the proxy url that will then in the ionic.project file redirect it to the correct URL
 .constant('ApiEndpoint', {
-  url : '/api'
+  url : 'https://protected-reaches-5946.herokuapp.com/api'
 })
 
 .config(function($stateProvider, $urlRouterProvider) {

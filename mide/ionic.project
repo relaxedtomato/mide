@@ -1,10 +1,4 @@
 {
   "name": "mide",
-  "app_id": "462d155e",
-  "proxies": [
-    {
-      "path": "/api",
-      "proxyUrl": "http://localhost:9000/api"
-    }
-  ]
+  "app_id": "96e6edef"
 }
