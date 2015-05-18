@@ -133,8 +133,8 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, Auth
     $scope.toggleMenuShow = function(){
         //console.log('AuthService',AuthService.isAuthenticated())
         //console.log('toggleMenuShow',AuthService.isAuthenticated());
-        return AuthService.isAuthenticated();
-        //return true;
+        //TODO: return AuthService.isAuthenticated();
+        return true;
     };
 
     $rootScope.$on('Auth',function(){
