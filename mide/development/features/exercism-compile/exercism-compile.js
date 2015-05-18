@@ -6,6 +6,9 @@ app.config(function($stateProvider){
 				templateUrl : 'features/exercism-compile/exercism-compile.html',
 				controller: 'ExercismCompileCtrl'
 			}
+		},
+		onEnter : function(){
+			if(window.jasmine) window.jasmine.getEnv().execute();
 		}
 	});
 });
