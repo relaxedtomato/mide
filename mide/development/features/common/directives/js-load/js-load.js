@@ -16,6 +16,7 @@ app.directive('jsload', function(){
 		link : function(scope, element, attributes){
 			scope.$watch('text', function(text){
 				updateScript(element, text);
+				// document.getElementById(scope.name).innerHTML = text;
 			});
 		}
 	};

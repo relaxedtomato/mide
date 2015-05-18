@@ -10,12 +10,13 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ExercismCodeCtrl', function($scope, ExercismFactory){
+app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state){
 	$scope.name = ExercismFactory.getName();
 	$scope.code = ExercismFactory.getCodeScript();
 
 	//passing this update function so that on text change in the directive the factory will be alerted
-	$scope.updatefunc = function(newValue){
-		ExercismFactory.setCodeScript(newValue);
+	$scope.compile = function(code){
+		ExercismFactory.setCodeScript(code);
+		$state.go('exercism.compile');
 	};
 });
