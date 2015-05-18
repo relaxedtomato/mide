@@ -3,8 +3,9 @@
 
                <pre>{{text}}</pre>
         <pre>KeyboardVis: {{keyboardVis}}</pre>
+
         <div>
-            <textarea id='code' ng-model='text'></textarea>
+            <textarea id='code' ng-model='text' cmedit></textarea>
         </div>
         <div style="margin-bottom:20px;">
             <button class='button button-balanced' ng-click='compileChallenge(text)'>
