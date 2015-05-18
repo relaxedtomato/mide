@@ -1,14 +1,4 @@
 {
   "name": "mide",
-  "app_id": "bab1754b",
-  "proxies": [
-    {
-      "path": "/api",
-      "proxyUrl": "http://localhost:9000/api"
-    },
-    {
-      "path": "/session",
-      "proxyUrl": "http://localhost:9000/session"
-    }
-  ]
+  "app_id": ""
 }

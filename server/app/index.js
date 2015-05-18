@@ -1,6 +1,7 @@
 'use strict';
 var path = require('path');
 var express = require('express');
+var cors = require('cors');
 var app = express();
 module.exports = app;
 
@@ -17,6 +18,7 @@ require('./configure')(app);
 
 // Routes that will be accessed via AJAX should be prepended with
 // /api so they are isolated from our GET /* wildcard.
+app.use(cors());
 app.use('/api', require('./routes'));
 
 
