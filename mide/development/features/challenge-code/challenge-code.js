@@ -17,18 +17,18 @@ app.config(function($stateProvider){
 });
 
 
-app.controller('ChallengeCodeCtrl', function($scope, $state, $rootScope, ChallengeFactory, ChallengeFooterFactory, $ionicPopup){
+app.controller('ChallengeCodeCtrl', function($scope, $state, $rootScope, ChallengeFactory, ChallengeFooterFactory, $ionicPopup, $localstorage){
 
 	setTimeout(function (){
-		$scope.keyboardVis = window.cordova.plugins.Keyboard.isVisible;
-			console.log("cordova isvis", window.cordova.plugins.Keyboard.isVisible);
-			console.log("$scope keyboardVis", $scope.keyboardVis);
+		// $scope.keyboardVis = window.cordova.plugins.Keyboard.isVisible;
+		// 	console.log("cordova isvis", window.cordova.plugins.Keyboard.isVisible);
+		// 	console.log("$scope keyboardVis", $scope.keyboardVis);
 
 
-		if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-		  window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-		  window.cordova.plugins.Keyboard.disableScroll(true);
-		}
+		// if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+		//   window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+		//   window.cordova.plugins.Keyboard.disableScroll(true);
+		// }
 	}, 50);
 
 	$scope.footerMenu = ChallengeFooterFactory.getFooterMenu();
@@ -98,6 +98,18 @@ app.controller('ChallengeCodeCtrl', function($scope, $state, $rootScope, Challen
 		  { text: '<b>Done</b>' }
 		]
 	});
+	};
+
+	$scope.saveChallenge = function(){
+		$localstorage.set("codeContents", $scope.text);
+	};
+
+	$scope.getSaved = function(){
+		console.log("entered getsaved func");
+		$scope.text = $localstorage.get("codeContents");
+		if(!$scope.$$phase) {
+		  $scope.$apply();
+		}
 	};
 
 });

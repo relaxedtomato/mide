@@ -5,7 +5,7 @@ app.directive('codekeyboard', function($compile){
 			ngModel : '=' //links any ngmodel on the element
 		},
 		link : function(scope, element, attribute){
-			// attribute.$set("class", "bar-stable");
+			element.$set("class", "bar-stable");
 			
 		}
 	};
