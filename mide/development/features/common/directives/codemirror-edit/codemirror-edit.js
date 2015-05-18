@@ -9,7 +9,7 @@ app.directive('cmedit', function(){
 			var updateText = function(){
 				var newValue = myCodeMirror.getValue();
 				scope.ngModel = newValue;
-				scope.updatefunc(newValue);
+				if(scope.updatefunc) scope.updatefunc(newValue);
 				scope.$apply();
 			};
 			//initialize CodeMirror

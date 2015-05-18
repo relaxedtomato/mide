@@ -75,13 +75,19 @@ app.factory('AvailableExercises', function(){
 		'binary-search-tree',
 		'bob',
 		'bracket-push',
-		'circulate-buffer',
+		'circular-buffer',
 		'clock',
 		'crypto-square',
 		'custom-set',
 		'difference-of-squares',
 		'etl',
-		'food-chain'
+		'food-chain',
+		'gigasecond',
+		'grade-school',
+		'grains',
+		'hamming',
+		'hello-world',
+		'hexadecimal'
 	];
 
 	var generateLink = function(name){
