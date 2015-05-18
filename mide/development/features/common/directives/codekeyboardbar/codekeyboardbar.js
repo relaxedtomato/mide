@@ -6,7 +6,7 @@ app.directive('codekeyboard', function($compile){
 		},
 		link : function(scope, element, attribute){
 			// attribute.$set("class", "bar-stable");
-			attribute.$set("keyboard-attach");
+			
 		}
 	};
 });
