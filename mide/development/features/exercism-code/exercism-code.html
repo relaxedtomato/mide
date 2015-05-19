@@ -7,5 +7,13 @@
         <button class='button button-balanced' ng-click='compile(code.text)'>
             COMPILE
         </button>
+        <button class='button button-balanced' ng-click='showCm(codeMirror)'>
+            show my codemirror
+        </button>
+        <pre>dis keys on scope{{keys | json}}</pre>
 	</ion-content>
+
+	<ion-footer-bar codekeyboard>
+		<snippetbuttons></snippetbuttons>
+	</ion-footer-bar>
 </ion-view>

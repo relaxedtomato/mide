@@ -8,8 +8,9 @@ app.directive('cmedit', function(){
 				lineNumbers : true,
 				mode: 'javascript',
 				autofocus : true,
-				theme : 'elegant',
-				lineWrapping: true
+				theme : 'twilight',
+				lineWrapping: true,
+				scrollbarStyle: "overlay"
 			});
 			ngModelCtrl.$render = function(){
 				myCodeMirror.setValue(ngModelCtrl.$viewValue || '');
