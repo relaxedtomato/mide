@@ -1,10 +1,8 @@
 app.directive('cmread', function(){
 	return {
 		restrict : 'A',
-		scope: {
-			ngModel : '='
-		},
-		link : function(scope, element, attribute){
+		require: 'ngModel',
+		link : function(scope, element, attribute, ngModelCtrl){
 			//initialize CodeMirror
 			var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('compile'), {
 				readOnly : 'nocursor',
@@ -14,7 +12,9 @@ app.directive('cmread', function(){
 				lineWrapping: true
 			});
 
-			myCodeMirror.setValue(scope.ngModel);
+			ngModelCtrl.$render = function(){
+				myCodeMirror.setValue(ngModelCtrl.$viewValue || '');
+			};
 		}
 	};
 });
