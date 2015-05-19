@@ -7712,6 +7712,8 @@ div.jasmine_html-reporter {
   div.jasmine_html-reporter .failures .description {
     font-size: 14px;
     line-height: 20px; }
+  div.jasmine_html-reporter .failures .spec-detail .messages .stack-trace {
+    overflow: scroll; }
   div.jasmine_html-reporter .suite .suite-detail p {
     font-size: 16px;
     line-height: 18px; }
