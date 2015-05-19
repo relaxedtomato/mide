@@ -17,7 +17,7 @@ app.directive('cmedit', function(){
 				lineNumbers : true,
 				mode: 'javascript',
 				autofocus : true,
-				theme : 'twilight',
+				theme : 'elegant',
 				lineWrapping: true
 			});
 			myCodeMirror.setValue(scope.ngModel);

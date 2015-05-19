@@ -21,9 +21,11 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
-// .scroll {
-// 	height:100%;
-// }
+.CodeMirror {
+  border: 1px solid #eee;
+  height: auto;
+  overflow:scroll;
+}
 
 .resultsContainer .CodeMirror {
 	height : auto;
