@@ -1,13 +1,5 @@
 <div id='jasmineContainer'>
 	<ng-transclude></ng-transclude>
-	Suite Info - {{suiteInfo}}
-	<pre>Suite Started: {{suiteStarted}}</pre>
-	Spec Started - {{specStarted}}
-	<pre>SpecDone: {{specDone}}</pre>
-	Suite Done - {{suiteDone}}
-	<h1>Suites</h1>
-	{{suites}}
-
 	<div class='jasmine_html-reporter'>
 		<div class='banner'>
 			<a class='title' href='http://jasmine.github.io/' target='_blank'></a>
@@ -19,20 +11,28 @@
 		</ul>
 
 		<div class='alert'>
-			<span class='duration'>finished in 0.011s</span>
-			<span class='bar passed'>2 specs, 0 failures</span>
+			<!-- <span class='bar passed'>{{specsOverview | length}} specs, {{specsOverview | criteria: 'status':'failed' | length }} failures</span> -->
+			<span class='{{specsOverview | filter: {"status":"failed"} | length | bool: ">0":"bar failed":"bar passed"}}'><a ng-click='showSummary()'>{{specsOverview | length}} specs</a>, <a ng-click='showFailures()'>{{specsOverview | filter: {'status':'failed'} | length }} failures</a></span>
 		</div>
 
 		<div class='results'>
-			<div class='failures'></div>
-			<div class='summary'>
+			<div class='failures' ng-hide='summaryShowing'>
+				<div class='spec-detail failed' ng-repeat='spec in specsOverview | filter:{"status" : "failed"}'>
+					<p class='description'>{{spec.fullName}}</p>
+					<div class='messages'>
+						<div class='result-message fail'>{{spec.failedExpectations[0].message}}</div>
+						<div class='stack-trace'>{{spec.failedExpectations[0].stack}}</div>
+					</div>
+				</div>
+			</div>
+			<div class='summary' ng-show='summaryShowing'>
 				<ul ng-repeat='suite in suites'class='suite' id='{{suite.id | append: "suite-"}}'>
 					<li class='suite-detail'>
-						{{suite.description}}
+						<p>{{suite.description}}<p>
 					</li>
 					<ul class='specs'>
-						<li ng-repeat='spec in suite.specs'class='{{spec.status' id='{{spec.id | append: "spec-"}}'>
-							{{spec.description}}
+						<li ng-repeat='spec in suite.specs'class='{{spec.status}}' id='{{spec.id | append: "spec-"}}'>
+							<p>{{spec.description}}<p>
 						</li>
 					</ul>
 				</ul>
@@ -40,11 +40,21 @@
 		</div>
 	</div>
 
+	Suite Info - {{suiteInfo}}
+	<pre>Suite Started: {{suiteStarted}}</pre>
+	Spec Started - {{specStarted}}
+	<pre>SpecDone: {{specDone}}</pre>
+	Suite Done - {{suiteDone}}
+	<h1>Suites</h1>
+	{{suites}}
+
+
 	<!-- Below is a template -->
 	<!-- <div class='jasmine_html-reporter'>
 		<div class='banner'>
 			<a class='title' href='http://jasmine.github.io/' target='_blank'></a>
 			<span class='version'>2.3.0</span>
+			<span class='duration'>finished in 0.05s</span> //from testem
 		</div>
 
 		<ul class='symbol-summary'>
@@ -56,6 +66,11 @@
 		<div class='alert'>
 			<span class='duration'>finished in 0.011s</span>
 			<span class='bar passed'>2 specs, 0 failures</span>
+			<span class='failingAlert bar'>Failing 7 specs</span> //from testem
+			<span class='resultsMenu bar'> //from testem
+				<a class='summaryMenuItem'>7 specs</a>
+				<a class='detailsMenuItem'>7 failing</a>
+			</span>
 		</div>
 
 		<div class='results'>
@@ -81,7 +96,17 @@
 						</li>
 					</ul>
 				</ul>
+			</div>
+			<div class='details'> //from testem
+				<div class='specDetail failed'>
+					<a class='description'>it_description</a>
+					<div class='messages'>
+						<div class='resultMessage fail'>ReferenceError: rMapKeys is not defined</div>
+						<div class='stackTrace'>
 
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div> -->

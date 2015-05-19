@@ -7683,5 +7683,44 @@ a.button {
 .resultsContainer .CodeMirror {
   height: auto; }
 
-div.jasmine_html-reporter .alert {
-  height: 35px; }
+div.jasmine_html-reporter {
+  font-size: 12px;
+  font-family: Monaco, "Lucida Console", monospace;
+  line-height: 15px; }
+  div.jasmine_html-reporter .bar {
+    font-size: 18px; }
+  div.jasmine_html-reporter .summary li.passed {
+    font-size: 14px; }
+    div.jasmine_html-reporter .summary li.passed p {
+      color: #007069;
+      line-height: 16px; }
+  div.jasmine_html-reporter .summary li.failed {
+    font-size: 14px; }
+    div.jasmine_html-reporter .summary li.failed p {
+      color: #ca3a11;
+      line-height: 16px; }
+  div.jasmine_html-reporter .summary li.empty {
+    font-size: 14px; }
+    div.jasmine_html-reporter .summary li.empty p {
+      color: #ba9d37;
+      line-height: 16px; }
+  div.jasmine_html-reporter .summary li.pending {
+    font-size: 14px; }
+    div.jasmine_html-reporter .summary li.pending p {
+      color: #ba9d37;
+      line-height: 16px; }
+  div.jasmine_html-reporter .summary li.disabled {
+    font-size: 14px; }
+    div.jasmine_html-reporter .summary li.disabled p {
+      color: #bababa;
+      line-height: 16px; }
+  div.jasmine_html-reporter .failures .description {
+    font-size: 14px;
+    line-height: 20px; }
+  div.jasmine_html-reporter .failures .spec-detail .messages .stack-trace {
+    overflow: scroll; }
+  div.jasmine_html-reporter .suite .suite-detail p {
+    font-size: 16px;
+    line-height: 18px; }
+  div.jasmine_html-reporter .alert {
+    height: 35px; }

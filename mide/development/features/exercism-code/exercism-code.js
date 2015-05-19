@@ -12,7 +12,11 @@ app.config(function($stateProvider){
 
 app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state){
 	$scope.name = ExercismFactory.getName();
-	$scope.code = ExercismFactory.getCodeScript();
+	$scope.code = {
+		text : null
+	};
+
+	$scope.code.text = ExercismFactory.getCodeScript();
 
 	//passing this update function so that on text change in the directive the factory will be alerted
 	$scope.compile = function(code){
