@@ -2,7 +2,7 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var findOrCreate = require('mongoose-findorcreate');
-
+var q = require('q');
 var schemaOptions = {
     toJSON : {
         virtuals : true
@@ -17,7 +17,7 @@ var userSchema = new mongoose.Schema({
         required:true,
         unique:true
     },
-    apiKey: {type: String, required:true},
+    apiKey: {type: String},
     password: {
         type: String,
         required:true
@@ -26,9 +26,10 @@ var userSchema = new mongoose.Schema({
     salt: {
         type: String//,
         //select: false
-    }
+    },
+    friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+    challengesCompleted: {type:Number}
 }, schemaOptions);
-
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
 // are all used for local authentication security.
@@ -66,10 +67,28 @@ userSchema.pre('save', function (next) {
 userSchema.plugin(findOrCreate);
 userSchema.statics.generateSalt = generateSalt;
 userSchema.statics.encryptPassword = encryptPassword;
-
 userSchema.method('correctPassword', function (candidatePassword) {
     console.log('candidatePassword',candidatePassword);
     return encryptPassword(candidatePassword, this.salt) === this.password;
 });
+userSchema.method('addFriend',function(friend){
+    var user = this; //user addFriend method was called on
+    //console.log(friend);
+    //function friendFound(friend){
+    //    console.log('friend Found', friend._id);
+    user.friends.push(friend._id); //Only pushing the user ID to the current User for reference
+    return user.saveAsync(); //TODO: You need to do save async
+    //return friend;
+    //}
+
+    //function friendNotFound(response){
+        //res.status(401).end('Friend does not exist'); //TODO: Look-up friend list dynamically
+        //console.log('friendNotFound');
+    //}
+});
+
+userSchema.methods.saveAsync = function () {
+    return q.ninvoke(this,'save');
+};
 
 mongoose.model('User', userSchema);

@@ -9,6 +9,27 @@ var jwt = require('jsonwebtoken'); //encoded json object (token), token sends it
 
 module.exports = router;
 
+function getUser(req,res,next){
+    console.log('req.user id',req.user.userId); //req.user is user ID, so convert to the full user before moving forward
+    UserModel.findOne({_id:req.user.userId}).exec().then(userFound);
+
+    function userFound(user){
+        //console.log('userFound',user,body.password,body.username);
+        //console.log('correctPassword check',user.correctPassword(body.password));
+        //if(user.correctPassword(body.password)){
+        req.user = user; //place the full user data on req.user to pass on for use
+        next();
+        //} else {
+        //    res.status(401).end('Username or password incorrect');
+        //userNotFound(user);
+        //}
+    }
+
+    //function userNotFound(response){
+    //    res.status(401).end('Username or password incorrect');
+    //}
+}
+
 function authenticate(req,res,next){
     var body = req.body;
     if (!body.username || !body.password) {
@@ -63,5 +84,42 @@ router.post('/signup', function(req, res, next) { // api/signup
 	function userNotCreated(){
 		res.sendStatus(401);//.send('User was not created');
 	}
+});
+
+router.post('/addFriend', getUser, function(req,res,next){
+    //console.log('/addFriend Route data','req.user',req.user,'req.body.friend',req.body.friend); //attached by getUser
+    var user = req.user;
+    var foundFriend;
+
+    //TODO: You cannot add yourself as a friend
+    UserModel
+        .findOne({userName:req.body.friend}).exec()
+        .then(friendFound,friendNotFound)
+        .then(friendAdded);
+
+    function friendAdded(){
+        //res.status(401).end('Username or password incorrect');
+        //send the friend back
+        console.log('friendAdded',foundFriend.userName);
+        res.send({
+            data:foundFriend.userName
+        });
+    }
+
+    //TODO: Friend data is being sent back after being added to database
+
+    function friendFound(friend){
+        //return user.addFriend(friend).then(function(){
+        //    return friend;
+        //});
+        //console.log('friendFound',friend);
+        foundFriend = friend;
+        return user.addFriend(friend);
+    }
+
+    function friendNotFound(response){
+        res.status(401).end('Username or password incorrect');
+    }
+
 });
 
