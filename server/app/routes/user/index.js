@@ -4,13 +4,13 @@ var UserModel = require('mongoose').model('User');
 var _ = require('lodash');
 var path = require('path');
 var SESSION_SECRET = require(path.join(__dirname, '../../../env')).SESSION_SECRET;
-
+var q = require('q');
 var jwt = require('jsonwebtoken'); //encoded json object (token), token sends it back on each request
 
 module.exports = router;
 
 function getUser(req,res,next){
-    console.log('req.user id',req.user.userId); //req.user is user ID, so convert to the full user before moving forward
+    //console.log('req.user id',req.user.userId); //req.user is user ID, so convert to the full user before moving forward
     UserModel.findOne({_id:req.user.userId}).exec().then(userFound);
 
     function userFound(user){
@@ -101,8 +101,9 @@ router.post('/addFriend', getUser, function(req,res,next){
         //res.status(401).end('Username or password incorrect');
         //send the friend back
         console.log('friendAdded',foundFriend.userName);
+        foundFriend = _.pick(foundFriend,'userName');
         res.send({
-            data:foundFriend.userName
+            friend:foundFriend
         });
     }
 
@@ -123,3 +124,22 @@ router.post('/addFriend', getUser, function(req,res,next){
 
 });
 
+router.get('/getFriends',getUser,function(req,res,next){
+    //console.log(req.user);
+    q.all(UserModel.getFriends(req.user)).then(friendsFound,friendsNotFound);
+
+    function friendsFound(friends){
+        //console.log('friends',friends); //TODO: return an array object of friend names for now
+        //TODO: Use low-dash to mit
+        friends.forEach(function(friend,index){
+           friends[index] = _.pick(friend,'userName');
+        });
+        res.send({
+            friends:friends
+        });
+    }
+
+    function friendsNotFound(err){
+        console.log(err);
+    }
+});

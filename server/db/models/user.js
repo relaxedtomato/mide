@@ -13,9 +13,7 @@ var schemaOptions = {
 var userSchema = new mongoose.Schema({
     userName : {type : String, required:true, unique:true},
     email: {
-        type: String,
-        required:true,
-        unique:true
+        type: String
     },
     apiKey: {type: String},
     password: {
@@ -76,7 +74,11 @@ userSchema.method('addFriend',function(friend){
     //console.log(friend);
     //function friendFound(friend){
     //    console.log('friend Found', friend._id);
-    user.friends.push(friend._id); //Only pushing the user ID to the current User for reference
+    //TODO: Cannot add yourself as a friend
+    if(user.friends.indexOf(friend._id)===-1){ //check if friend exists or not
+        user.friends.push(friend._id); //Only pushing the user ID to the current User for reference
+    }
+
     return user.saveAsync(); //TODO: You need to do save async
     //return friend;
     //}
@@ -86,7 +88,29 @@ userSchema.method('addFriend',function(friend){
         //console.log('friendNotFound');
     //}
 });
+//userSchema.method('getFriends',function(){
+//    var user = this;
+//    var friends = user.friends; //array of Friend Object IDs
+//
+//});
+userSchema.statics.getFriends = function(user){
+    var User = this; //user model
+    var friends = user.friends; //object ID array
+    //console.log('in here',friends);
+    //array of promises
+    var friendsPromiseArr = [];
 
+    friends.forEach(function(friendId){
+        if(friendId !== null) {
+            //console.log(friendId);
+            friendsPromiseArr.push(User.findOne({_id: friendId}).exec());
+        }
+    });
+
+    //console.log('friendsPromiseArr',friendsPromiseArr);
+    return friendsPromiseArr; //promise returning array of all friends
+
+};
 userSchema.methods.saveAsync = function () {
     return q.ninvoke(this,'save');
 };
