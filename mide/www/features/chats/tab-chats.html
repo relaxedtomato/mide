@@ -1,11 +1,25 @@
 <ion-view view-title="Chats">
   <ion-content>
+
+    <div class="list list-inset">
+      <div>
+        <label class="item item-input">
+          <input type="text" placeholder="Add Friends" ng-model="data.username" required>
+          <div class="error" ng-show="data.username.$dirty && data.username.$invalid">
+            <small class="error" ng-show="data.username.name.$error.required">
+              Username required
+            </small>
+          </div>
+        </label>
+      </div>
+    </div>
+    <button class="button button-block button-calm" ng-click="addFriend()">Add Friend</button>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
-        <img ng-src="{{chat.face}}">
-        <h2>{{chat.name}}</h2>
-        <p>{{chat.lastText}}</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="friend in friends" type="item-text-wrap">
+        <!--<img ng-src="{{chat.face}}">-->
+        <h2>{{friend.userName}}</h2>
+        <!--<p>{{chat.lastText}}</p>-->
+        <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
 
         <ion-option-button class="button-assertive" ng-click="remove(chat)">
           Delete

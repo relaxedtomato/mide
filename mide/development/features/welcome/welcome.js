@@ -30,6 +30,6 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope){
 		$state.go('exercism.view');
 	} else {
 		//TODO: $state.go('signup'); Remove Below line
-		$state.go('exercism.view');
+		$state.go('signup');
 	}
 });
