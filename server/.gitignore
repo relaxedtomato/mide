@@ -3,4 +3,5 @@ approach.txt
 .idea
 node_modules
 npm-debug.log
+env/gist.js
 

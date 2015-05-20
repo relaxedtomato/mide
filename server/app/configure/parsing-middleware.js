@@ -18,7 +18,7 @@ module.exports = function (app) {
 
     //TODO: Fix for Production
     //if (process.env.NODE_ENV === 'production') {
-    app.use(expressJwt({secret:SESSION_SECRET}).unless({path: ['/api/user/login','/api/user/signup']}));
+    //app.use(expressJwt({secret:SESSION_SECRET}).unless({path: ['/api/user/login','/api/user/signup']}));
     //} else {
         //do nothing
     //}
