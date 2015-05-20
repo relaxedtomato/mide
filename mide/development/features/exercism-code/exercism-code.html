@@ -7,13 +7,17 @@
         <button class='button button-balanced' ng-click='compile(code.text)'>
             COMPILE
         </button>
-        <button class='button button-balanced' ng-click='showCm(codeMirror)'>
-            show my codemirror
-        </button>
-        <pre>dis keys on scope{{keys | json}}</pre>
+        <pre>dis keys on scope{{btns | json}}</pre>
 	</ion-content>
 
-	<ion-footer-bar codekeyboard>
-		<snippetbuttons></snippetbuttons>
+	<ion-footer-bar codekeyboard keyboard-attach>
+		<div style="display:-webkit-flex-direction:row;">
+			<span>hey there</span>
+		</div>
+		<!-- <snippetbuttons style="-webkit-flex-direction:row" ng-model="replText"></snippetbuttons> -->
+
+		<div class="buttons" style="-webkit-flex-direction:row" ng-repeat="btn in btns">
+			<button class="button" style="-webkit-flex-direction:column" ng-click="btnClick(btn)">{{btn.display}}</button>
+		</div>
 	</ion-footer-bar>
 </ion-view>

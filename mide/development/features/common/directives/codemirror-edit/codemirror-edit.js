@@ -1,10 +1,11 @@
-app.directive('cmedit', function(){
+app.directive('cmedit', function(CodeMirrorFactory){
 	return {
 		restrict : 'A',
 		require: 'ngModel',
 		link : function(scope, element, attribute, ngModelCtrl){
 			//initialize CodeMirror
-			var myCodeMirror = CodeMirror.fromTextArea(document.getElementById(attribute.id), {
+			var myCodeMirror;
+			myCodeMirror = CodeMirror.fromTextArea(document.getElementById(attribute.id), {
 				lineNumbers : true,
 				mode: 'javascript',
 				autofocus : true,
@@ -20,7 +21,10 @@ app.directive('cmedit', function(){
 		    	ngModelCtrl.$setViewValue(myCodeMirror.getValue());
 		    });
 
-		    scope.codeMirror = myCodeMirror;
+		    scope.$watch('scope.code.replace', function(text){
+		    	// myCodeMirror.replaceSelection(text);
+		    	console.log("repltext,", text);
+		    });
 		}
 	};
 });

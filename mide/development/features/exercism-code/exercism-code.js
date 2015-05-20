@@ -13,7 +13,8 @@ app.config(function($stateProvider){
 app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state){
 	$scope.name = ExercismFactory.getName();
 	$scope.code = {
-		text : null
+		text : null,
+		replace : null
 	};
 
 	$scope.code.text = ExercismFactory.getCodeScript();
@@ -23,11 +24,6 @@ app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state){
 	$scope.compile = function(code){
 		ExercismFactory.setCodeScript(code);
 		$state.go('exercism.compile');
-	};
-
-	$scope.showCm = function(x){
-		console.log("codemirror is: ",x);
-		console.log("what about : ", $scope.codeMirror);
 	};
 
 });
