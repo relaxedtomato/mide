@@ -19,9 +19,9 @@
 			<div class='failures' ng-hide='summaryShowing'>
 				<div class='spec-detail failed' ng-repeat='spec in specsOverview | filter:{"status" : "failed"}'>
 					<p class='description'>{{spec.fullName}}</p>
-					<div class='messages' ng-repeat='fail in spec.failedExpectations'>
-						<div class='result-message fail'>{{fail.message}}</div>
-						<div class='stack-trace'>{{fail.stack}}</div>
+					<div class='messages'>
+						<div class='result-message fail'>{{spec.failedExpectations[0].message}}</div>
+						<div class='stack-trace'>{{spec.failedExpectations[0].stack}}</div>
 					</div>
 				</div>
 			</div>

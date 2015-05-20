@@ -15,14 +15,19 @@ app.config(function($stateProvider){
 
 app.controller('ExercismCompileCtrl', function($scope, ExercismFactory){
 	$scope.name = ExercismFactory.getName();
-	$scope.test = ExercismFactory.getTestScript();
-	$scope.code = ExercismFactory.getCodeScript();
+	$scope.compiling = {
+		test: null,
+		code : null
+	};
+	$scope.compiling.test = ExercismFactory.getTestScript();
+	$scope.compiling.code = ExercismFactory.getCodeScript();
+
 
 	$scope.$on('testChange', function(event, data){
-		$scope.test = data.test;
+		$scope.compiling.test = test;
 	});
 
 	$scope.$on('codeChange', function(event, data){
-		$scope.code = data.code;
+		$scope.compiling.code = code;
 	});
 });

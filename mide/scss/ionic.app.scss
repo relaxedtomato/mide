@@ -88,6 +88,13 @@ div.jasmine_html-reporter {
 			font-size: 14px;
 			line-height:20px;
 		}
+		.spec-detail {
+			.messages {
+				.stack-trace {
+					overflow: scroll;
+				}
+			}
+		}
 	}
 	.suite {
 		.suite-detail {
