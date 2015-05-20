@@ -6,7 +6,28 @@ var path = require('path');
 var bluebird = require('bluebird');
 var githubInstance = require('../../api/github');
 
-router.get('/gistsQueue',getuser(),function(req,res,next){
+function getUser(req,res,next){
+    //console.log('req.user id',req.user.userId); //req.user is user ID, so convert to the full user before moving forward
+    UserModel.findOne({_id:req.user.userId}).exec().then(userFound);
+
+    function userFound(user){
+        //console.log('userFound',user,body.password,body.username);
+        //console.log('correctPassword check',user.correctPassword(body.password));
+        //if(user.correctPassword(body.password)){
+        req.user = user; //place the full user data on req.user to pass on for use
+        next();
+        //} else {
+        //    res.status(401).end('Username or password incorrect');
+        //userNotFound(user);
+        //}
+    }
+
+    //function userNotFound(response){
+    //    res.status(401).end('Username or password incorrect');
+    //}
+}
+
+router.get('/gistsQueue',getUser,function(req,res,next){
     var user = req.user;
     var gistPromiseArr = [];
 
@@ -35,13 +56,9 @@ router.get('/gistsQueue',getuser(),function(req,res,next){
         });
     }
 });
-//TODO: You are here, deciding next steps, going into Angular or not
-//TODO: TEST /createdGists and /gistsQueue Works
-//TODO: getUser() is req here.
 //TODO: Users can access all their gists, you may want to include and/or save the gist description as well
 //TODO: gist file name, description, and code
-//TODO: Abstract routes to separate folder labelled gists
-//TODO: add back getUser for testing and post
+//TODO: Add gists ID/TOKEN to Production ENV variables (currently in .gitignore)
 router.get('/shareGists',getUser,function(req,res,next){
     var user = req.user;
     //TODO: This is not proper async and only temp for testing since getUser is not available
@@ -69,12 +86,8 @@ router.get('/shareGists',getUser,function(req,res,next){
     //TODO: You need to track total calls per hour to avoid rate limiting, or per user
 
     githubInstance.gists.create(input,function(err,response){
-        //console.log(response.id);
-        //return response;
         //TODO: send over user ID on get and add friends as well
-        // get code
-        // post to github as .js file
-        //store ID in database of user, as an array of code snippets to load
+
         user.gists.push(response.id); //gist id to save
         user.saveAsync()
             .then(findFriend)
@@ -101,10 +114,9 @@ router.get('/shareGists',getUser,function(req,res,next){
 router.get('/createdGists',getUser,function(req,res,next){
     var user = req.user;
     var gistPromiseArr = [];
-    //var user;
+
     //TODO: This is not proper async and only temp for testing since getUser is not available
-    //UserModel.findOne({_id:gist.USER_ID1}).exec().then(function(data){
-    //user = data;
+
     user.gists.forEach(function(gistId){ //{id:gistId}
         gistPromiseArr.push(getGistAsync({id:gistId})); //TODO: Not sure if this matches the npm library
     });
@@ -116,9 +128,7 @@ router.get('/createdGists',getUser,function(req,res,next){
             gists:response
         });
     }
-    //});
 
-    //define Async function on github/index.js for modular use
     //TODO: Test if this actually works
     function getGistAsync(obj){
         return new bluebird(function(resolve,reject){
@@ -133,15 +143,3 @@ router.get('/createdGists',getUser,function(req,res,next){
 
     //TODO: Filter data using lo-dash before sending to the front end, sending all for now
 });
-
-//getStuff("dataParam",function(err,data){
-//    To:
-//
-//        function getStuffAsync(param){
-//            return new Promise(function(resolve,reject){
-//                getStuff(param,function(err,data){
-//                    if(err !== null) return reject(err);
-//                    resolve(data);
-//                });
-//            });
-//        }

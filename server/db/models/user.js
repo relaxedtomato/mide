@@ -96,9 +96,11 @@ userSchema.method('addFriend',function(friend){
 //
 //});
 userSchema.statics.getFriends = function(user){
+    //console.log('in here',friends);
+
     var User = this; //user model
     var friends = user.friends; //object ID array
-    //console.log('in here',friends);
+
     //array of promises
     var friendsPromiseArr = [];
 
