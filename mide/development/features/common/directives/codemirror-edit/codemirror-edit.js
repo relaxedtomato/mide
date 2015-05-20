@@ -1,4 +1,4 @@
-app.directive('cmedit', function(CodeMirrorFactory){
+app.directive('cmedit', function(){
 	return {
 		restrict : 'A',
 		require: 'ngModel',
@@ -21,9 +21,8 @@ app.directive('cmedit', function(CodeMirrorFactory){
 		    	ngModelCtrl.$setViewValue(myCodeMirror.getValue());
 		    });
 
-		    scope.$watch('scope.code.replace', function(text){
-		    	// myCodeMirror.replaceSelection(text);
-		    	console.log("repltext,", text);
+		    scope.$on("insert", function(event, text){
+		    	myCodeMirror.replaceSelection(text);
 		    });
 		}
 	};

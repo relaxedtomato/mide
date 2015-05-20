@@ -11,13 +11,16 @@
 	</ion-content>
 
 	<ion-footer-bar codekeyboard keyboard-attach>
-		<div style="display:-webkit-flex-direction:row;">
+		<!-- <div style="display:-webkit-flex-direction:row;">
 			<span>hey there</span>
-		</div>
-		<!-- <snippetbuttons style="-webkit-flex-direction:row" ng-model="replText"></snippetbuttons> -->
+		</div> -->
+		<snippetbuttons></snippetbuttons>
 
-		<div class="buttons" style="-webkit-flex-direction:row" ng-repeat="btn in btns">
-			<button class="button" style="-webkit-flex-direction:column" ng-click="btnClick(btn)">{{btn.display}}</button>
-		</div>
+		<!-- <div class="buttons" style="-webkit-flex-direction:row" ng-repeat="btn in btns">
+			<div style="-webkit-flex-direction:row" ng-show="">
+				<button class="button" ng-repeat="item in btn.data" ng-click="btnDataClick(item.insertParam)">{{item.display}}</button>
+			</div>
+			<button class="button" style="-webkit-flex-direction:column" ng-click="btnCatClick(btn)">{{btn.display}}</button>
+		</div> -->
 	</ion-footer-bar>
 </ion-view>

@@ -10,11 +10,10 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state){
+app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state, KeyboardFactory){
 	$scope.name = ExercismFactory.getName();
 	$scope.code = {
-		text : null,
-		replace : null
+		text : null
 	};
 
 	$scope.code.text = ExercismFactory.getCodeScript();
@@ -25,5 +24,7 @@ app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state){
 		ExercismFactory.setCodeScript(code);
 		$state.go('exercism.compile');
 	};
+
+	$scope.insertFunc = KeyboardFactory.makeInsertFunc($scope);
 
 });
