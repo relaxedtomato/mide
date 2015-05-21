@@ -12,7 +12,6 @@ app.config(function($stateProvider){
 
 app.controller('SandboxCompileCtrl', function($scope, SandboxFactory){
 	$scope.question = SandboxFactory.getSubmission();
-	console.log($scope.question);
 	var results = SandboxFactory.compileSubmission($scope.question);
 	$scope.results = results;
 	$scope.output = SandboxFactory.compileSubmission($scope.question).output;
@@ -24,7 +23,5 @@ app.controller('SandboxCompileCtrl', function($scope, SandboxFactory){
 		$scope.results = results;
 		$scope.output = SandboxFactory.compileSubmission($scope.question).output;
 		$scope.error = SandboxFactory.compileSubmission($scope.question).error;
-		cmResults.setValue($scope.output);
-
 	});
 });
