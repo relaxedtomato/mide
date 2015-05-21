@@ -108,11 +108,14 @@ app.factory('CodeSnippetFactory', function($rootScope){
 			codeSnippets.push(obj);
 			$rootScope.$broadcast('footerUpdated', footerMenu);
 		},
-		deleteCodeSnippet : function(selection){
+		deleteCodeSnippet : function(display){
 			codeSnippets = codeSnippets.filter(function(el){
-				return el.display !== selection;
+				return el.display !== display;
 			});
 			$rootScope.$broadcast('footerUpdated', footerMenu);
+		},
+		getCodeSnippets : function(){
+			return codeSnippets;
 		}
 	};
 });

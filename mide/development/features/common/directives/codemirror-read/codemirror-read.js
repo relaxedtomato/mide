@@ -4,7 +4,7 @@ app.directive('cmread', function(){
 		require: 'ngModel',
 		link : function(scope, element, attribute, ngModelCtrl){
 			//initialize CodeMirror
-			var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('compile'), {
+			var myCodeMirror = CodeMirror.fromTextArea(document.getElementById(attribute.id), {
 				readOnly : 'nocursor',
 				mode: 'javascript',
 				autofocus : true,
