@@ -13,7 +13,6 @@ var app = angular.module('mide', ['ionic', 'ionic.utils'])
     // for form inputs)
     // $locationProvider.html5Mode(true);
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-        console.log("does reg window work?");
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
     }
