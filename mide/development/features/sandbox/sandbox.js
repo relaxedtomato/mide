@@ -1,11 +1,11 @@
 app.config(function($stateProvider){
-	$stateProvider.state('challenge', {
-		templateUrl : 'features/challenge/challenge.html',
+	$stateProvider.state('sandbox', {
+		templateUrl : 'features/sandbox/sandbox.html',
 		abstract : true
 	});
 });
 
-app.factory('ChallengeFactory', function($http, ApiEndpoint, $rootScope, $state){
+app.factory('SandboxFactory', function($http, ApiEndpoint, $rootScope, $state){
 
 	var problem = '';
 	var submission = '';
