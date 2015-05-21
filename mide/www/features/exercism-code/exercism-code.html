@@ -1,11 +1,12 @@
 <ion-view view-title="{{name | nameformat}}">
 	<ion-content>
+		<button class='button button-balanced' style="width:100%;" ng-click='compile(code.text)'>
+            COMPILE
+        </button>
 		<div class='editContainer'>
             <textarea id='exercism-code' ng-model='code.text' cmedit></textarea>
         </div>
-        <button class='button button-balanced' ng-click='compile(code.text)'>
-            COMPILE
-        </button>
+        
 	</ion-content>
 
 	

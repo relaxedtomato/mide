@@ -116,19 +116,19 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, Auth
           ref : function(){return 'account';}
         },
         {
-          name : 'Challenge',
+          name : 'Sandbox',
           ref : function(){return 'challenge.view';}
         },
-        {
-          name : 'Chats',
-          ref: function(){return 'chats';}
-        },
+        // {
+        //   name : 'Chats',
+        //   ref: function(){return 'chats';}
+        // },
         {
           name : 'Exercism',
           ref: function(){return 'exercism.view';}
         },
         {
-          name : 'Exercises',
+          name : 'Create Challenges',
           ref : function(){return 'exercises'; }
         }
     ];

@@ -66,28 +66,28 @@ app.factory('ExercismFactory', function($http, $rootScope){
 app.factory('AvailableExercises', function(){
 
 	var library = [
-		'accumulate',
-		'allergies',
-		'anagram',
-		'atbash-cipher',
-		'beer-song',
-		'binary',
-		'binary-search-tree',
-		'bob',
-		'bracket-push',
-		'circular-buffer',
-		'clock',
-		'crypto-square',
-		'custom-set',
-		'difference-of-squares',
-		'etl',
-		'food-chain',
-		'gigasecond',
-		'grade-school',
-		'grains',
-		'hamming',
-		'hello-world',
-		'hexadecimal'
+		// 'accumulate',
+		// 'allergies',
+		// 'anagram',
+		// 'atbash-cipher',
+		// 'beer-song',
+		// 'binary',
+		// 'binary-search-tree',
+		// 'bob',
+		// 'bracket-push',
+		// 'circular-buffer',
+		// 'clock',
+		'crypto-square'
+		// 'custom-set',
+		// 'difference-of-squares',
+		// 'etl',
+		// 'food-chain',
+		// 'gigasecond',
+		// 'grade-school',
+		// 'grains',
+		// 'hamming',
+		// 'hello-world',
+		// 'hexadecimal'
 	];
 
 	var generateLink = function(name){
