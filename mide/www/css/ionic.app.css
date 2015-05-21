@@ -7675,6 +7675,11 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.CodeMirror {
+  border: 1px solid #eee;
+  height: auto;
+  overflow: scroll; }
+
 .resultsContainer .CodeMirror {
   height: auto; }
 

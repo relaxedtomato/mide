@@ -7,5 +7,25 @@
         <button class='button button-balanced' ng-click='compile(code.text)'>
             COMPILE
         </button>
+        <pre>dis keys on scope{{btns | json}}</pre>
 	</ion-content>
+
+	
+	<ion-footer-bar codekeyboard keyboard-attach style="height:auto;">
+		<!-- <div style="display:-webkit-flex-direction:row;">
+			<span>hey there</span>
+		</div> -->
+		<!-- <div> -->
+			<!-- <div><h4>Predictive</h4><snippetbuttons></snippetbuttons></div> -->
+			<!-- <div> -->
+				<snippetbuttons></snippetbuttons>
+			<!-- </div> -->
+		<!-- </div> -->
+		<!-- <div class="buttons" style="-webkit-flex-direction:row" ng-repeat="btn in btns">
+			<div style="-webkit-flex-direction:row" ng-show="">
+				<button class="button" ng-repeat="item in btn.data" ng-click="btnDataClick(item.insertParam)">{{item.display}}</button>
+			</div>
+			<button class="button" style="-webkit-flex-direction:column" ng-click="btnCatClick(btn)">{{btn.display}}</button>
+		</div> -->
+	</ion-footer-bar>
 </ion-view>

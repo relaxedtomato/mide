@@ -1,12 +1,9 @@
-app.directive('codekeyboard', function($compile){
+app.directive('codekeyboard', function(CodeSnippetFactory){
 	return {
 		restrict : 'A',
-		scope: {
-			ngModel : '=' //links any ngmodel on the element
-		},
 		link : function(scope, element, attribute){
-			element.$set("class", "bar-stable");
-			
+			element.addClass("bar-stable");
+			scope.btns = CodeSnippetFactory.getFooterMenu();
 		}
 	};
 });

@@ -4,12 +4,14 @@ app.directive('cmedit', function(){
 		require: 'ngModel',
 		link : function(scope, element, attribute, ngModelCtrl){
 			//initialize CodeMirror
-			var myCodeMirror = CodeMirror.fromTextArea(document.getElementById(attribute.id), {
+			var myCodeMirror;
+			myCodeMirror = CodeMirror.fromTextArea(document.getElementById(attribute.id), {
 				lineNumbers : true,
 				mode: 'javascript',
 				autofocus : true,
 				theme : 'twilight',
-				lineWrapping: true
+				lineWrapping: true,
+				scrollbarStyle: "overlay"
 			});
 			ngModelCtrl.$render = function(){
 				myCodeMirror.setValue(ngModelCtrl.$viewValue || '');
@@ -19,7 +21,9 @@ app.directive('cmedit', function(){
 		    	ngModelCtrl.$setViewValue(myCodeMirror.getValue());
 		    });
 
-		    scope.codeMirror = myCodeMirror;
+		    scope.$on("insert", function(event, text){
+		    	myCodeMirror.replaceSelection(text);
+		    });
 		}
 	};
 });
