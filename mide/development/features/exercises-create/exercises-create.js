@@ -6,6 +6,6 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ExercisesCreateCtrl', function(){
+app.controller('ExercisesCreateCtrl', function($scope){
 
 });
