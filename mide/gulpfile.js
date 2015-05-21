@@ -20,7 +20,9 @@ var ngAnnotate = require('gulp-ng-annotate');
 var paths = {
   sass: ['./scss/**/*.scss'],
   images : ['./development/img/*'],
-  exercism : ['./development/exercism/javascript/**/*']
+  exercism : ['./development/exercism/javascript/**/*'],
+  icon: ['./development/img/icon_192x192.png'],
+  splash: ['./development/img/splash_2208x2208.png'],
 };
 
 // gulp.task('default', ['sass']);
@@ -125,6 +127,18 @@ gulp.task('moveImages', function () {
         .pipe(gulp.dest('./www/img'));
 });
 
+gulp.task('moveIcon', function () {
+    return gulp.src(['./development/img/icon_192x192.png'])
+        .pipe(rename('icon.png'))
+        .pipe(gulp.dest('./resources'));
+});
+
+gulp.task('moveSplash', function () {
+    return gulp.src(['./development/img/splash_1100x1100.png'])
+        .pipe(rename('splash.png'))
+        .pipe(gulp.dest('./resources'));
+});
+
 // ------------------------------------------------------
 // Testing
 // ------------------------------------------------------
@@ -145,9 +159,9 @@ gulp.task('test', function(done) {
 
 gulp.task('build', function () {
     if (process.env.NODE_ENV === 'production') {
-        runSeq(['buildJSProduction', 'sass', 'buildHTML', 'moveImages', 'moveExercism']);
+        runSeq(['buildJSProduction', 'sass', 'buildHTML', 'moveImages', 'moveExercism', 'moveSplash', 'moveIcon']);
     } else {
-        runSeq(['buildJS', 'sass', 'buildHTML', 'moveImages', 'moveExercism']);
+        runSeq(['buildJS', 'sass', 'buildHTML', 'moveImages', 'moveExercism', 'moveSplash', 'moveIcon']);
     }
 });
 
@@ -165,6 +179,8 @@ gulp.task('default', function(){
   //   });
 
   gulp.watch(paths.images, ['moveImages']);
+  gulp.watch(paths.icon, ['moveIcon']);
+  gulp.watch(paths.splash, ['moveSplash']);
 
   gulp.watch(paths.sass, ['sass']);
 
