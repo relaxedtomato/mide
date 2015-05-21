@@ -1,6 +1,6 @@
-app.factory('CodeSnippetFactory', function(){
+app.factory('CodeSnippetFactory', function($rootScope){
 	
-	var CodeSnippets = [
+	var codeSnippets = [
 		{
 			display: "fn",
 			insertParam: "function(){ }"
@@ -46,7 +46,7 @@ app.factory('CodeSnippetFactory', function(){
 		}
 	];
 
-		var comparators = [
+	var comparators = [
 		{
 			display: "!",
 			insertParam: "!"
@@ -84,7 +84,7 @@ app.factory('CodeSnippetFactory', function(){
 	var footerMenu = [
 		{
 			display: "Custom",
-			data: CodeSnippets
+			data: codeSnippets
 		},
 		{
 			display: "Special",
@@ -101,8 +101,18 @@ app.factory('CodeSnippetFactory', function(){
 	// };
 
 	return 	{
-				getFooterMenu : function(){
-					return footerMenu;
-				}
-			};
+		getFooterMenu : function(){
+			return footerMenu;
+		},
+		addCodeSnippet : function(obj){
+			codeSnippets.push(obj);
+			$rootScope.$broadcast('footerUpdated', footerMenu);
+		},
+		deleteCodeSnippet : function(selection){
+			codeSnippets = codeSnippets.filter(function(el){
+				return el.display !== selection;
+			});
+			$rootScope.$broadcast('footerUpdated', footerMenu);
+		}
+	};
 });

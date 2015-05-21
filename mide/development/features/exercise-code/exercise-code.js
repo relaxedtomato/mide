@@ -10,6 +10,5 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ExerciseCodeCtrl', function(){
-
+app.controller('ExerciseCodeCtrl', function($scope){
 });
