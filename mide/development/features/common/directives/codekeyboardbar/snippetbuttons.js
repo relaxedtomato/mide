@@ -16,6 +16,15 @@ app.directive('snippetbuttons', function(){
 			scope.resetMenu = function(){
 				scope.showOptions = false;
 			};
+			scope.demo1 = function() {
+				var text = "var HelloWorld = function() {};\n\nHelloWorld.prototype.hello = function(name){\nname = name || 'world';\nreturn 'Hello, ' + name + '!';\n};";
+				scope.insertFunc(text);
+			};
+			scope.demo2 = function() {
+				var text = "function haha() {return \"hehe\"};\n\nhaha();";
+				scope.insertFunc(text);
+			};
+
 		}
 	};
 });

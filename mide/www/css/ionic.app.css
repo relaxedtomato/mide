@@ -7684,6 +7684,10 @@ a.button {
     min-height: 100%;
     height: auto; }
 
+.textview {
+  padding-left: 10px;
+  padding-right: 10px; }
+
 .readContainer {
   height: 68vh; }
   .readContainer .CodeMirror {

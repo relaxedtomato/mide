@@ -46,7 +46,7 @@ app.factory('CodeSnippetFactory', function($rootScope){
 		}
 	];
 
-	var comparators = [
+	var special = [
 		{
 			display: "!",
 			insertParam: "!"
@@ -78,6 +78,21 @@ app.factory('CodeSnippetFactory', function($rootScope){
 		{
 			display: ">",
 			insertParam: ">"
+		},
+		{
+			display: ";",
+			insertParam: ";"
+		}
+	];
+
+	var demoButtons = [
+		{
+			display: "Demo1",
+			insertParam: "<"
+		},
+		{
+			display: "Demo2",
+			insertParam: ">"
 		}
 	];
 
@@ -88,12 +103,16 @@ app.factory('CodeSnippetFactory', function($rootScope){
 		},
 		{
 			display: "Special",
-			data: comparators
+			data: special
 		},
 		{
 			display: "Brackets",
 			data: brackets
 		}
+		// {
+		// 	display: "Demo",
+		// 	data: demoButtons
+		// }
 	];
 
 	// var getHotkeys = function(){

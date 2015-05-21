@@ -77,7 +77,7 @@ app.factory('AvailableExercises', function(){
 		// 'bracket-push',
 		// 'circular-buffer',
 		// 'clock',
-		'crypto-square'
+		// 'crypto-square',
 		// 'custom-set',
 		// 'difference-of-squares',
 		// 'etl',
@@ -86,7 +86,7 @@ app.factory('AvailableExercises', function(){
 		// 'grade-school',
 		// 'grains',
 		// 'hamming',
-		// 'hello-world',
+		'hello-world'
 		// 'hexadecimal'
 	];
 

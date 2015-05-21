@@ -35,6 +35,11 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 	}
 }
 
+.textview {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
 .readContainer {
 	height : 68vh;
 	.CodeMirror {
