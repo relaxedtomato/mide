@@ -1,29 +1,5 @@
 app.factory('CodeSnippetFactory', function(){
 	
-	var brackets = [
-		{
-			display: "[ ]",
-			insertParam: "[]"
-		},
-		{
-			display: "{ }",
-			insertParam: "{}"
-		},
-		{
-			display: "( )",
-			insertParam: "()"
-		},
-		{
-			display: "//",
-			insertParam: "//"
-		},
-		{
-			display: "/*  */",
-			insertParam: "/* */"
-		},
-
-	];
-
 	var CodeSnippets = [
 		{
 			display: "fn",
@@ -47,7 +23,30 @@ app.factory('CodeSnippetFactory', function(){
 		},
 	];
 
-	var comparators = [
+	var brackets = [
+		{
+			display: "[ ]",
+			insertParam: "[]"
+		},
+		{
+			display: "{ }",
+			insertParam: "{}"
+		},
+		{
+			display: "( )",
+			insertParam: "()"
+		},
+		{
+			display: "//",
+			insertParam: "//"
+		},
+		{
+			display: "/*  */",
+			insertParam: "/* */"
+		}
+	];
+
+		var comparators = [
 		{
 			display: "!",
 			insertParam: "!"
