@@ -1,6 +1,6 @@
 <ion-view view-title="Sandbox">
 	<ion-content>
-        <div class='row'>
+        <div class='row' style='padding:0px;'>
             <button class='button button-balanced col' ng-click='compile(code.text)' style =''>
                 {{buttons.compile | uppercase}}
             </button>
@@ -8,7 +8,7 @@
                 {{buttons.save | uppercase}}
             </button>
         </div>
-        <div>
+        <div class='editContainer'>
             <textarea id='code' ng-model='code.text' cmedit></textarea>
         </div>
 	</ion-content>

@@ -1,1 +1,14 @@
-
+<ion-view view-title="Snippets">
+	<ion-content>
+		<ion-list>
+	      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="snippet in snippets" type="item-text-wrap" href="#/tab/snippet/{{snippet.name}}">
+	        <h2>{{snippet.name}}</h2>
+	        <p>{{snippet.insertParam}}</p>
+	        <i class="icon ion-chevron-right icon-accessory"></i>
+	        <ion-option-button class="button-assertive" ng-click="remove(snippet.name)">
+	          Delete
+	        </ion-option-button>
+	      </ion-item>
+	    </ion-list>
+	</ion-content>
+</ion-view>

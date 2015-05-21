@@ -7675,13 +7675,20 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
-.CodeMirror {
-  border: 1px solid #eee;
-  height: auto;
-  overflow: scroll; }
-
 .resultsContainer .CodeMirror {
   height: auto; }
+
+.editContainer {
+  height: 100vh; }
+  .editContainer .CodeMirror {
+    min-height: 100%;
+    height: auto; }
+
+.readContainer {
+  height: 68vh; }
+  .readContainer .CodeMirror {
+    min-height: 100%;
+    height: auto; }
 
 div.jasmine_html-reporter {
   font-size: 12px;
