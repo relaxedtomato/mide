@@ -6,7 +6,7 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ExercisesCtrl', function($state){
+app.controller('ExercisesCtrl', function($scope, $state){
 	$scope.create = function(){
 		$state.go('exercises-create');
 	};

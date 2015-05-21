@@ -10,6 +10,6 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ExerciseViewCtrl', function(){
+app.controller('ExerciseViewCtrl', function($scope){
 
 });
