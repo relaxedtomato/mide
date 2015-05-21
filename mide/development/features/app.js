@@ -127,6 +127,10 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, Auth
         {
           name : 'Exercism',
           ref: function(){return 'exercism.view';}
+        },
+        {
+          name : 'Exercises',
+          ref : function(){return 'exercises'; }
         }
     ];
 
