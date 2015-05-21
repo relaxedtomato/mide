@@ -42,11 +42,11 @@ app.factory('ExercismFactory', function($http, $rootScope){
 		},
 		setTestScript : function(test){
 			test = test;
-			$rootScope.$broadcast('testChange', {test : test});
+			$rootScope.$broadcast('testChange', test);
 		},
 		setCodeScript : function (code){
 			code = code;
-			$rootScope.$broadcast('codeChange', {code : code});
+			$rootScope.$broadcast('codeChange', code);
 		},
 		getTestScript : function(){
 			return test;
