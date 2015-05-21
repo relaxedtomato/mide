@@ -1,6 +1,6 @@
 app.factory('CodeSnippetFactory', function(){
 	
-	var footerHotkeys = [
+	var brackets = [
 		{
 			display: "[ ]",
 			insertParam: "[]"
@@ -18,6 +18,57 @@ app.factory('CodeSnippetFactory', function(){
 			insertParam: "//"
 		},
 		{
+			display: "/*  */",
+			insertParam: "/* */"
+		},
+
+	];
+
+	var CodeSnippets = [
+		{
+			display: "fn",
+			insertParam: "function(){ }"
+		},
+		{
+			display: "for",
+			insertParam: "for(var i= ;i< ;i++){ }"
+		},
+		{
+			display: "while",
+			insertParam: "while( ){ }"
+		},
+		{
+			display: "do while",
+			insertParam: "do { } while( );"
+		},
+		{
+			display: "log",
+			insertParam: "console.log();"
+		},
+	];
+
+	var comparators = [
+		{
+			display: "!",
+			insertParam: "!"
+		},
+		{
+			display: "@",
+			insertParam: "@"
+		},
+		{
+			display: "#",
+			insertParam: "#"
+		},
+		{
+			display: "$",
+			insertParam: "$"
+		},
+		{
+			display: "%",
+			insertParam: "%"
+		},
+		{
 			display: "=",
 			insertParam: "="
 		},
@@ -28,27 +79,7 @@ app.factory('CodeSnippetFactory', function(){
 		{
 			display: ">",
 			insertParam: ">"
-		},
-		{
-			display: "/*  */",
-			insertParam: "/* */"
-		},
-
-	];
-
-	var CodeSnippets = [
-		{
-			display: "function",
-			insertParam: "function(){ }"
-		},
-		{
-			display: "for loop",
-			insertParam: "for(var i= ;i< ;i++){ }"
-		},
-		{
-			display: "log",
-			insertParam: "console.log();"
-		},
+		}
 	];
 
 	var footerMenu = [
@@ -57,12 +88,12 @@ app.factory('CodeSnippetFactory', function(){
 			data: CodeSnippets
 		},
 		{
-			display: "Syntax",
-			data: footerHotkeys
+			display: "Special",
+			data: comparators
 		},
 		{
-			display: "Create",
-			data: footerHotkeys
+			display: "Brackets",
+			data: brackets
 		}
 	];
 
