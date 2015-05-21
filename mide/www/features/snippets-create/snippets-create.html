@@ -1,0 +1,21 @@
+<ion-view view-title="Snippets - Create">
+	<ion-content>
+		<div class='list'>
+			<div class='item item-input-inset'>
+				<label class='item-input-wrapper'>
+					<input placeholder ='Enter Alias' type='text' ng-model='scope.snippet.display' > 
+				</label>
+				<button class='button button-small button-balanced' ng-click='create(snippet)'>
+	            CREATE
+	        	</button>
+	        </div>
+        </div>
+		<div class='editContainer'>
+            <textarea id='snippets-create' ng-model='snippet.insertParams' cmedit></textarea>
+        </div>
+	</ion-content>
+
+	<ion-footer-bar codekeyboard keyboard-attach style="height:auto;">
+		<snippetbuttons></snippetbuttons>
+	</ion-footer-bar>
+</ion-view>

@@ -21,22 +21,26 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
-.CodeMirror {
-  border: 1px solid #eee;
-  height: auto;
-  overflow:scroll;
+.resultsContainer{
+	.CodeMirror {
+		height : auto;
+	}
 }
 
-.resultsContainer .CodeMirror {
-	height : auto;
+.editContainer {
+	height: 100vh;
+	.CodeMirror {
+		min-height : 100%;
+		height: auto;
+	}
 }
 
-.editContainer .CodeMirror {
-
-}
-
-.readContainer .CodeMirror {
-	
+.readContainer {
+	height : 68vh;
+	.CodeMirror {
+		min-height: 100%;
+		height : auto;
+	}
 }
 
 div.jasmine_html-reporter {
