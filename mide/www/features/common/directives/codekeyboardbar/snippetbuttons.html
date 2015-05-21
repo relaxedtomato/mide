@@ -1,3 +1,10 @@
-<div class="buttons" ng-repeat="btn in btns" style="display:inline;">
-	<button class="button" ng-click="btnClick(btn)">{{btn.display}}</button>
+<div>
+	<button class="button button-assertive" ng-show="showOptions" ng-click="resetMenu()">Back</button>
+	<div class="buttons" ng-if="showOptions" ng-repeat="item in items" style="display:inline;">
+		<button class="button" ng-click="itemClick(item.insertParam)">{{item.display}}</button>
+	</div>
+
+	<div class="buttons" ng-show="!showOptions" ng-repeat="btn in btns" style="display:inline;">
+		<button class="button" ng-click="btnClick(btn.data)">{{btn.display}}</button>
+	</div>
 </div>

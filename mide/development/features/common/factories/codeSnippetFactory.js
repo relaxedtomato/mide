@@ -53,7 +53,7 @@ app.factory('CodeSnippetFactory', function(){
 
 	var footerMenu = [
 		{
-			display: "Code Snippets",
+			display: "Custom",
 			data: CodeSnippets
 		},
 		{
