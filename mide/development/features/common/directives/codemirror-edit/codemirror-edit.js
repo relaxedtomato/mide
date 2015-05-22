@@ -9,7 +9,7 @@ app.directive('cmedit', function(){
 				lineNumbers : true,
 				mode: 'javascript',
 				autofocus : true,
-				theme : 'twilight',
+				theme : 'monokai',
 				lineWrapping: true,
 				scrollbarStyle: "overlay"
 			});
@@ -23,6 +23,12 @@ app.directive('cmedit', function(){
 
 		    scope.$on("insert", function(event, text){
 		    	myCodeMirror.replaceSelection(text);
+		    	document.getElementById(attribute.id).focus();
+		    });
+
+		    myCodeMirror.on("blur", function (){
+		    	console.log("blur detected");
+		    	// document.getElementById(attribute.id).focus();
 		    });
 		}
 	};

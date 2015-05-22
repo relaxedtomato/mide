@@ -124,7 +124,7 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, Auth
         //   ref: function(){return 'chats';}
         // },
         {
-          name : 'Exercism',
+          name : 'Challenges',
           ref: function(){return 'exercism.view';}
         }
         // {

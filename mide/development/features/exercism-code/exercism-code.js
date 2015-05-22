@@ -22,7 +22,7 @@ app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state, Key
 	//passing this update function so that on text change in the directive the factory will be alerted
 	$scope.compile = function(code){
 		ExercismFactory.setCodeScript(code);
-		$state.go('exercism.compile');
+		// $state.go('exercism.compile');
 	};
 
 	$scope.insertFunc = KeyboardFactory.makeInsertFunc($scope);

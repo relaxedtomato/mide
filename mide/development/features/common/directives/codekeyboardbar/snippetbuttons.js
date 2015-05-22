@@ -17,7 +17,7 @@ app.directive('snippetbuttons', function(){
 				scope.showOptions = false;
 			};
 			scope.demo1 = function() {
-				var text = "var HelloWorld = function() {};\n\nHelloWorld.prototype.hello = function(name){\nname = name || 'world';\nreturn 'Hello, ' + name + '!';\n};";
+				var text = "var HelloWorld = function() {};\nHelloWorld.prototype.hello = function(name){name=name||'world';\nreturn 'Hello, ' + name + '!';};";
 				scope.insertFunc(text);
 			};
 			scope.demo2 = function() {
