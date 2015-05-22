@@ -4,22 +4,22 @@ app.factory('GistFactory',function($http,$q,ApiEndpoint){
     //TODO: Friend and code must be present
     //TODO: friends is an array of friend Mongo IDs
 
-    function shareGist(friends,code,description,fileName){
-        return $http.post(ApiEndPoint.url + '/users/shareGists',
-            {
-                friends:friends,
+    function shareGist(code,friends,description,fileName){
+        return $http.post(ApiEndpoint.url + '/gists/shareGists',
+            {gist : {
                 code:code,
+                friends:friends|| "555b623dfa9a65a43e9ec6d6",
                 description:description || 'no description',
                 fileName:fileName+".js" || 'no file name'
-            });
+            }});
     }
 
-    function queueGists(){
-        return $http.get(ApiEndpoint.url + '/users/gistsQueue');
+    function queuedGists(){
+        return $http.get(ApiEndpoint.url + '/gists/gistsQueue');
     }
 
     function createdGists(){
-        return $http.get(ApiEndpoint.url + '/users/createdGists')
+        return $http.get(ApiEndpoint.url + '/gists/createdGists')
     }
 
     return{

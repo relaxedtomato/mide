@@ -10,7 +10,7 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state){
+app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state, GistFactory){
 	$scope.name = ExercismFactory.getName();
 	$scope.code = ExercismFactory.getCodeScript();
 
@@ -19,4 +19,12 @@ app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state){
 		ExercismFactory.setCodeScript(code);
 		$state.go('exercism.compile');
 	};
+
+	$scope.share = function(code){
+		GistFactory.shareGist(code).then(gistShared);
+	}
+
+	gistShared = function(response){
+		console.log('gist shared',response);
+	}
 });
