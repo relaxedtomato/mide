@@ -10,7 +10,6 @@ app.directive('snippetbuttons', function(){
 				scope.items = data;
 			};
 			scope.itemClick = function(insertParam){
-				console.log(insertParam);
 				scope.insertFunc(insertParam);
 			};
 			scope.resetMenu = function(){

@@ -6,7 +6,7 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('SnippetsCreateCtrl', function($scope, KeyboardFactory, CodeSnippetFactory){
+app.controller('SnippetsCreateCtrl', function($scope, $state, KeyboardFactory, CodeSnippetFactory){
 	$scope.snippet = {
 		display : '',
 		insertParam : ''
@@ -15,6 +15,7 @@ app.controller('SnippetsCreateCtrl', function($scope, KeyboardFactory, CodeSnipp
 	$scope.insertFunc = KeyboardFactory.makeInsertFunc($scope);
 
 	$scope.create = function(snippet){
-		CodeSnippetFactory.addCodeSnippet(snippet);
+		CodeSnippetFactory.addSnippet(snippet);
+		$state.go('snippets');
 	};
 });
