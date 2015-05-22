@@ -22,7 +22,7 @@ app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state, Gis
 
 	$scope.share = function(code){
 		GistFactory.shareGist(code).then(gistShared);
-	}
+	};
 
 	gistShared = function(response){
 		console.log('gist shared',response);
