@@ -4,7 +4,7 @@ module.exports = router;
 
 router.use('/challenge', require('./challenge'));
 router.use('/user', require('./user')); //these are not restricted, anyone can access
-//router.use('/gists', require('./gists')); TODO: Remove git api calls to separate file
+router.use('/gists', require('./gists')); //TODO: Remove git api calls to separate file
 
 // Make sure this is after all of
 // the registered routes!

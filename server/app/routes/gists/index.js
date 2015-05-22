@@ -5,7 +5,6 @@ var _ = require('lodash');
 var path = require('path');
 var bluebird = require('bluebird');
 var githubInstance = require('../../api/github');
-
 function getUser(req,res,next){
     //console.log('req.user id',req.user.userId); //req.user is user ID, so convert to the full user before moving forward
     UserModel.findOne({_id:req.user.userId}).exec().then(userFound);
@@ -59,25 +58,26 @@ router.get('/gistsQueue',getUser,function(req,res,next){
 //TODO: Users can access all their gists, you may want to include and/or save the gist description as well
 //TODO: gist file name, description, and code
 //TODO: Add gists ID/TOKEN to Production ENV variables (currently in .gitignore)
-router.get('/shareGists',getUser,function(req,res,next){
+router.post('/shareGists',getUser,function(req,res,next){
+
     var user = req.user;
     //TODO: This is not proper async and only temp for testing since getUser is not available
-    UserModel.findOne({_id:gist.USER_ID1}).exec().then(function(data){
-        user = data;
-    });
+    //UserModel.findOne({_id:gist.USER_ID1}).exec().then(function(data){
+    //    user = data;
+    //});
 
     //TODO: store data from the front end
-    var friendId = gist.USER_ID2; //TODO: Save User ID on front-end as well req.body.friend.id ||
-    var code = gist.TEST_TEXT; //TODO: Front end must send code snippet req.body.gist.code ||
-    var description = gist.TEST_DESC; //TODO: req.body.gist.description ||
-    var fileName = gist.TEST_FILE; //TODO: Why is fileName underlined, req.body.gist.fileName ||
+    var friendId = req.body.gist.friends; //gist.USER_ID2; //TODO: Save User ID on front-end as well req.body.friend.id ||
+    var code = req.body.gist.code; //gist.TEST_TEXT; //TODO: Front end must send code snippet req.body.gist.code ||
+    var description = req.body.gist.description //gist.TEST_DESC; //TODO: req.body.gist.description ||
+    var fileName = req.body.gist.fileName //gist.TEST_FILE; //TODO: Why is fileName underlined, req.body.gist.fileName ||
 
     //Note: You can do multiple files as once as well.
     var input = {
         "description": description,
         "public": true,
         "files": {
-            fileName: {
+            fileName: { //TODO:, does this file name actually work?
                 "content": code
             }
         }
@@ -143,3 +143,5 @@ router.get('/createdGists',getUser,function(req,res,next){
 
     //TODO: Filter data using lo-dash before sending to the front end, sending all for now
 });
+
+module.exports = router;
