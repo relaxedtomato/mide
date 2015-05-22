@@ -24,10 +24,10 @@ app.controller('ExercismCompileCtrl', function($scope, ExercismFactory){
 
 
 	$scope.$on('testChange', function(event, data){
-		$scope.compiling.test = test;
+		$scope.compiling.test = data;
 	});
 
 	$scope.$on('codeChange', function(event, data){
-		$scope.compiling.code = code;
+		$scope.compiling.code = data;
 	});
 });
