@@ -1,8 +1,21 @@
-app.service('LocalStorage',function($localstorage,$cordovaNetwork){
+app.service('LocalStorage',function($localstorage){
     //if(
-    console.log();
+    //console.log($cordovaNetwork.getNetwork());
     if($localstorage.get('auth-token')){
-        console.log($cordovaNetwork.getNetwork());
+        //TODO: Test Network Connection on Device and Via Console Log
+
+        var connection = !false;
+
+        if(connection){
+            //sync data
+        } else {
+            //load data from localStorage
+            //you need to store to local storage at some point
+            //so anytime you touch any of the localStorage data, be sure to write to it
+        }
+        //If Internet Connection
+
+        //console.log($cordovaNetwork.getNetwork());
         //console.log(Connection.NONE);
     } else {
         //do nothing - welcome will handle un-auth users
