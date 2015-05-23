@@ -27,7 +27,7 @@ The native application is available through <a href="http://view.ionic.io/" targ
 ## External Libraries and Technologies Used
 
 We have used many open source technologies for completion of this project as follows:
-* Native Application
+* Mobile Application
   * Cordova  
   * Ionic
   * Angular
@@ -41,7 +41,6 @@ We have used many open source technologies for completion of this project as fol
   * JSON Web Tokens
 * Code Challenges
   * Exercism
-  * CodeWars
 
 ## Tests
 
