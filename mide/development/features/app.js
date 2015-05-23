@@ -26,8 +26,10 @@ var app = angular.module('mide', ['ionic', 'ionic.utils'])
 
 //TODO:This is needed to set to access the proxy url that will then in the ionic.project file redirect it to the correct URL
 .constant('ApiEndpoint', {
-  url : 'https://protected-reaches-5946.herokuapp.com/api'
+  url : 'http://localhost:9000/api'
 })
+
+//TODO:'https://protected-reaches-5946.herokuapp.com/api' - Deploy latest server before replacing
 
 .config(function($stateProvider, $urlRouterProvider) {
   // Ionic uses AngularUI Router which uses the concept of states
@@ -130,7 +132,7 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, Auth
         },
         {
           name : 'Exercises',
-          ref : function(){return 'exercises'; }
+          ref : function(){return 'exercises.view'; }
         },
         {
           name : 'My Snippets',

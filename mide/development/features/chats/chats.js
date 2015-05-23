@@ -1,29 +1,125 @@
 app.config(function($stateProvider, USER_ROLES){
 
   $stateProvider.state('chats', {
+      cache: false, //to ensure the controller is loading each time
       url: '/chats',
       templateUrl: 'features/chats/tab-chats.html',
       controller: 'ChatsCtrl',
-      data: {
-        authenticate: [USER_ROLES.public]
+      resolve: {
+        friends: function(FriendsFactory) {
+          return FriendsFactory.getFriends().then(function(response){
+            //console.log('response.data friends',response.data.friends);
+            return response.data.friends;
+          });
+        }
       }
     })
-    .state('chat-detail', {
-      url: '/chats/:chatId',
+    .state('chat-details', {
+      cache: false, //to ensure the controller is loading each time
+      url: '/chats/:id',
       templateUrl: 'features/chats/chat-detail.html',
       controller: 'ChatDetailCtrl'
     });
 });
 
-app.controller('ChatsCtrl', function($scope, Chats) {
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
+app.controller('ChatsCtrl', function($scope, Chats, FriendsFactory,friends, $state, GistFactory) {
+  console.log('hello world');
+  //$scope.chats = Chats.all();
+  //$scope.remove = function(chat) {
+  //  Chats.remove(chat);
+  //};
+
+  $scope.data = {};
+  $scope.friends = friends;
+
+  console.log('friends',friends);
+  //TODO: Add getFriends route as well and save to localStorage
+  //FriendsFactory.getFriends().then(function(response){
+  //  console.log('response.data friends',response.data.friends);
+  //  $scope.friends = response.data.friends;
+  //});
+
+  $scope.addFriend = function(){
+    console.log('addFriend clicked');
+    FriendsFactory.addFriend($scope.data.username).then(friendAdded, friendNotAdded);
   };
+
+  friendAdded = function(response){
+    console.log('friendAdded',response.data.friend);
+    $scope.friends.push(response.data.friend);
+  };
+
+  friendNotAdded = function(err){
+    console.log(err);
+  };
+
+  GistFactory.queuedGists().then(addSharedGistsToScope);
+
+  function addSharedGistsToScope(gists){
+    //console.log('addSharedGistsToScope',gists.data);
+    $scope.gists = gists.data;
+    FriendsFactory.setGists(gists.data);
+  }
+
+  $scope.sharedCode = function(id){
+    //console.log(id); //id of friend gist shared with
+    $state.go('chat-details',{id:id}, {inherit:false});
+  }
+
 });
 
-app.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+app.controller('ChatDetailCtrl', function($scope, $stateParams, FriendsFactory,$ionicModal) {
+  console.log('stateParams',$stateParams.id,'gists',FriendsFactory.getGists());
+  //$scope.chat = Chats.get($stateParams.chatId);
+  //TODO: These are all gists, you need to filter based on the user before place on scope.
+  $scope.gists = [];
+
+  //$scope.code = '';
+
+  var allGists = FriendsFactory.getGists() || [];
+
+  $scope.showCode = function(code){
+    console.log('showCode',code);
+    $scope.code = code;
+    $scope.openModal(code);
+  };
+
+  //TODO: Only show all Gists from specific user clicked on
+  //TODO: Need to apply JSON parse
+
+  allGists.forEach(function(gist){
+    if(gist.user === $stateParams.id){
+      $scope.gists.push(gist.gist.files.fileName.content);
+    }
+  });
+
+  $ionicModal.fromTemplateUrl('features/chats/code-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function(code) {
+    //console.log(code);
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
+  //$scope.gists = FriendsFactory.getGists();
+
 });
 
 app.factory('Chats', function() {
@@ -73,4 +169,40 @@ app.factory('Chats', function() {
       return null;
     }
   };
+});
+
+app.factory('FriendsFactory',function($http,$q,ApiEndpoint){
+  //get user to add and respond to user
+  var allGists = [];
+  var addFriend = function(friend){
+    //console.log(friend);
+    return $http.post(ApiEndpoint.url+"/user/addFriend",{friend:friend});
+  };
+
+  var getFriends = function(){
+    //console.log('getFriends called')
+    return $http.get(ApiEndpoint.url + "/user/getFriends");
+  };
+
+
+  //TODO: Remove Gists from FriendsFactory - should be in gist factory and loaded on start
+  //TODO: You need to refactor because you may end up on any page without any data because it was not available in the previous page (the previous page was not loaded)
+  var setGists = function(gists){
+    //console.log('setGists');
+    allGists = gists;
+  };
+
+  var getGists = function(){
+    console.log('allGists',allGists);
+    return allGists.gists;
+  };
+
+  return {
+    addFriend: addFriend,
+    getFriends: getFriends,
+    getGists: getGists,
+    setGists: setGists
+  };
+
+  //TODO: User is not logged in, so you cannot add a friend
 });
