@@ -24,30 +24,10 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope, 
 		$state.go('signup');
 	};
 
-<<<<<<< HEAD
 	var authReq = !false; //TODO: Toggle for using authentication work flow - require backend wired up
-=======
-	// if (AuthService.isAuthenticated()) {
-	// 	$rootScope.$broadcast('Auth');
-	// 	$scope.states.push({ //TODO: Need to add a parent controller to communicate
-	// 		name: 'Logout',
-	// 		ref: function(){
-	// 			AuthService.logout();
-	// 			$scope.data = {};
-	// 			$scope.states.pop(); //TODO: Find a better way to remove the Logout link, instead of pop
-	// 			$state.go('signup');
-	// 		}
-	// 	});
-	// 	$state.go('exercism.view');
-	// } else {
-	// 	// TODO: $state.go('signup'); Remove Below line
-	// 	// $state.go('exercism.view');
-	// }
-	var authReq = false; //TODO: Toggle for using authentication work flow - require backend wired up
->>>>>>> development
 
 	if (!authReq){
-		$state.go('exercism.view');
+		$state.go('exercism.view'); //TODO: If Auth is not required, go directly here
 	} else {
 		if (AuthService.isAuthenticated()) {
 			$rootScope.$broadcast('Auth');
@@ -96,7 +76,8 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope, 
 
 		} else {
 			//TODO: $state.go('signup'); Remove Below line
-			$state.go('signup');
+			//$state.go('signup');
+			//DO Nothing
 		}
 	}
 });
