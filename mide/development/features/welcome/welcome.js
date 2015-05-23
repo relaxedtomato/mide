@@ -5,10 +5,18 @@ app.config(function($stateProvider){
 		controller : 'WelcomeCtrl'
 	});
 });
-
 app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope, GistFactory, $ionicPopup){
 	//TODO: Splash page while you load resources (possible idea)
 	//console.log('WelcomeCtrl');
+	$scope.buttons = {
+		login : 'login',
+		signup : 'signup'
+	};
+
+	// ionic.Platform.ready(function(){
+	// 	ionic.Platform.showStatusBar(false);
+	// });
+
 	$scope.login = function(){
 		$state.go('login');
 	};
@@ -16,6 +24,22 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope, 
 		$state.go('signup');
 	};
 
+	// if (AuthService.isAuthenticated()) {
+	// 	$rootScope.$broadcast('Auth');
+	// 	$scope.states.push({ //TODO: Need to add a parent controller to communicate
+	// 		name: 'Logout',
+	// 		ref: function(){
+	// 			AuthService.logout();
+	// 			$scope.data = {};
+	// 			$scope.states.pop(); //TODO: Find a better way to remove the Logout link, instead of pop
+	// 			$state.go('signup');
+	// 		}
+	// 	});
+	// 	$state.go('exercism.view');
+	// } else {
+	// 	// TODO: $state.go('signup'); Remove Below line
+	// 	// $state.go('exercism.view');
+	// }
 	var authReq = false; //TODO: Toggle for using authentication work flow - require backend wired up
 
 	if (!authReq){
@@ -35,7 +59,7 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope, 
 
 			//pop-up options, view shared code or
 			//TODO: Happen on Login, recieve gist notification
-			GistFactory.queuedGists().then(gistsRx)
+			GistFactory.queuedGists().then(gistsRx);
 
 			function gistsRx(response){
 				console.log(response.data.gists);
@@ -54,14 +78,14 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope, 
 								$state.go('chats');
 							} else {
 								//console.log('You are not sure');
-								$state.go('exercism.view');
+								$state.go('exercism.compile');
 							}
 						});
 					};
 
 					showConfirm();
 				} else {
-					$state.go('exercism.view');
+					$state.go('exercism.compile');
 				}
 			}
 
