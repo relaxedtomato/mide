@@ -18,7 +18,7 @@ app.controller('LoginCtrl', function($rootScope, $scope, $ionicPopup, $state, Au
 		AuthService
 			.login($scope.data)
 			.then(function(authenticated){ //TODO:authenticated is what is returned
-				//console.log('login, tab.challenge-submit');
+				console.log('login successful',authenticated);
 				//$scope.menu = true;
 				$rootScope.$broadcast('Auth');
 				$scope.states.push({ //TODO: Need to add a parent controller to communicate
