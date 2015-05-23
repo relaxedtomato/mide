@@ -26,7 +26,7 @@ var app = angular.module('mide', ['ionic', 'ionic.utils', 'ngCordova'])
 
 //TODO:This is needed to set to access the proxy url that will then in the ionic.project file redirect it to the correct URL
 .constant('ApiEndpoint', {
-  url : 'https://protected-reaches-5946.herokuapp.com/api'
+  url : 'http://localhost:9000/api'
 })
 
 //TODO:'https://protected-reaches-5946.herokuapp.com/api' - Deploy latest server before replacing

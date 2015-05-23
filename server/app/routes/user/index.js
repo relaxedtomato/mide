@@ -41,20 +41,21 @@ function authenticate(req,res,next){
     UserModel.findOne({userName:body.username}).exec().then(userFound,userNotFound);
 
     function userFound(user){
-        console.log('userFound',user);
+        //console.log('userFound',user);
         //console.log('correctPassword check',user.correctPassword(body.password));
         if(user.correctPassword(body.password)){
             console.log('in here');
             req.user = user;
             next();
         } else {
-          console.log('ooops');
+          //console.log('ooops');
           //res.status(401).end('Username or password incorrect');
           userNotFound(user);
         }
     }
 
     function userNotFound(response){
+        console.log('Username or password incorrect');
         res.status(401).end('Username or password incorrect');
     }
 }
