@@ -15,7 +15,7 @@ The motivation for this project is to create an environment for individuals to l
 The repository is split into two folders: 
 
 ####_mide_
-This is where the native application. View folder <a href="https://github.com/RichardBansal/mide/tree/development/mide/development" target="_blank">development</a> to view the Angular code compiled by Ionic for native (iOS).
+This contains the mobile application. View folder <a href="https://github.com/RichardBansal/mide/tree/development/mide/development" target="_blank">development</a> to view the Angular code compiled by Ionic for native (iOS).
 
 ####_server_
 This is the Node backend server deployed to Heroku that the native application will access.
