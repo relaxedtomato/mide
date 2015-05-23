@@ -1,6 +1,6 @@
 #mide
 
-![](./mide/development/img/mide_logo_300x150.png = 200x100)
+<img src="./mide/development/img/mide_logo_300x150.png" width="300px"/>
 
 ## Synopsis
 
