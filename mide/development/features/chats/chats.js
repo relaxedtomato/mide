@@ -8,20 +8,20 @@ app.config(function($stateProvider, USER_ROLES){
       resolve: {
         friends: function(FriendsFactory) {
           return FriendsFactory.getFriends().then(function(response){
-            console.log('response.data friends',response.data.friends);
+            //console.log('response.data friends',response.data.friends);
             return response.data.friends;
           });
         }
       }
     })
     .state('chat-detail', {
-      url: '/chats/:chatId',
+      url: '/chats/:id',
       templateUrl: 'features/chats/chat-detail.html',
       controller: 'ChatDetailCtrl'
     });
 });
 
-app.controller('ChatsCtrl', function($scope, Chats, FriendsFactory,friends) {
+app.controller('ChatsCtrl', function($scope, Chats, FriendsFactory,friends, $state, GistFactory) {
   console.log('hello world');
   //$scope.chats = Chats.all();
   //$scope.remove = function(chat) {
@@ -52,10 +52,16 @@ app.controller('ChatsCtrl', function($scope, Chats, FriendsFactory,friends) {
     console.log(err);
   };
 
+  $scope.sharedCode = function(id){
+    console.log(id);
+    $state.go('chat-detail',{id:id}, {inherit:false});
+  }
+
 });
 
 app.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+  console.log('stateParams',$stateParams.id);
+  //$scope.chat = Chats.get($stateParams.chatId);
 
 });
 
@@ -111,7 +117,7 @@ app.factory('Chats', function() {
 app.factory('FriendsFactory',function($http,$q,ApiEndpoint){
   //get user to add and respond to user
   var addFriend = function(friend){
-    console.log(friend);
+    //console.log(friend);
     return $http.post(ApiEndpoint.url+"/user/addFriend",{friend:friend});
   };
 
