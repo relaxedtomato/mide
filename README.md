@@ -1,8 +1,10 @@
 #mide
 
+<img src="./mide/development/img/mide_logo_300x150.png" width="300px"/>
+
 ## Synopsis
 
-Mide is an native app to complete code challenges. Currently the application only support iOS.
+Mide is an Ionic mobile application that allows anyone to complete coding challenges or code offline. It features a customizable keyboard bar that can insert pre-defined code snippets to write with ease.
 
 ## Motivation
 
