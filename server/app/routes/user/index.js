@@ -35,7 +35,7 @@ function getUser(req,res,next){
 function authenticate(req,res,next){
     var body = req.body;
     if (!body.username || !body.password) {
-        res.sendStatus(400)//.end('Must provide username and/or password');
+        res.sendStatus(400) //.end('Must provide username and/or password');
     }
     //TODO: Check if data.username is username or email
     UserModel.findOne({userName:body.username}).exec().then(userFound,userNotFound);

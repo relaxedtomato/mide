@@ -14,7 +14,8 @@ app.config(function($stateProvider, USER_ROLES){
         }
       }
     })
-    .state('chat-detail', {
+    .state('chat-details', {
+      cache: false, //to ensure the controller is loading each time
       url: '/chats/:id',
       templateUrl: 'features/chats/chat-detail.html',
       controller: 'ChatDetailCtrl'
@@ -52,16 +53,40 @@ app.controller('ChatsCtrl', function($scope, Chats, FriendsFactory,friends, $sta
     console.log(err);
   };
 
+  GistFactory.queuedGists().then(addSharedGistsToScope);
+
+  function addSharedGistsToScope(gists){
+    //console.log('addSharedGistsToScope',gists.data);
+    $scope.gists = gists.data;
+    FriendsFactory.setGists(gists.data);
+  }
+
   $scope.sharedCode = function(id){
-    console.log(id);
-    $state.go('chat-detail',{id:id}, {inherit:false});
+    //console.log(id); //id of friend gist shared with
+    $state.go('chat-details',{id:id}, {inherit:false});
   }
 
 });
 
-app.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  console.log('stateParams',$stateParams.id);
+app.controller('ChatDetailCtrl', function($scope, $stateParams, FriendsFactory) {
+  console.log('stateParams',$stateParams.id,'gists',FriendsFactory.getGists());
   //$scope.chat = Chats.get($stateParams.chatId);
+  //TODO: These are all gists, you need to filter based on the user before place on scope.
+  $scope.gists = [];
+
+  var allGists = FriendsFactory.getGists() || [];
+
+
+  //TODO: Only show all Gists from specific user clicked on
+  //TODO: Need to apply JSON parse
+
+  allGists.forEach(function(gist){
+    if(gist.user === $stateParams.id){
+      $scope.gists.push(gist.gist.files.fileName.content);
+    }
+  });
+
+  //$scope.gists = FriendsFactory.getGists();
 
 });
 
@@ -116,6 +141,7 @@ app.factory('Chats', function() {
 
 app.factory('FriendsFactory',function($http,$q,ApiEndpoint){
   //get user to add and respond to user
+  var allGists = [];
   var addFriend = function(friend){
     //console.log(friend);
     return $http.post(ApiEndpoint.url+"/user/addFriend",{friend:friend});
@@ -126,9 +152,24 @@ app.factory('FriendsFactory',function($http,$q,ApiEndpoint){
     return $http.get(ApiEndpoint.url + "/user/getFriends");
   };
 
+
+  //TODO: Remove Gists from FriendsFactory - should be in gist factory and loaded on start
+  //TODO: You need to refactor because you may end up on any page without any data because it was not available in the previous page (the previous page was not loaded)
+  var setGists = function(gists){
+    //console.log('setGists');
+    allGists = gists;
+  };
+
+  var getGists = function(){
+    console.log('allGists',allGists);
+    return allGists.gists;
+  };
+
   return {
     addFriend: addFriend,
-    getFriends: getFriends
+    getFriends: getFriends,
+    getGists: getGists,
+    setGists: setGists
   };
 
   //TODO: User is not logged in, so you cannot add a friend

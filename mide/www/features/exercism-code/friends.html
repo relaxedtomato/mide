@@ -4,7 +4,7 @@
             <div ng-repeat="friend in data.friends">
                 <ion-checkbox ng-model="isChecked[friend._id]">{{friend.userName}}</ion-checkbox>
             </div>
-            <button ng-click="send()">Send</button>
+            <button ng-click="send(code)">Send</button>
         </form>
     </ion-content>
 </ion-popover-view>

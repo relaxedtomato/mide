@@ -10,7 +10,7 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state, GistFactory,$ionicPopup,$ionicPopover,FriendsFactory){
+app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state){
 	$scope.name = ExercismFactory.getName();
 	$scope.code = ExercismFactory.getCodeScript();
 
@@ -21,61 +21,59 @@ app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state, Gis
 	};
 
 	//TODO: Cleanup GistFactory.shareGist(code,$scope.data.friends).then(gistShared);
-
-	FriendsFactory.getFriends().then(addFriends);
-	$scope.data = [];
-	$scope.isChecked = [];
-	function addFriends(response){
-		console.log('addFriends',response.data.friends);
-		$scope.data.friends = response.data.friends;
-	};
-
-	//$scope.$watch('isChecked',function(){
-	//	console.log($scope.isChecked);
-	//});
-	$scope.send = function(){
-		//console.log($scope.isChecked);
-		GistFactory.shareGist(ExercismFactory.getCodeScript(),Object.keys($scope.isChecked)).then(gistShared);
-	};
-
-	//$scope.share = function(code){
-	// .fromTemplate() method
-	//var template = '';
-	//$scope.popover = $ionicPopover.fromTemplate(template, {
-	//	scope: $scope
-	//});
-
-	// .fromTemplateUrl() method
-	$ionicPopover.fromTemplateUrl('features/exercism-code/friends.html', {
-		scope: $scope
-	}).then(function(popover) {
-		$scope.popover = popover;
-	});
-
-	$scope.openPopover = function($event) {
-		$scope.popover.show($event);
-	};
-	$scope.closePopover = function() {
-		$scope.popover.hide();
-	};
-	//Cleanup the popover when we're done with it!
-	$scope.$on('$destroy', function() {
-		$scope.popover.remove();
-	});
-	// Execute action on hide popover
-	$scope.$on('popover.hidden', function() {
-		// Execute action
-	});
-	// Execute action on remove popover
-	$scope.$on('popover.removed', function() {
-		// Execute action
-	});
-	//};
-
-	gistShared = function(response){
-		console.log('gist shared',response);
-		$scope.closePopover();
-	};
+		//FriendsFactory.getFriends().then(addFriends);
+		//$scope.data = [];
+		//$scope.isChecked = [];
+		//function addFriends(response){
+		//	console.log('addFriends',response.data.friends);
+		//	$scope.data.friends = response.data.friends;
+		//};
+		//$scope.$watch('isChecked',function(){
+		//	console.log($scope.isChecked);
+		//});
+		//$scope.send = function(code){
+		//	console.log('!@?!@#',ExercismFactory.getCodeScript(),code);
+		//	GistFactory.shareGist($scope.code,Object.keys($scope.isChecked)).then(gistShared);
+		//};
+		//
+		////$scope.share = function(code){
+		//// .fromTemplate() method
+		////var template = '';
+		////$scope.popover = $ionicPopover.fromTemplate(template, {
+		////	scope: $scope
+		////});
+		//
+		//// .fromTemplateUrl() method
+		//$ionicPopover.fromTemplateUrl('features/exercism-code/friends.html', {
+		//	scope: $scope
+		//}).then(function(popover) {
+		//	$scope.popover = popover;
+		//});
+		//
+		//$scope.openPopover = function($event) {
+		//	$scope.popover.show($event);
+		//};
+		//$scope.closePopover = function() {
+		//	$scope.popover.hide();
+		//};
+		////Cleanup the popover when we're done with it!
+		//$scope.$on('$destroy', function() {
+		//	$scope.popover.remove();
+		//});
+		//// Execute action on hide popover
+		//$scope.$on('popover.hidden', function() {
+		//	// Execute action
+		//});
+		//// Execute action on remove popover
+		//$scope.$on('popover.removed', function() {
+		//	// Execute action
+		//});
+		////};
+		//
+		//gistShared = function(response){
+		//	console.log('gist shared',response);
+		//	$scope.closePopover();
+		//};
 });
 
 //$scope.showPopup = function() {

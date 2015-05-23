@@ -28,7 +28,12 @@ var userSchema = new mongoose.Schema({
     friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
     challengesCompleted: {type:Number},
     gists:[{type:String}],
-    gistsQueue: [{type:String}]
+    gistsQueue: [
+                    {
+                     user:{type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+                     gist:String
+                    }
+                ]
 }, schemaOptions);
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations

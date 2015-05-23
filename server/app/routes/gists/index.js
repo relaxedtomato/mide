@@ -30,26 +30,32 @@ router.get('/gistsQueue',getUser,function(req,res,next){
     var user = req.user;
     var gistPromiseArr = [];
 
-    user.gistsQueue.forEach(function(gistId){ //{id:gistId}
+    //TODO: Instance method to clear gistsQueue after they have been sent to stop rx
+    user.gistsQueue.forEach(function(gist){ //{id:gistId}
         //TODO: Not sure if this matches the npm library
-        gistPromiseArr.push(getGistAsync({id:gistId}));
+        gistPromiseArr.push(getGistAsync({id:gist.gist},gist.user));
     });
 
     bluebird.all(gistPromiseArr).then(sendGists);
 
     function sendGists(response){
+        console.log('sendGists',response);
         res.send({
             gists:response
         });
     }
 
     //TODO: Test if this actually works
-    function getGistAsync(obj){
+    function getGistAsync(obj,user){
         return new bluebird(function(resolve,reject){
             githubInstance.gists.get(obj,function(err,data){
                 if(err) reject(err);
                 else {
-                    return resolve(data);
+                    return resolve(
+                        {
+                            user: user,
+                            gist: _.pick(data,'files')
+                        })
                 }
             });
         });
@@ -67,7 +73,7 @@ router.post('/shareGists',getUser,function(req,res,next){
     //});
 
     //TODO: store data from the front end
-    var friendId = req.body.gist.friends; //gist.USER_ID2; //TODO: Save User ID on front-end as well req.body.friend.id ||
+    var friends = req.body.gist.friends; //gist.USER_ID2; //TODO: Save User ID on front-end as well req.body.friend.id ||
     var code = req.body.gist.code; //gist.TEST_TEXT; //TODO: Front end must send code snippet req.body.gist.code ||
     var description = req.body.gist.description //gist.TEST_DESC; //TODO: req.body.gist.description ||
     var fileName = req.body.gist.fileName //gist.TEST_FILE; //TODO: Why is fileName underlined, req.body.gist.fileName ||
@@ -88,20 +94,37 @@ router.post('/shareGists',getUser,function(req,res,next){
     githubInstance.gists.create(input,function(err,response){
         //TODO: send over user ID on get and add friends as well
 
-        user.gists.push(response.id); //gist id to save
-        user.saveAsync()
-            .then(findFriend)
-            .then(addToFriendQueue)
-            .then(sendResponse);
-
-        //TODO: General error handling for the app
-        function findFriend(){
-            return UserModel.findOne({_id:friendId}).exec()
+        if(err){
+            console.log(err);
+        } else {
+            //console.log(response.id);
+            user.gists.push(response.id); //gist id to save
+            user.saveAsync()
+                .then(findFriends)
+                .then(addToFriendsQueue)
+                .then(sendResponse);
         }
 
-        function addToFriendQueue(friend){
-            friend.gistsQueue.push(response.id);
-            return friend.saveAsync();
+        //TODO: General error handling for the app
+        //TODO: If no friend found, first one is returned, to be fixed
+
+        //TODO: Handle sending to multiple friends
+        function findFriends(){
+            var friendsPromise = [];
+            friends.forEach(function(id){
+                friendsPromise.push(UserModel.findOne({_id:id}).exec());
+            });
+            return bluebird.all(friendsPromise);
+        }
+
+        function addToFriendsQueue(friends){
+            var friendsPromise = [];
+            friends.forEach(function(friend){
+                friend.gistsQueue.push({user:user,gist:response.id});
+                friendsPromise.push(friend.saveAsync());
+            });
+
+            return bluebird.all(friendsPromise);
         }
 
         function sendResponse(){
