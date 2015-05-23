@@ -113,26 +113,26 @@ app.controller('MainCtrl', function($rootScope,$scope, $ionicSideMenuDelegate, $
 app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, AuthService, $rootScope){
 
     $scope.states = [
-        {
-          name : 'Account',
-          ref : function(){return 'account';}
-        },
-        {
-          name : 'Sandbox',
-          ref : function(){return 'sandbox.code';}
-        },
-        {
-          name : 'Chats',
-          ref: function(){return 'chats';}
-        },
+        //{
+        //  name : 'Account',
+        //  ref : function(){return 'account';}
+        //},
         {
           name : 'Exercism',
           ref: function(){return 'exercism.view';}
         },
         {
-          name : 'Exercises',
-          ref : function(){return 'exercises'; }
+            name : 'Friends',
+            ref: function(){return 'friends';}
         },
+        {
+            name : 'Sandbox',
+            ref : function(){return 'sandbox.code';}
+        },
+        //{
+        //  name : 'Exercises',
+        //  ref : function(){return 'exercises'; }
+        //},
         {
           name : 'Snippets',
           ref : function (){return 'snippets';}

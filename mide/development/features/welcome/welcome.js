@@ -51,7 +51,7 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope, 
 						confirmPopup.then(function(res) {
 							if(res) {
 								//console.log('You are sure');
-								$state.go('chats');
+								$state.go('friends');
 							} else {
 								//console.log('You are not sure');
 								$state.go('exercism.view');
