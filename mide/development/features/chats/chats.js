@@ -19,7 +19,13 @@ app.config(function($stateProvider, USER_ROLES){
       url: '/chats/:id',
       templateUrl: 'features/chats/chat-detail.html',
       controller: 'ChatDetailCtrl'
-    });
+    })
+    .state('chat-code', {
+      cache: false, //to ensure the controller is loading each time
+      url: '/chats/code',
+      templateUrl: 'features/chats/chat-code.html',
+      controller: 'ChatCodeCtrl'
+    })
 });
 
 app.controller('ChatsCtrl', function($scope, Chats, FriendsFactory,friends, $state, GistFactory) {
@@ -68,7 +74,16 @@ app.controller('ChatsCtrl', function($scope, Chats, FriendsFactory,friends, $sta
 
 });
 
-app.controller('ChatDetailCtrl', function($scope, $stateParams, FriendsFactory,$ionicModal) {
+app.controller('ChatCodeCtrl', function($scope){
+
+
+  //TODO:
+  //var allGists = FriendsFactory.getGists();
+  $scope.code = "testing123testing123testing123testing123testing123testing123testing123testing123testing123testing123testing123testing123";
+
+});
+
+app.controller('ChatDetailCtrl', function($scope, $stateParams, FriendsFactory,$ionicModal,$state) {
   console.log('stateParams',$stateParams.id,'gists',FriendsFactory.getGists());
   //$scope.chat = Chats.get($stateParams.chatId);
   //TODO: These are all gists, you need to filter based on the user before place on scope.
@@ -79,9 +94,10 @@ app.controller('ChatDetailCtrl', function($scope, $stateParams, FriendsFactory,$
   var allGists = FriendsFactory.getGists() || [];
 
   $scope.showCode = function(code){
-    console.log('showCode',code);
-    $scope.code = code;
-    $scope.openModal(code);
+    $state.go('chat-code'); //TODO: which one was clicked, send param id, index of gist
+    //console.log('showCode',code);
+    //$scope.code = code;
+    //$scope.openModal(code);
   };
 
   //TODO: Only show all Gists from specific user clicked on
@@ -95,6 +111,7 @@ app.controller('ChatDetailCtrl', function($scope, $stateParams, FriendsFactory,$
 
   $ionicModal.fromTemplateUrl('features/chats/code-modal.html', {
     scope: $scope,
+    cache: false,
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.modal = modal;
