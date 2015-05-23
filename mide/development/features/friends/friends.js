@@ -74,12 +74,20 @@ app.controller('FriendsCtrl', function($scope, FriendsFactory,friends, $state, G
 
 });
 
-app.controller('ViewCodeCtrl', function($scope, $stateParams, FriendsFactory){
+app.controller('ViewCodeCtrl', function($state,$scope, $stateParams, FriendsFactory){
 
 
   //TODO:
   //var allGists = FriendsFactory.getGists();
   $scope.code = FriendsFactory.userGists[$stateParams.id];
+
+  $scope.goBack = function(n){
+    if(n===1){
+      $state.go('shared-gists');
+    } else {
+      $state.go('friends');
+    }
+  }
 
 });
 
@@ -91,6 +99,10 @@ app.controller('SharedGistsCtrl', function($scope, $stateParams, FriendsFactory,
   //$scope.code = '';
 
   var allGists = FriendsFactory.getGists() || [];
+
+  $scope.goBack = function(){
+    $state.go('friends');
+  }
 
   $scope.showCode = function(gistIndex){
     console.log(gistIndex);
