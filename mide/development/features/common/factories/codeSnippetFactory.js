@@ -123,18 +123,49 @@ app.factory('CodeSnippetFactory', function($rootScope){
 		getFooterMenu : function(){
 			return footerMenu;
 		},
-		addCodeSnippet : function(obj){
+		addSnippet : function(obj){
+			console.log(obj);
 			codeSnippets.push(obj);
-			$rootScope.$broadcast('footerUpdated', footerMenu);
+			$rootScope.$broadcast('footerUpdated', this.getFooterMenu());
 		},
-		deleteCodeSnippet : function(display){
-			codeSnippets = codeSnippets.filter(function(el){
-				return el.display !== display;
+		deleteSnippet : function(id){
+			codeSnippets.splice(id, 1);
+			$rootScope.$broadcast('footerUpdated', this.getFooterMenu());
+		},
+		getAllSnippets : function(){
+			return codeSnippets.map(function(el, index){
+				el.id = index;
+				return el;
 			});
-			$rootScope.$broadcast('footerUpdated', footerMenu);
 		},
-		getCodeSnippets : function(){
-			return codeSnippets;
+		editSnippet : function(id, changes){
+			for(var key in codeSnippets[id]){
+				codeSnippets[id][key] = changes[key];
+			}
+			$rootScope.$broadcast('footerUpdated', this.getFooterMenu());
+		},
+		getSnippet : function(id){
+			return codeSnippets[id];
+		},
+		getSomeSnippets : function(text){
+			function replaceTSN (str){
+				return str.replace('/(\n|\t|\s)+/g', '');
+			}
+
+			function checkObject(check){
+				if (arguments.length > 1){
+					var args = [].prototype.slice.call(arguments,0);
+					args.shift();
+					return args.filter(function(el){
+						return replaceTSN(el) === replaceTSN(check);
+					}).length > 0;
+				}
+				else throw new Error('Please check');
+			}
+
+			return codeSnippets.filter(function(el){
+				return checkObject(text, el.display, el.insertParam);
+			});
 		}
 	};
 });

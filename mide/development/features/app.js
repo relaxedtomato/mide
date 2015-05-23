@@ -25,8 +25,10 @@ var app = angular.module('mide', ['ionic', 'ionic.utils'])
 
 //TODO:This is needed to set to access the proxy url that will then in the ionic.project file redirect it to the correct URL
 .constant('ApiEndpoint', {
-  url : 'https://protected-reaches-5946.herokuapp.com/api'
+  url : 'http://localhost:9000/api'
 })
+
+//TODO:'https://protected-reaches-5946.herokuapp.com/api' - Deploy latest server before replacing
 
 .config(function($stateProvider, $urlRouterProvider) {
   // Ionic uses AngularUI Router which uses the concept of states
@@ -36,7 +38,7 @@ var app = angular.module('mide', ['ionic', 'ionic.utils'])
   // if none of the above states are matched, use this as the fallback
   // $urlRouterProvider.otherwise('/challenge/view'); //TODO: Albert testing this route
 
-  $urlRouterProvider.otherwise('/exercism/view'); // TODO: Richard testing this route
+  $urlRouterProvider.otherwise('/welcome'); // TODO: Richard testing this route
   //$urlRouterProvider.otherwise('challenge.view'); //TODO: Tony testing this route
   // $urlRouterProvider.otherwise('welcome');
 
@@ -119,13 +121,25 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, Auth
           name : 'Sandbox',
           ref : function(){return 'sandbox.code';}
         },
-        // {
-        //   name : 'Chats',
-        //   ref: function(){return 'chats';}
-        // },
+        {
+          name : 'Chats',
+          ref: function(){return 'chats';}
+        },
         {
           name : 'Challenges',
-          ref: function(){return 'exercism.view';}
+          ref: function(){return 'exercism.compile';}
+        },
+        {
+          name : 'Exercises',
+          ref : function(){return 'exercises.view'; }
+        },
+        {
+          name : 'My Snippets',
+          ref : function (){return 'snippets';}
+        },
+        {
+          name : 'About',
+          ref : function(){ return 'about';}
         }
         // {
         //   name : 'Create Challenges',
