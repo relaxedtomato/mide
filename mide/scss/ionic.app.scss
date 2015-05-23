@@ -21,6 +21,43 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+.background {
+	background-color: rgb(38, 38, 38);
+	height: 100vh;
+	.row {
+		text-align: center;
+		h4 {
+			color: #ffffff;
+			text-decoration: underline;
+		}
+		ul {
+			margin-left: auto;
+			margin-right : auto;
+		}
+		p {
+			font-size: 16px;
+			color: #ffffff;
+		}
+	}
+}
+
+button.welcome {
+	margin: 5px;
+}
+
+div.welcome {
+	margin-left:25%;
+}
+
+.code-view {
+	padding : 15px;
+}
+
+.logo {
+	width : 100%;
+	height : auto;
+}
+
 .resultsContainer{
 	.CodeMirror {
 		height : auto;

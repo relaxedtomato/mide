@@ -1,4 +1,17 @@
-<ion-view view-title="Splash">
+<ion-view>
   <ion-content>
+  	<div class='background'>
+  		<div class='row row-center'>
+  			<img class='logo' ng-src='img/mide_logo_300x150.png' />
+  		</div>
+  		<div class='row welcome'>
+          <button class='button welcome col-25' ng-click='login()'>
+  	  			{{buttons.login | uppercase}}
+  	  		</button>
+  	  		<button class='button welcome col-25' ng-click='signup()'>
+  	  			{{buttons.signup | uppercase}}
+  	  		</button>
+	  	</div>
+    </div>
   </ion-content>
 </ion-view>

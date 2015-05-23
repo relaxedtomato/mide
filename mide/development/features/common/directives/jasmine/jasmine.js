@@ -200,35 +200,21 @@ app.factory('JasmineReporter', function(){
 		var myReporter = {
 
 			jasmineStarted: function(options){
-				console.log(options);
 				suites = [];
-				scope.totalSpecs = options.totalSpecsDefined;
 			},
 			suiteStarted: function(suite){
-				console.log('this is the suite started');
-				console.log(suite);
-				scope.suiteStarted = suite;
 				currentSuite = new Suite(suite);
 			},
 			specStarted: function(spec){
-				console.log('this is the spec started');
-				console.log(spec);
 				scope.specStarted = spec;
 			},
 			specDone: function(spec){
-				console.log('this is the spec done');
-				console.log(spec);
-				scope.specDone = spec;
 				currentSuite.specs.push(spec);
 			},
 			suiteDone: function(suite){
-				console.log('this is the suite done');
-				console.log(suite);
-				scope.suiteDone = suite;
 				suites.push(currentSuite);
 			},
 			jasmineDone: function(){
-				console.log('Finished suite');
 				scope.suites = suites;
 			}
 		};

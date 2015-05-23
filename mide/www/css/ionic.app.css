@@ -7675,6 +7675,34 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.background {
+  background-color: #262626;
+  height: 100vh; }
+  .background .row {
+    text-align: center; }
+    .background .row h4 {
+      color: #ffffff;
+      text-decoration: underline; }
+    .background .row ul {
+      margin-left: auto;
+      margin-right: auto; }
+    .background .row p {
+      font-size: 16px;
+      color: #ffffff; }
+
+button.welcome {
+  margin: 5px; }
+
+div.welcome {
+  margin-left: 25%; }
+
+.code-view {
+  padding: 15px; }
+
+.logo {
+  width: 100%;
+  height: auto; }
+
 .resultsContainer .CodeMirror {
   height: auto; }
 
