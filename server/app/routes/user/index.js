@@ -48,6 +48,7 @@ function authenticate(req,res,next){
             req.user = user;
             next();
         } else {
+          console.log('ooops');
           //res.status(401).end('Username or password incorrect');
           userNotFound(user);
         }
