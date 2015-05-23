@@ -13,7 +13,7 @@ var app = angular.module('mide', ['ionic', 'ionic.utils'])
     // for form inputs)
     // $locationProvider.html5Mode(true);
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-        console.log("does reg window work?");
+
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
     }
@@ -37,7 +37,7 @@ var app = angular.module('mide', ['ionic', 'ionic.utils'])
   // if none of the above states are matched, use this as the fallback
   // $urlRouterProvider.otherwise('/challenge/view'); //TODO: Albert testing this route
 
-  $urlRouterProvider.otherwise('/snippets/create'); // TODO: Richard testing this route
+  $urlRouterProvider.otherwise('/welcome'); // TODO: Richard testing this route
   //$urlRouterProvider.otherwise('challenge.view'); //TODO: Tony testing this route
   // $urlRouterProvider.otherwise('welcome');
 
@@ -125,16 +125,20 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, Auth
           ref: function(){return 'chats';}
         },
         {
-          name : 'Exercism',
-          ref: function(){return 'exercism.view';}
+          name : 'Challenges',
+          ref: function(){return 'exercism.compile';}
         },
         {
           name : 'Exercises',
           ref : function(){return 'exercises'; }
         },
         {
-          name : 'Snippets',
+          name : 'My Snippets',
           ref : function (){return 'snippets';}
+        },
+        {
+          name : 'About',
+          ref : function(){ return 'about';}
         }
     ];
 

@@ -6,9 +6,18 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope){
+app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope, $ionicPlatform){
 	//TODO: Splash page while you load resources (possible idea)
 	//console.log('WelcomeCtrl');
+	$scope.buttons = {
+		login : 'login',
+		signup : 'signup'
+	};
+
+	// ionic.Platform.ready(function(){
+	// 	ionic.Platform.showStatusBar(false);
+	// });
+
 	$scope.login = function(){
 		$state.go('login');
 	};
@@ -16,20 +25,20 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope){
 		$state.go('signup');
 	};
 
-	if (AuthService.isAuthenticated()) {
-		$rootScope.$broadcast('Auth');
-		$scope.states.push({ //TODO: Need to add a parent controller to communicate
-			name: 'Logout',
-			ref: function(){
-				AuthService.logout();
-				$scope.data = {};
-				$scope.states.pop(); //TODO: Find a better way to remove the Logout link, instead of pop
-				$state.go('signup');
-			}
-		});
-		$state.go('exercism.view');
-	} else {
-		//TODO: $state.go('signup'); Remove Below line
-		$state.go('exercism.view');
-	}
+	// if (AuthService.isAuthenticated()) {
+	// 	$rootScope.$broadcast('Auth');
+	// 	$scope.states.push({ //TODO: Need to add a parent controller to communicate
+	// 		name: 'Logout',
+	// 		ref: function(){
+	// 			AuthService.logout();
+	// 			$scope.data = {};
+	// 			$scope.states.pop(); //TODO: Find a better way to remove the Logout link, instead of pop
+	// 			$state.go('signup');
+	// 		}
+	// 	});
+	// 	$state.go('exercism.view');
+	// } else {
+	// 	// TODO: $state.go('signup'); Remove Below line
+	// 	// $state.go('exercism.view');
+	// }
 });
