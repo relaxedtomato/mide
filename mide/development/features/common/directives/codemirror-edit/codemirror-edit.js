@@ -1,29 +1,28 @@
 app.directive('cmedit', function(){
 	return {
 		restrict : 'A',
-		scope: {
-			ngModel : '=',
-			updatefunc: '='
-		},
-		link : function(scope, element, attribute){
-			var updateText = function(){
-				var newValue = myCodeMirror.getValue();
-				scope.ngModel = newValue;
-				if(scope.updatefunc) scope.updatefunc(newValue);
-				scope.$apply();
-			};
+		require: 'ngModel',
+		link : function(scope, element, attribute, ngModelCtrl){
 			//initialize CodeMirror
-			var myCodeMirror = CodeMirror.fromTextArea(document.getElementById(attribute.id), {
+			var myCodeMirror;
+			myCodeMirror = CodeMirror.fromTextArea(document.getElementById(attribute.id), {
 				lineNumbers : true,
 				mode: 'javascript',
 				autofocus : true,
 				theme : 'twilight',
-				lineWrapping: true
+				lineWrapping: true,
+				scrollbarStyle: "overlay"
 			});
-			myCodeMirror.setValue(scope.ngModel);
+			ngModelCtrl.$render = function(){
+				myCodeMirror.setValue(ngModelCtrl.$viewValue || '');
+			};
 
 			myCodeMirror.on("change", function (myCodeMirror, changeObj){
-		    	updateText();
+		    	ngModelCtrl.$setViewValue(myCodeMirror.getValue());
+		    });
+
+		    scope.$on("insert", function(event, text){
+		    	myCodeMirror.replaceSelection(text);
 		    });
 		}
 	};

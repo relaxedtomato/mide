@@ -1,0 +1,22 @@
+<ion-view view-title="Sandbox">
+	<ion-content>
+        <div class='row' style='padding:0px;'>
+            <button class='button button-balanced col' ng-click='compile(code.text)' style =''>
+                {{buttons.compile | uppercase}}
+            </button>
+            <button class='button button-assertive col' ng-click='save(code.text)'>
+                {{buttons.save | uppercase}}
+            </button>
+        </div>
+        <div class='editContainer'>
+            <textarea id='code' ng-model='code.text' cmedit></textarea>
+        </div>
+	</ion-content>
+   <ion-footer-bar class="bar-stable" keyboard-attach codekeyboard>
+      <snippetbuttons></snippetbuttons>
+  </ion-footer-bar>
+
+
+</ion-view>
+
+

@@ -1,0 +1,15 @@
+<ion-view view-title="Snippets">
+	<ion-content>
+		<button ng-click='create()' class='button button-full button-balanced'>CREATE</button>
+		<ion-list>
+	      <ion-item class="item-remove-animate item-icon-right" ng-repeat="snippet in snippets" type="item-text-wrap" href="#/snippet/{{snippet.id}}">
+	        <h2>{{snippet.display}}</h2>
+	        <p>{{snippet.insertParam}}</p>
+	        <i class="icon ion-chevron-right icon-accessory"></i>
+	        <ion-option-button class="button-assertive" ng-click="remove(snippet.id)">
+	          Delete
+	        </ion-option-button>
+	      </ion-item>
+	    </ion-list>
+	</ion-content>
+</ion-view>

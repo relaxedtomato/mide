@@ -11,11 +11,16 @@ app.config(function($stateProvider){
 });
 
 app.controller('ExercismTestCtrl', function($scope, ExercismFactory){
-	$scope.name = ExercismFactory.getName();
-	$scope.test = ExercismFactory.getTestScript();
 
-	//passing this update function so that on text change in the directive the factory will be alerted
-	$scope.updatefunc = function(newValue){
-		ExercismFactory.setTestScript(newValue);
+	$scope.name = ExercismFactory.getName();
+
+	$scope.test = {
+		text: null
 	};
+
+	$scope.test.text = ExercismFactory.getTestScript();
+
+	$scope.$watch('test.text', function(newValue){
+		ExercismFactory.setTestScript(newValue);
+	});
 });

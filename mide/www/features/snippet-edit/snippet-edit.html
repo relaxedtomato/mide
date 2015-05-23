@@ -1,0 +1,31 @@
+<ion-view view-title="Snippet - Edit">
+	<ion-content>
+		<div class='list'>
+			<div class='item row'>
+				<button class='button button-calm col' ng-click='cancel()'>
+	            	{{buttons.cancel | uppercase}}
+	        	</button>
+	        	<button class='button button-balanced col' ng-click='delete()'>
+	            	{{buttons.delete | uppercase}}
+	        	</button>
+			</div>
+			<div class='item item-input-inset'>
+				<label class='item-input-wrapper'>
+					<input placeholder ='Enter Alias' type='text' ng-model='snippet.display' > 
+				</label>
+				<button class='button button-small button-balanced' ng-click='edit(snippet)'>
+	            	{{buttons.edit | uppercase}}
+	        	</button>
+	        </div>
+        </div>
+		<div class='editContainer'>
+            <textarea id='snippets-edit' ng-model='snippet.insertParam' cmedit></textarea>
+        </div>
+	</ion-content>
+
+	<ion-footer-bar codekeyboard keyboard-attach style="height:auto;">
+		<snippetbuttons></snippetbuttons>
+	</ion-footer-bar>
+
+	</ion-content>
+</ion-view>
