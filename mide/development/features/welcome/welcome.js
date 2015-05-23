@@ -16,7 +16,7 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope, 
 		$state.go('signup');
 	};
 
-	var authReq = false; //TODO: Toggle for using authentication work flow - require backend wired up
+	var authReq = !false; //TODO: Toggle for using authentication work flow - require backend wired up
 
 	if (!authReq){
 		$state.go('exercism.view');

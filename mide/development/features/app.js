@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('mide', ['ionic', 'ionic.utils'])
+var app = angular.module('mide', ['ionic', 'ionic.utils','ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -38,10 +38,9 @@ var app = angular.module('mide', ['ionic', 'ionic.utils'])
   // Each state's controller can be found in controllers.js
   // if none of the above states are matched, use this as the fallback
   // $urlRouterProvider.otherwise('/challenge/view'); //TODO: Albert testing this route
-
-  $urlRouterProvider.otherwise('/snippets/create'); // TODO: Richard testing this route
+  //$urlRouterProvider.otherwise('/snippets/create'); // TODO: Richard testing this route
   //$urlRouterProvider.otherwise('challenge.view'); //TODO: Tony testing this route
-  // $urlRouterProvider.otherwise('welcome');
+   $urlRouterProvider.otherwise('welcome');
 
 })
 //
@@ -50,7 +49,7 @@ var app = angular.module('mide', ['ionic', 'ionic.utils'])
 //Use run method to register work which should be performed when the injector is done loading all modules.
 //http://devdactic.com/user-auth-angularjs-ionic/
 
-.run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+.run(function ($rootScope, $state, AuthService, AUTH_EVENTS, LocalStorage) {
 
     var destinationStateRequiresAuth = function (state) {
         //console.log('cl - destinationStateRequiresAuth','state.data',state.data,'state.data.auth',state.data.authenticate);
