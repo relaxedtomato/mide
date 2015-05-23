@@ -41,9 +41,10 @@ function authenticate(req,res,next){
     UserModel.findOne({userName:body.username}).exec().then(userFound,userNotFound);
 
     function userFound(user){
-        console.log('userFound',user,body.password,body.username);
+        console.log('userFound',user);
         //console.log('correctPassword check',user.correctPassword(body.password));
         if(user.correctPassword(body.password)){
+            console.log('in here');
             req.user = user;
             next();
         } else {
@@ -59,7 +60,7 @@ function authenticate(req,res,next){
 
 //TODO: figure out what to include
 router.post('/login', authenticate, function(req,res){ // api/login
-    console.log('/login post found')
+    console.log('/login post found');
     var token = jwt.sign({
         userId: req.user._id
     },SESSION_SECRET);
