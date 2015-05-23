@@ -24,8 +24,6 @@
     <script type="text/javascript" src="lib/codemirror/lib/codemirror.js"></script>
     <script type="text/javascript" src="lib/codemirror/mode/javascript/javascript.js"></script>
     <script type="text/javascript" src="lib/codemirror/addon/scroll/simplescrollbars.js"></script>
-    <script type="text/javascript" src="lib/codemirror/addon/hint/show-hint.js"></script>
-    <script type="text/javascript" src="lib/codemirror/addon/hint/javascript-hint.js"></script>
 
     <!-- Jasmine -->
     <link rel="shortcut icon" type="image/png" href="lib/jasmine/images/jasmine_favicon.png">
@@ -35,20 +33,20 @@
     <script type="text/javascript" src="lib/jasmine/lib/jasmine-core/jasmine-html.js"></script>
 
      <!-- Markdown Editing -->
-    <script src='lib/marked/marked.min.js'></script>
+    <script src="lib/marked/marked.min.js"></script>
     
-    <script src='lib/lodash/lodash.min.js'></script>
+    <script src="lib/lodash/lodash.min.js"></script>
     
     <!-- your app's js -->
-    <script src="features/app.js" ></script>
+    <script src="features/app.js"></script>
 
   </head>
-  <body ng-app="mide" ng-controller='MainCtrl'>
+  <body ng-app="mide" ng-controller="MainCtrl">
     <div>
-      <div ng-controller='MenuCtrl'>
+      <div ng-controller="MenuCtrl">
       <ion-side-menus>
 
-        <ion-pane ion-side-menu-content>
+        <ion-pane ion-side-menu-content="">
           <!--
             The nav bar that will be updated as we navigate between views.
           -->
@@ -67,11 +65,11 @@
           <ion-nav-view></ion-nav-view>
         </ion-pane>
 
-        <ion-side-menu side='left'>
-          <ion-content has-header='false'>
+        <ion-side-menu side="left">
+          <ion-content has-header="false">
             <ion-list>
-              <ion-item ng-repeat='item in states'>
-                <div ng-click='clickItem(item.ref)'>{{item.name}}</div>
+              <ion-item ng-repeat="item in states">
+                <div ng-click="clickItem(item.ref)">{{item.name}}</div>
                 <!-- TODO: Remove {{item.name}} from showing-->
               </ion-item>
             </ion-list>

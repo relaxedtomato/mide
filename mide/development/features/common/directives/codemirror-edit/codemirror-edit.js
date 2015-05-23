@@ -19,16 +19,17 @@ app.directive('cmedit', function(){
 
 			myCodeMirror.on("change", function (myCodeMirror, changeObj){
 		    	ngModelCtrl.$setViewValue(myCodeMirror.getValue());
+		    	myCodeMirror.focus();
 		    });
 
 		    scope.$on("insert", function(event, text){
 		    	myCodeMirror.replaceSelection(text);
-		    	document.getElementById(attribute.id).focus();
+		    	myCodeMirror.focus();
 		    });
 
 		    myCodeMirror.on("blur", function (){
 		    	console.log("blur detected");
-		    	// document.getElementById(attribute.id).focus();
+		    	myCodeMirror.focus();
 		    });
 		}
 	};

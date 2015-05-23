@@ -1,9 +1,5 @@
 ["Hello, World!"](http://en.wikipedia.org/wiki/%22Hello,_world!%22_program) is the traditional first program for beginning programming in a new language.
 
-**Note:** You can skip this exercise by running:
-
-    exercism skip $LANGUAGE hello-world
-
 ## Specification
 
 The `Hello World!` program will greet me, the caller.

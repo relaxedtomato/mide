@@ -36,7 +36,6 @@ var app = angular.module('mide', ['ionic', 'ionic.utils'])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   // if none of the above states are matched, use this as the fallback
-  // $urlRouterProvider.otherwise('/challenge/view'); //TODO: Albert testing this route
 
   $urlRouterProvider.otherwise('/welcome'); // TODO: Richard testing this route
   //$urlRouterProvider.otherwise('challenge.view'); //TODO: Tony testing this route
@@ -75,10 +74,8 @@ var app = angular.module('mide', ['ionic', 'ionic.utils'])
         }
 
         //TODO: Not sure how to proceed here
-        $state.go('login'); //if above fails, goto login
+        $state.go('welcome'); //if above fails, goto welcome
     });
-  // $urlRouterProvider.otherwise('/signup'); // TODO: Richard testing this route
-  //$urlRouterProvider.otherwise('/challenge/view'); //TODO: Tony testing this route
 
 });
 
