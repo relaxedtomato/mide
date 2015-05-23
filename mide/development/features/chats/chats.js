@@ -68,14 +68,21 @@ app.controller('ChatsCtrl', function($scope, Chats, FriendsFactory,friends, $sta
 
 });
 
-app.controller('ChatDetailCtrl', function($scope, $stateParams, FriendsFactory) {
+app.controller('ChatDetailCtrl', function($scope, $stateParams, FriendsFactory,$ionicModal) {
   console.log('stateParams',$stateParams.id,'gists',FriendsFactory.getGists());
   //$scope.chat = Chats.get($stateParams.chatId);
   //TODO: These are all gists, you need to filter based on the user before place on scope.
   $scope.gists = [];
 
+  //$scope.code = '';
+
   var allGists = FriendsFactory.getGists() || [];
 
+  $scope.showCode = function(code){
+    console.log('showCode',code);
+    $scope.code = code;
+    $scope.openModal(code);
+  };
 
   //TODO: Only show all Gists from specific user clicked on
   //TODO: Need to apply JSON parse
@@ -86,6 +93,31 @@ app.controller('ChatDetailCtrl', function($scope, $stateParams, FriendsFactory) 
     }
   });
 
+  $ionicModal.fromTemplateUrl('features/chats/code-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function(code) {
+    //console.log(code);
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
   //$scope.gists = FriendsFactory.getGists();
 
 });
