@@ -29,7 +29,7 @@ var app = angular.module('mide', ['ionic', 'ionic.utils'])
   url : 'http://localhost:9000/api'
 })
 
-//TODO:'https://protected-reaches-5946.herokuapp.com/api'
+//TODO:'https://protected-reaches-5946.herokuapp.com/api' - Deploy latest server before replacing
 
 .config(function($stateProvider, $urlRouterProvider) {
   // Ionic uses AngularUI Router which uses the concept of states
