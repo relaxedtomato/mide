@@ -117,6 +117,7 @@ app.controller('SharedGistsCtrl', function($scope, $stateParams, FriendsFactory,
   //TODO: Need to apply JSON parse
 
   allGists.forEach(function(gist){
+    FriendsFactory.userGists = []; //set to empty
     if(gist.user === $stateParams.id){
       FriendsFactory.userGists.push(gist.gist.files.fileName.content);
     }

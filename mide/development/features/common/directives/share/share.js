@@ -4,6 +4,7 @@ app.directive('share',function(GistFactory, $ionicPopover, FriendsFactory){
        templateUrl:'features/common/directives/share/share.html',
        link: function($scope, element, attributes){
            // .fromTemplateUrl() method
+           // console.log($scope.)
 
            //TODO: Cleanup GistFactory.shareGist(code,$scope.data.friends).then(gistShared);
 
@@ -15,13 +16,14 @@ app.directive('share',function(GistFactory, $ionicPopover, FriendsFactory){
                $scope.data.friends = response.data.friends;
            };
 
+           var codeToSend = null;
            //$scope.$watch('isChecked',function(){
            //	console.log($scope.isChecked);
            //});
            //TODO: Confirm that this is working in all scenarios
            $scope.send = function(code){
-               //console.log('!@?!@#',code);
-               GistFactory.shareGist($scope.code,Object.keys($scope.isChecked)).then(gistShared);
+               console.log('!@?!@#',code.text);
+               GistFactory.shareGist(code.text,Object.keys($scope.isChecked)).then(gistShared);
            };
 
            $ionicPopover.fromTemplateUrl('features/common/directives/share/friends.html', {
@@ -31,6 +33,8 @@ app.directive('share',function(GistFactory, $ionicPopover, FriendsFactory){
            });
 
            $scope.openPopover = function($event) {
+               //console.log('openPopover',code);
+               //codeToSend = code;
                $scope.popover.show($event);
            };
            $scope.closePopover = function() {
