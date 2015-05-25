@@ -1,4 +1,4 @@
-app.directive('cmedit', function(){
+app.directive('cmedit', function($timeout){
 	return {
 		restrict : 'A',
 		require: 'ngModel',
@@ -11,7 +11,7 @@ app.directive('cmedit', function(){
 				autofocus : true,
 				theme : 'twilight',
 				lineWrapping: true,
-				scrollbarStyle: "overlay"
+				inputStyle: 'contenteditable'
 			});
 			ngModelCtrl.$render = function(){
 				myCodeMirror.setValue(ngModelCtrl.$viewValue || '');
@@ -24,6 +24,7 @@ app.directive('cmedit', function(){
 		    scope.$on("insert", function(event, text){
 		    	myCodeMirror.replaceSelection(text);
 		    });
+
 		}
 	};
 });

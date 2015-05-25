@@ -130,10 +130,10 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, Auth
           name : 'Challenges',
           ref: function(){return 'exercism.compile';}
         },
-        {
-          name : 'Exercises',
-          ref : function(){return 'exercises.view'; }
-        },
+        // {
+        //   name : 'Exercises',
+        //   ref : function(){return 'exercises.view'; }
+        // },
         {
           name : 'My Snippets',
           ref : function (){return 'snippets';}
