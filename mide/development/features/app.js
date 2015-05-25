@@ -122,6 +122,7 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, Auth
           name : 'Challenges',
           ref: function(){return 'exercism.compile';}
         },
+//<<<<<<< HEAD
         {
             name : 'Friends',
             ref: function(){return 'friends';}
@@ -134,6 +135,12 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, Auth
         //  name : 'Exercises',
         //  ref : function(){return 'exercises'; }
         //},
+//=======
+        // {
+        //   name : 'Exercises',
+        //   ref : function(){return 'exercises.view'; }
+        // },
+//>>>>>>> development
         {
           name : 'My Snippets',
           ref : function (){return 'snippets';}

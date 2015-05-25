@@ -1,6 +1,5 @@
 <ion-view view-title="{{name | nameformat}}">
 	<ion-content>
-		<pre>{{code.text}}</pre>
 		<div class='editContainer'>
             <textarea id='exercism-code' ng-model='code.text' cmedit></textarea>
         </div>
@@ -10,8 +9,8 @@
 		<share></share>
         <pre>dis keys on scope{{btns | json}}</pre>
 	</ion-content>
-	
-	<ion-footer-bar codekeyboard keyboard-attach style="height:auto;">
+
+	<ion-footer-bar codekeyboard keyboard-attach>
 		<!-- <div style="display:-webkit-flex-direction:row;">
 			<span>hey there</span>
 		</div> -->
