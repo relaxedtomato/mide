@@ -16,13 +16,13 @@ app.config(function($stateProvider, USER_ROLES){
     })
     .state('shared-gists', {
       cache: false, //to ensure the controller is loading each time
-      url: '/chats/:id',
+      url: '/chats/:userId',
       templateUrl: 'features/friends/shared-gists.html',
       controller: 'SharedGistsCtrl'
     })
     .state('view-code', {
       cache: false, //to ensure the controller is loading each time
-      url: '/chats/code/:id',
+      url: '/chats/code/:userId/:gistIndex',
       templateUrl: 'features/friends/view-code.html',
       controller: 'ViewCodeCtrl'
     })
@@ -67,9 +67,9 @@ app.controller('FriendsCtrl', function($scope, FriendsFactory,friends, $state, G
     FriendsFactory.setGists(gists.data);
   }
 
-  $scope.sharedCode = function(id){
+  $scope.sharedCode = function(userId){
     //console.log(id); //id of friend gist shared with
-    $state.go('shared-gists',{id:id}, {inherit:false});
+    $state.go('shared-gists',{userId:userId}, {inherit:false});
   }
 
 });
@@ -77,11 +77,11 @@ app.controller('FriendsCtrl', function($scope, FriendsFactory,friends, $state, G
 app.controller('ViewCodeCtrl', function($state,$scope, $stateParams, FriendsFactory){
   //TODO:
   //var allGists = FriendsFactory.getGists();
-  $scope.code = FriendsFactory.userGists[$stateParams.id];
+  $scope.code = FriendsFactory.userGists[$stateParams.gistIndex];
 
   $scope.goBack = function(n){
     if(n===1){
-      $state.go('shared-gists');
+      $state.go('shared-gists',{userId:$stateParams.userId});
     } else {
       $state.go('friends');
     }
@@ -104,7 +104,7 @@ app.controller('SharedGistsCtrl', function($scope, $stateParams, FriendsFactory,
 
   $scope.showCode = function(gistIndex){
     console.log(gistIndex);
-    $state.go('view-code',{id:gistIndex}, {inherit:false});
+    $state.go('view-code',{userId:$stateParams.userId,gistIndex:gistIndex}, {inherit:false});
     //$state.go('view-code'); //TODO: which one was clicked, send param id, index of gist
     //console.log('showCode',code);
     //$scope.code = code;
@@ -116,7 +116,7 @@ app.controller('SharedGistsCtrl', function($scope, $stateParams, FriendsFactory,
 
   allGists.forEach(function(gist){
     FriendsFactory.userGists = []; //set to empty
-    if(gist.user === $stateParams.id){
+    if(gist.user === $stateParams.userId){
       FriendsFactory.userGists.push(gist.gist.files.fileName.content);
     }
   });
