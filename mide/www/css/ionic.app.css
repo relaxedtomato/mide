@@ -7759,32 +7759,3 @@ div.jasmine_html-reporter {
     line-height: 18px; }
   div.jasmine_html-reporter .alert {
     height: 35px; }
-
-ion-header-bar.bar-stable.bar.bar-header.disable-user-behavior {
-  background-color: #262626; }
-
-.authentication {
-  background-color: #c6c6c6;
-  border-color: transparent; }
-
-.auth {
-  background-color: white;
-  color: black;
-  border-color: transparent;
-  text-align: center;
-  width: 100%; }
-
-label.item.item-input-auth {
-  background-color: #c6c6c6;
-  border-color: transparent; }
-
-.title.title-center.header-item {
-  color: white; }
-
-button.button.button-icon.button-clear.ion-navicon {
-  color: white; }
-
-button.button.button-block.button-calm.col.auth {
-  background-color: transparent;
-  color: black;
-  border-color: transparent; }

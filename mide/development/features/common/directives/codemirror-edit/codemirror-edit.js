@@ -9,7 +9,7 @@ app.directive('cmedit', function(){
 				lineNumbers : true,
 				mode: 'javascript',
 				autofocus : true,
-				theme : 'twilight',
+				//theme : 'twilight',
 				lineWrapping: true,
 				scrollbarStyle: "overlay"
 			});
