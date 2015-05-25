@@ -26,7 +26,7 @@ app.controller('SignUpCtrl',function($rootScope, $http, $scope, $state, AuthServ
                         AuthService.logout();
                         $scope.data = {};
                         $scope.states.pop(); //TODO: Find a better way to remove the Logout link, instead of pop
-                        $state.go('signup');
+                        $state.go('welcome');
                         $rootScope.$broadcast('Auth');
                     }
                 });

@@ -143,12 +143,16 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, Auth
           ref : function(){ return 'about';}
         }
     ];
-
+    //$scope.authReq = false;
+    var authReq = !false
     $scope.toggleMenuShow = function(){
         //console.log('AuthService',AuthService.isAuthenticated())
         //console.log('toggleMenuShow',AuthService.isAuthenticated());
-        //TODO: return AuthService.isAuthenticated();
-        return true;
+        if(authReq){
+            return AuthService.isAuthenticated();
+        } else {
+            return true;
+        }
     };
 
     $rootScope.$on('Auth',function(){

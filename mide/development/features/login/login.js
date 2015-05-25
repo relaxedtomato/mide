@@ -27,7 +27,7 @@ app.controller('LoginCtrl', function($rootScope, $scope, $ionicPopup, $state, Au
 						AuthService.logout();
                         $scope.data = {};
 						$scope.states.pop(); //TODO: Find a better way to remove the Logout link, instead of pop
-						$state.go('signup');
+						$state.go('welcome');
 						$rootScope.$broadcast('Auth');
 					}
 				});

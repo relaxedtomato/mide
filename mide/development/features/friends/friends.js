@@ -75,8 +75,6 @@ app.controller('FriendsCtrl', function($scope, FriendsFactory,friends, $state, G
 });
 
 app.controller('ViewCodeCtrl', function($state,$scope, $stateParams, FriendsFactory){
-
-
   //TODO:
   //var allGists = FriendsFactory.getGists();
   $scope.code = FriendsFactory.userGists[$stateParams.id];

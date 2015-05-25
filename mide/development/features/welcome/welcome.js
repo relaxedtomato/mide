@@ -77,7 +77,7 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope, 
 		} else {
 			//TODO: $state.go('signup'); Remove Below line
 			//$state.go('signup');
-			//DO Nothing
+			//DO
 		}
 	}
 });
