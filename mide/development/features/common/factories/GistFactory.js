@@ -6,6 +6,8 @@ app.factory('GistFactory',function($http,$q,ApiEndpoint){
 
     //TODO: Share description and filename based on challenge for example
     //TODO:Or give the user options of what to fill in
+
+    //TODO: On-Click Grab the latest code
     function shareGist(code,friends,description,fileName){
         console.log('code',code);
         return $http.post(ApiEndpoint.url + '/gists/shareGists',
