@@ -9,7 +9,7 @@ app.directive('cmedit', function($timeout){
 				lineNumbers : true,
 				mode: 'javascript',
 				autofocus : true,
-				theme : 'twilight',
+				theme : 'monokai',
 				lineWrapping: true,
 				inputStyle: 'contenteditable'
 			});
