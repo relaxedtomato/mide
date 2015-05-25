@@ -9,9 +9,10 @@ app.directive('cmedit', function(){
 				lineNumbers : true,
 				mode: 'javascript',
 				autofocus : true,
-				theme : 'monokai',
+				// theme : 'monokai',
+				//theme : 'twilight',
 				lineWrapping: true,
-				scrollbarStyle: "overlay"
+				inputStyle: 'contenteditable'
 			});
 			ngModelCtrl.$render = function(){
 				myCodeMirror.setValue(ngModelCtrl.$viewValue || '');
@@ -31,6 +32,7 @@ app.directive('cmedit', function(){
 		    	console.log("blur detected");
 		    	myCodeMirror.focus();
 		    });
+
 		}
 	};
 });

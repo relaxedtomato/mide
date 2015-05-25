@@ -8,7 +8,7 @@ app.directive('cmread', function(){
 				readOnly : 'nocursor',
 				mode: 'javascript',
 				autofocus : true,
-				theme : 'twilight',
+				//theme : 'twilight',
 				lineWrapping: true
 			});
 

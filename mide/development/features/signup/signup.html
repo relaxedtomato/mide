@@ -1,21 +1,24 @@
-<ion-view view-title="">
+<ion-view view-title="" class="authentication">
     <ion-content>
         <div class="list list-inset">
-            <label class="item item-input">
-                <input type="text" placeholder="Username" ng-model="data.userName">
+            <label class="item item-input-auth">
+                <input type="text" class="auth" placeholder="Username" ng-model="data.userName"  style="color: black">
             </label>
-            <label class="item item-input">
-                <input type="text" placeholder="Email" ng-model="data.email">
+            <label class="item item-input-auth">
+                <input type="text" class="auth" placeholder="Email" ng-model="data.email" style="color: black">
             </label>
             <!--<label class="item item-input">-->
                 <!--<input type="text" placeholder="Codewars API Key" ng-model="data.apiKey">-->
             <!--</label>-->
-            <label class="item item-input">
-                <input type="password" placeholder="Password" ng-model="data.password">
+            <label class="item item-input-auth">
+                <input type="password" class="auth" placeholder="Password" ng-model="data.password" style="color: black">
             </label>
         </div>
-        <button class="button button-block button-calm" ng-click="signup()">Sign Up</button>
-        <button ui-sref="login" class="button button-block button-calm">Log In</button>
+        <div class='row' style='padding:0px;'>
+            <button class="button button-block button-calm col auth" ng-click="signup()">Sign Up</button>
+            <button ui-sref="login" class="button button-block button-calm col auth">Log In</button>
+        </div>
+
     </ion-content>
 </ion-view>
 

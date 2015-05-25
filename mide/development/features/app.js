@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('mide', ['ionic', 'ionic.utils'])
+var app = angular.module('mide', ['ionic', 'ionic.utils', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -37,18 +37,14 @@ var app = angular.module('mide', ['ionic', 'ionic.utils'])
   // Each state's controller can be found in controllers.js
   // if none of the above states are matched, use this as the fallback
 
-  $urlRouterProvider.otherwise('/welcome'); // TODO: Richard testing this route
-  //$urlRouterProvider.otherwise('challenge.view'); //TODO: Tony testing this route
-  // $urlRouterProvider.otherwise('welcome');
-
+  $urlRouterProvider.otherwise('/welcome');
 })
-//
 
 ////run blocks: http://stackoverflow.com/questions/20663076/angularjs-app-run-documentation
 //Use run method to register work which should be performed when the injector is done loading all modules.
 //http://devdactic.com/user-auth-angularjs-ionic/
 
-.run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+.run(function ($rootScope, $state, AuthService, AUTH_EVENTS, LocalStorage) {
 
     var destinationStateRequiresAuth = function (state) {
         //console.log('cl - destinationStateRequiresAuth','state.data',state.data,'state.data.auth',state.data.authenticate);
@@ -110,26 +106,33 @@ app.controller('MainCtrl', function($rootScope,$scope, $ionicSideMenuDelegate, $
 app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, AuthService, $rootScope){
 
     $scope.states = [
-        {
-          name : 'Account',
-          ref : function(){return 'account';}
-        },
-        {
-          name : 'Sandbox',
-          ref : function(){return 'sandbox.code';}
-        },
-        {
-          name : 'Chats',
-          ref: function(){return 'chats';}
-        },
+        //{
+        //  name : 'Account',
+        //  ref : function(){return 'account';}
+        //},
         {
           name : 'Challenges',
           ref: function(){return 'exercism.compile';}
         },
+//<<<<<<< HEAD
         {
-          name : 'Exercises',
-          ref : function(){return 'exercises.view'; }
+            name : 'Friends',
+            ref: function(){return 'friends';}
         },
+        {
+            name : 'Sandbox',
+            ref : function(){return 'sandbox.code';}
+        },
+        //{
+        //  name : 'Exercises',
+        //  ref : function(){return 'exercises'; }
+        //},
+//=======
+        // {
+        //   name : 'Exercises',
+        //   ref : function(){return 'exercises.view'; }
+        // },
+//>>>>>>> development
         {
           name : 'My Snippets',
           ref : function (){return 'snippets';}
@@ -143,12 +146,16 @@ app.controller('MenuCtrl', function($scope, $ionicSideMenuDelegate, $state, Auth
         //   ref : function(){return 'exercises'; }
         // }
     ];
-
+    //$scope.authReq = false;
+    var authReq = !false;
     $scope.toggleMenuShow = function(){
         //console.log('AuthService',AuthService.isAuthenticated())
         //console.log('toggleMenuShow',AuthService.isAuthenticated());
-        //TODO: return AuthService.isAuthenticated();
-        return true;
+        if(authReq){
+            return AuthService.isAuthenticated();
+        } else {
+            return true;
+        }
     };
 
     $rootScope.$on('Auth',function(){

@@ -7,7 +7,7 @@
 		</div>
 
 		<ul class='symbol-summary'>
-			<li ng-repeat='spec in specsOverview'class='{{spec.status}}' id='{{spec.id | append:"spec_"}}' title='{{spec.fullName}}'></li>
+			<li ng-repeat='spec in specsOverview'class='{{spec.status}}' id='{{spec.id | prepend:"spec_"}}' title='{{spec.fullName}}'></li>
 		</ul>
 
 		<div class='alert'>
@@ -26,12 +26,12 @@
 				</div>
 			</div>
 			<div class='summary' ng-show='summaryShowing'>
-				<ul ng-repeat='suite in suites'class='suite' id='{{suite.id | append: "suite-"}}'>
+				<ul ng-repeat='suite in suites'class='suite' id='{{suite.id | prepend: "suite-"}}'>
 					<li class='suite-detail'>
 						<p>{{suite.description}}<p>
 					</li>
 					<ul class='specs'>
-						<li ng-repeat='spec in suite.specs'class='{{spec.status}}' id='{{spec.id | append: "spec-"}}'>
+						<li ng-repeat='spec in suite.specs'class='{{spec.status}}' id='{{spec.id | prepend: "spec-"}}'>
 							<p>{{spec.description}}<p>
 						</li>
 					</ul>

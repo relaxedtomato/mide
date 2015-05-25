@@ -18,7 +18,7 @@ app.controller('LoginCtrl', function($rootScope, $scope, $ionicPopup, $state, Au
 		AuthService
 			.login($scope.data)
 			.then(function(authenticated){ //TODO:authenticated is what is returned
-				//console.log('login, tab.challenge-submit');
+				console.log('login successful',authenticated);
 				//$scope.menu = true;
 				$rootScope.$broadcast('Auth');
 				$scope.states.push({ //TODO: Need to add a parent controller to communicate
@@ -27,11 +27,11 @@ app.controller('LoginCtrl', function($rootScope, $scope, $ionicPopup, $state, Au
 						AuthService.logout();
                         $scope.data = {};
 						$scope.states.pop(); //TODO: Find a better way to remove the Logout link, instead of pop
-						$state.go('signup');
+						$state.go('welcome');
 						$rootScope.$broadcast('Auth');
 					}
 				});
-				$state.go('exercism.view');
+				$state.go('exercism.compile');
 				//TODO: We can set the user name here as well. Used in conjunction with a main ctrl
 			})
 			.catch(function(err){
