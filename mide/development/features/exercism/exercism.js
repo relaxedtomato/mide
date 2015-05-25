@@ -21,7 +21,7 @@ app.config(function($stateProvider){
 app.factory('ExercismFactory', function($http, $rootScope){
 	var name = '';
 	var test = '';
-	var code = '';
+	var code = '\n\n\n\n\n\n\n\n\n\n\n\n\n';
 	var markdown = '';
 
 	return {

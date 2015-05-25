@@ -9,9 +9,9 @@ app.directive('cmedit', function(){
 				lineNumbers : true,
 				mode: 'javascript',
 				autofocus : true,
-				theme : 'twilight',
+				theme : 'monokai',
 				lineWrapping: true,
-				scrollbarStyle: "overlay"
+				inputStyle: 'contenteditable'
 			});
 			ngModelCtrl.$render = function(){
 				myCodeMirror.setValue(ngModelCtrl.$viewValue || '');
@@ -24,6 +24,7 @@ app.directive('cmedit', function(){
 		    scope.$on("insert", function(event, text){
 		    	myCodeMirror.replaceSelection(text);
 		    });
+
 		}
 	};
 });
