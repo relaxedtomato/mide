@@ -20,7 +20,7 @@ app.directive('snippetbuttons', function(){
 				scope.insertFunc(text);
 			};
 			scope.demo2 = function() {
-				var text = "function haha() {return \"hehe\"};\n\nhaha();";
+				var text = "function haha() {\"hehe\";};\n\nhaha();";
 				scope.insertFunc(text);
 			};
 

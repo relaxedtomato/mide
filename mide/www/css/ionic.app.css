@@ -7763,3 +7763,12 @@ div.jasmine_html-reporter {
     line-height: 18px; }
   div.jasmine_html-reporter .alert {
     height: 35px; }
+
+button.button.button-balanced {
+  color: black; }
+
+button.button.button-assertive {
+  color: black; }
+
+button.button.button-calm {
+  color: black; }

@@ -28,11 +28,6 @@ app.directive('cmedit', function(){
 		    	myCodeMirror.focus();
 		    });
 
-		    myCodeMirror.on("blur", function (){
-		    	console.log("blur detected");
-		    	myCodeMirror.focus();
-		    });
-
 		}
 	};
 });

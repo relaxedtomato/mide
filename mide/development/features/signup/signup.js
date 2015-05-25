@@ -30,7 +30,7 @@ app.controller('SignUpCtrl',function($rootScope, $http, $scope, $state, AuthServ
                         $rootScope.$broadcast('Auth');
                     }
                 });
-                $state.go('exercism.compile');
+                $state.go('about');
             })
             .catch(function(err){
                 $scope.error = 'Signup Invalid';

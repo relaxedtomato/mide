@@ -14,16 +14,32 @@ app.factory('CodeSnippetFactory', function($rootScope){
 			insertParam: "while( ){ }"
 		},
 		{
-			display: "do while",
+			display: "do",
 			insertParam: "do { } while( );"
 		},
 		{
 			display: "log",
 			insertParam: "console.log();"
 		},
+		// {
+		// 	display: "return",
+		// 	insertParam: "return  ;"
+		// },
+		{
+			display: "var",
+			insertParam: "var  =  ;"
+		}
 	];
 
 	var brackets = [
+		{
+			display: "\"\"",
+			insertParam: "\"  \""
+		},
+		{
+			display: "( )",
+			insertParam: "()"
+		},
 		{
 			display: "[ ]",
 			insertParam: "[]"
@@ -31,10 +47,6 @@ app.factory('CodeSnippetFactory', function($rootScope){
 		{
 			display: "{ }",
 			insertParam: "{}"
-		},
-		{
-			display: "( )",
-			insertParam: "()"
 		},
 		{
 			display: "//",

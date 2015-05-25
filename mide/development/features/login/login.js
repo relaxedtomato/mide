@@ -31,7 +31,7 @@ app.controller('LoginCtrl', function($rootScope, $scope, $ionicPopup, $state, Au
 						$rootScope.$broadcast('Auth');
 					}
 				});
-				$state.go('exercism.compile');
+				$state.go('about');
 				//TODO: We can set the user name here as well. Used in conjunction with a main ctrl
 			})
 			.catch(function(err){

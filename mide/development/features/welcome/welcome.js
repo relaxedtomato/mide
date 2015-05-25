@@ -24,7 +24,7 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope, 
 		$state.go('signup');
 	};
 
-	var authReq = !false; //TODO: Toggle for using authentication work flow - require backend wired up
+	var authReq = true; //TODO: Toggle for using authentication work flow - require backend wired up
 
 //<<<<<<< HEAD
 	if (!authReq){
@@ -60,7 +60,7 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope, 
 
 			// 		//pop-up options, view shared code or
 			// 		//TODO: Happen on Login, recieve gist notification
-			// 		GistFactory.queuedGists().then(gistsRx);
+			GistFactory.queuedGists().then(gistsRx);
 
 //<<<<<<< HEAD
 			function gistsRx(response) {
@@ -80,7 +80,7 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope, 
 								$state.go('friends');
 							} else {
 								//console.log('You are not sure');
-								$state.go('exercism.compile');
+								$state.go('about');
 							}
 						});
 					};
@@ -118,7 +118,7 @@ app.controller('WelcomeCtrl', function($scope, $state, AuthService, $rootScope, 
 //<<<<<<< HEAD
 				} else {
 					//TODO: $state.go('signup'); Remove Below line
-					//$state.go('signup');
+					$state.go('about');
 					//DO
 				}
 			}
