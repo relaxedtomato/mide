@@ -1,4 +1,4 @@
-app.directive('cmedit', function($timeout){
+app.directive('cmedit', function(){
 	return {
 		restrict : 'A',
 		require: 'ngModel',
