@@ -26,5 +26,4 @@ app.controller('ExercismCodeCtrl', function($scope, ExercismFactory, $state, Key
 	};
 
 	$scope.insertFunc = KeyboardFactory.makeInsertFunc($scope);
-
 });

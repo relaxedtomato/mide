@@ -73,7 +73,8 @@ userSchema.plugin(findOrCreate);
 userSchema.statics.generateSalt = generateSalt;
 userSchema.statics.encryptPassword = encryptPassword;
 userSchema.method('correctPassword', function (candidatePassword) {
-    console.log('candidatePassword',candidatePassword);
+    //console.log('candidatePassword',candidatePassword);
+    console.log('correctPassword',(encryptPassword(candidatePassword, this.salt)) === this.password);
     return encryptPassword(candidatePassword, this.salt) === this.password;
 });
 userSchema.method('addFriend',function(friend){

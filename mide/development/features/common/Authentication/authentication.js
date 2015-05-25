@@ -63,7 +63,7 @@ app.factory('AuthTokenFactory',function($window){
     }
 });
 
-app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpoint,$rootScope){
+app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpoint,$rootScope,FriendsFactory){
     var username = '';
     var isAuthenticated = false;
     var authToken;
@@ -98,7 +98,8 @@ app.service('AuthService',function($q,$http,USER_ROLES,AuthTokenFactory,ApiEndpo
 
     var logout = function(){
         destroyUserCredentials();
-
+        FriendsFactory.allGists = [];
+        //TODO: Central way to destroy local data saved
     };
 
     //var login = function()

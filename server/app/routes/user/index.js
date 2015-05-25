@@ -17,7 +17,7 @@ var bluebird = require('bluebird');
 var githubInstance = require('../../api/github');
 
 //TODO: Temp for testing
-var gist = require('../../../env/gist.js')
+//var gist = require('../../../env/gist.js')
 
 module.exports = router;
 
@@ -41,24 +41,28 @@ function authenticate(req,res,next){
     UserModel.findOne({userName:body.username}).exec().then(userFound,userNotFound);
 
     function userFound(user){
-        //console.log('userFound',user,body.password,body.username);
+        //console.log('userFound',user);
         //console.log('correctPassword check',user.correctPassword(body.password));
         if(user.correctPassword(body.password)){
+            console.log('in here');
             req.user = user;
             next();
         } else {
+          //console.log('ooops');
           //res.status(401).end('Username or password incorrect');
           userNotFound(user);
         }
     }
 
     function userNotFound(response){
+        console.log('Username or password incorrect');
         res.status(401).end('Username or password incorrect');
     }
 }
 
 //TODO: figure out what to include
 router.post('/login', authenticate, function(req,res){ // api/login
+    console.log('/login post found');
     var token = jwt.sign({
         userId: req.user._id
     },SESSION_SECRET);

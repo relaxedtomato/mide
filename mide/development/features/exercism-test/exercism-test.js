@@ -10,7 +10,7 @@ app.config(function($stateProvider){
 	});
 });
 
-app.controller('ExercismTestCtrl', function($scope, ExercismFactory){
+app.controller('ExercismTestCtrl', function($scope, ExercismFactory, KeyboardFactory){
 
 	$scope.name = ExercismFactory.getName();
 
@@ -23,4 +23,6 @@ app.controller('ExercismTestCtrl', function($scope, ExercismFactory){
 	$scope.$watch('test.text', function(newValue){
 		ExercismFactory.setTestScript(newValue);
 	});
+
+	$scope.insertFunc = KeyboardFactory.makeInsertFunc($scope);
 });

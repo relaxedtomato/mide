@@ -13,7 +13,7 @@ app.config(function($stateProvider){
 
 app.controller('SandboxCodeCtrl', function($scope, $state, SandboxFactory, ExercismFactory, KeyboardFactory){
 	$scope.code = {
-		text : ''
+		text : '\n\n\n\n\n\n\n\n\n\n\n\n\n'
 	};
 
 	$scope.buttons = {
