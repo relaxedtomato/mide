@@ -4,6 +4,7 @@
 
 ##mide/
 * All ionic related stuff is in the ```mide/development``` which is basically an Angular application. You must be in the ```mide``` folder for any ionic commands to run. 
+* Run ```npm install``` and ```bower install```
 
 ####Buildtool
 * Ensure you are running the gulp process on the mide folder (```/development to /www```) .
@@ -24,4 +25,5 @@
 * [Use Ionic View to test on a mobile device](http://view.ionic.io/)
 
 ##server/
-* Handles authentication and sharing of code snippets. 
+* Handles authentication and sharing of code snippets.
+* Run ```npm install```
