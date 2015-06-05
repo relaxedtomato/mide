@@ -1,6 +1,9 @@
 #mide
 
-<img src="./mide/development/img/mide_logo_300x150.png" width="300px"/>
+<a href="https://vimeo.com/129849131" target="_blank"><img src="./mide/development/img/mide_logo_300x150.png" width="300px"/></a>
+
+##Demo
+<a href="https://vimeo.com/129849131" target="_blank">Click here to view demo</a>
 
 ## Synopsis
 
